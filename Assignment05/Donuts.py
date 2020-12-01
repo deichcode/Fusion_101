@@ -55,7 +55,7 @@ class ringButtonCommandCreatedEventHandler(adsk.core.CommandCreatedEventHandler)
         explicitAmountOfRings = inputs.addIntegerSliderCommandInput('explicitAmountOfRings', 'Amount of rings', 1, 10, False)
 
         #Create a slider to vary the radius of the circle
-        ringdistance = inputs.addIntegerSliderCommandInput('ringDistance', 'Distance between Rings in cm', 1, 15, False)
+        ringdistance = inputs.addIntegerSliderCommandInput('ringDistance', 'Distance between Rings in cm', 4, 15, False)
 
         #Connetct to the execute event
         onExecute = ringButtonCommandExecuteHandler()
