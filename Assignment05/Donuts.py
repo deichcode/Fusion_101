@@ -15,9 +15,16 @@ def run(context):
         commandDefinitions = ui.commandDefinitions
 
         #Create the RingButton command definition
-        ringButton = commandDefinitions.addButtonDefinition('ringButton01PYTHON', 
-        'Ring', 
-        'Creates a single ring or a set on the xy plane. Choose if you want to create a random number of rings or an explicite number.')
+        ringButton = commandDefinitions.addButtonDefinition(
+            'ringButton01PYTHON', 
+            'Closing Rings', 
+            'Creates a certain number of rings parallel to the x-axis.\n\n' +
+            'The rings are closed further from the first to the last along the x-axis . The first ring is closed to 360° / number of rings, the last ring is completely closed. All rings are colored randomly.\n\n' +
+            'Choose if you want to create a random number of rings or an explicit number. Furthermore, choose the distance between the rings.' +
+            '',
+            './resources'
+        )
+        ringButton.toolClipFilename = './resources/extendedTooltipImage.png'
 
         #Connect to the command created event
         ringButtonCommandCreated = ringButtonCommandCreatedEventHandler()
