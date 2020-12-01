@@ -187,7 +187,6 @@ def stop(context):
         control = solidCreatePanel.controls.itemById('ringButton01PYTHON')
         if control:
             control.deleteMe()
-        ui.messageBox('Stop addin')
 
     except:
         if ui:
