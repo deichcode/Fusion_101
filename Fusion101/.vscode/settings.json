@@ -1,5 +1,0 @@
-{
-	"python.autoComplete.extraPaths":	["/Users/soeren/Library/Application Support/Autodesk/Autodesk Fusion 360/API/Python/defs"],
-	"python.pythonPath":	"/Users/soeren/Library/Application Support/Autodesk/webdeploy/production/7f179d7f77b0ef02eda6305f9733dc3864565a41/Autodesk Fusion 360.app/Contents/Frameworks/Python.framework/Versions/Current/bin/python",
-	"python.linting.pylintEnabled":	false
-}
