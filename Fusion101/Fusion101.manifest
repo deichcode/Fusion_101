@@ -7,7 +7,7 @@
 		"":	"Fusion101 provides you a gentle introduction into the basics of Fusion360 by providing step-by-step tutorials to multiple topics."
 	},
 	"version":	"0.0.1",
-	"runOnStartup":	true,
+	"runOnStartup":	false,
 	"supportedOS":	"windows|mac",
 	"editEnabled":	true
 }
