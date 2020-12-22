@@ -103,11 +103,14 @@ class MyHTMLEventHandler(adsk.core.HTMLEventHandler):
         super().__init__()
     def notify(self, args):
         try:
-            # htmlArgs = adsk.core.HTMLEventArgs.cast(args)            
-            # data = json.loads(htmlArgs.data)
+            htmlArgs = adsk.core.HTMLEventArgs.cast(args)            
+            data = json.loads(htmlArgs.data)
             # msg = "An event has been fired from the html to Fusion with the following data:\n"
             # msg += '    Command: {}\n    arg1: {}\n    arg2: {}'.format(htmlArgs.action, data['arg1'], data['arg2'])
-            _ui.palettes.itemById(PALLET_ID).deleteMe()
+            if data['command'] == 'close':
+                palette = _ui.palettes.itemById(PALLET_ID)
+                if palette:
+                    palette.isVisible = False
         except:
             _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))           
 
@@ -188,7 +191,7 @@ def initializePalette():
         PALLET_URL,
         isVisible=True,
         showCloseButton=True,
-        isResizable=False,
+        isResizable=True,
         width=400,
         height=800)
     fusion101Palette.dockingOption = adsk.core.PaletteDockingOptions.PaletteDockOptionsToVerticalOnly

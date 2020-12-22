@@ -15,8 +15,7 @@ export default {
   methods: {
     closeApp() {
       var args = {
-        arg1: "Sample argument 1",
-        arg2: "Sample argument 2"
+        command: "close",
       };
       window.adsk.fusionSendData("send", JSON.stringify(args));
     }
