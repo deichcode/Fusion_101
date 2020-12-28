@@ -8,6 +8,7 @@ import traceback
 from .constants import PALLET_ID, PALLET_NAME, PALLET_URL
 import json
 
+
 # global set of event handlers to keep them referenced for the duration of the command
 handlers = []
 _app = adsk.core.Application.cast(None)
@@ -114,13 +115,65 @@ class MyHTMLEventHandler(adsk.core.HTMLEventHandler):
         except:
             _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))           
 
-                
+
+
+###########AddInSample#################################
+
+
+#CommandExecuteHandler for Tutorial Button on Right QAT bar. AddInSample.py has been used as reference
+class CommandExecuteHandler(adsk.core.CommandEventHandler):
+            def __init__(self):
+                super().__init__()
+            def notify(self, args):
+                try:
+                    command = args.firingEvent.sender
+                    _ui.messageBox('command: {} executed successfully').format(command.parentCommandDefinition.id)
+                except:
+                    if _ui:
+                        _ui.messageBox('command executed failed: {}').format(traceback.format_exc())
+
+#CommandExecuteHandler for Tutorial Button on Right QAT bar. AddInSample.py has been used as reference
+class CommandCreatedEventHandlerQATRight(adsk.core.CommandCreatedEventHandler):
+            def __init__(self):
+                super().__init__()
+            def notify(self, args):
+                try:
+                    command = args.command
+                    onExecute = CommandExecuteHandler()
+                    command.execute.add(onExecute)
+                    # keep the handler referenced beyond this function
+                    handlers.append(onExecute)
+                    _ui.messageBox('Right QAT command created successfully')
+                except:
+                    _ui.messageBox(' Right QAT command created failed: {}').format(traceback.format_exc())               
+###########AddinSample#################
+
 def run(context):
     try:
         global _ui, _app
         _app = adsk.core.Application.get()
         _ui  = _app.userInterface
-        
+
+        #######AddInSAMPLE######
+
+        cmdDef = _ui.commandDefinitions
+
+        # add a button command on Quick Access Toolbar
+        if not _ui.toolbars.itemById('QATRight').controls.itemById('TutorialButtonOnQATRight'):
+            btnCmdDefinitionQATRight_ = cmdDef.itemById('TutorialButtonOnQATRight')
+            if not btnCmdDefinitionQATRight_:
+                btnCmdDefinitionQATRight_ = cmdDef.addButtonDefinition('TutorialButtonOnQATRight', 'Tutorial Command', 'Tutorial Command', './resources')
+            onButtonCommandCreated = CommandCreatedEventHandlerQATRight()
+            btnCmdDefinitionQATRight_.commandCreated.add(onButtonCommandCreated)
+            # keep the handler referenced beyond this function
+            handlers.append(onButtonCommandCreated)
+            _ui.toolbars.itemById('QATRight').controls.addCommand(btnCmdDefinitionQATRight_).isVisible = True
+            _ui.messageBox('A demo button command is successfully added to the right Quick Access Toolbar')
+            
+
+        ###### AddInSample ############
+
+
         # Add a command that displays the panel.
         showPaletteCmdDef = _ui.commandDefinitions.itemById('showPalette')
         if not showPaletteCmdDef:
@@ -157,7 +210,28 @@ def run(context):
 
 
 def stop(context):
-    try:        
+    try:
+        ############addinsample######
+        objArrayQATRight = []
+
+        if _ui.toolbars.itemById('QATRight').controls.itemById('TutorialButtonOnQATRight'):
+            objArrayQATRight.append(_ui.toolbars.itemById('QATRight').controls.itemById('TutorialButtonOnQATRight'))
+
+        btnCmdDefinitionQATRight_ = _ui.commandDefinitions.itemById('TutorialButtonOnQATRight')
+        if btnCmdDefinitionQATRight_:
+            objArrayQATRight.append(btnCmdDefinitionQATRight_)
+            
+
+        for obj in objArrayQATRight:
+            if _ui and obj:
+                if obj.isValid:
+                    obj.deleteMe()
+                else:
+                    _ui.messageBox(_('obj is not a valid object'))
+
+
+        #############addinsample######
+
         # Delete the palette created by this add-in.
         palette = _ui.palettes.itemById(PALLET_ID)
         if palette:
