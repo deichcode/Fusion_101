@@ -149,6 +149,100 @@ class CommandCreatedEventHandlerQATRight(adsk.core.CommandCreatedEventHandler):
                     _ui.messageBox(' Right QAT command created failed: {}').format(traceback.format_exc())               
 ###########AddinSample#################
 
+#Event handler for the commandCreated event
+class popUpCommandCreatedEventHandler(adsk.core.CommandCreatedEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        eventArgs = adsk.core.CommandCreatedEventArgs.cast(args)
+        
+        #Get the command
+        command = eventArgs.command
+
+        #Get the CommandInputs collection for new inputs
+        inputs = command.commandInputs
+
+        command.cancelButtonText = 'Close'
+        command.okButtonText = 'Start Fusion 101'
+
+        #Create a "textBox" with the welcoming text
+        welcomeText = inputs.addTextBoxCommandInput(
+            'welcomeText', 
+            '',
+            '<div align="center"><b>Welcome to Fusion 101!</b></div>',
+            3,
+            True
+        )
+
+        #Create a "textBox" with the description of the tutorial
+        introductionText = inputs.addTextBoxCommandInput(
+            'introductionText', 
+            '',
+            '<div align="center">This interactive tutorial will guide you through'+
+            ' your first steps in Fusion 360. You will get to know the most important'+
+            ' tools, workflows and concepts to kickstart your own ideas</div>.',
+            6,
+            True
+        )
+
+        #Create a "textBox" with the second description of the tutorial
+        introductionText2 = inputs.addTextBoxCommandInput(
+            'introductionText2', 
+            '',
+            '<div align="center">To start Fusion 101 later just click on the HAT symbol'+
+            ' next to your profile picture or initials in the upper right Quick Access Bar of your screen</div>.',
+            6,
+            True
+        )
+
+        #Create a check box asking for random or explicit number of rings
+        dontShowAgain = inputs.addBoolValueInput('dontShowAgain', 'Don\'t show again', True, '', False)
+
+
+
+        #Connect to the execute event
+        onExecute = popUpCommandExecuteHandler()
+        command.execute.add(onExecute)
+        handlers.append(onExecute)
+
+        #Connect to the inputChanged event
+        onInputChanged = popUpInputChangedHandler()
+        command.inputChanged.add(onInputChanged)
+        handlers.append(onInputChanged)
+
+#Event handler for the inputChanged event
+class popUpCommandInputChangedHandler(adsk.core.InputChangedEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        eventArgs = adsk.core.InputChangedEventArgs.cast(args)
+
+        #Check the value of dont show again
+        changedInput = eventArgs.input
+        if changedInput.id == 'dontShowAgain':
+            isDontShowAgain = True
+
+#Event handler for the execute event
+class popUpCommandExecuteHandler(adsk.core.CommandEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        eventArgs = adsk.core.CommandEventArgs.cast(args)
+
+        #Code to react to the event
+        app = adsk.core.Application.get()
+        ui = app.userInterface
+        ui.messageBox('Tutorial will start now')
+
+        #Get values from command inputs
+        inputs = eventArgs.command.commandInputs
+
+        cmd = ui.commandDefinitions.itemById('TutorialButtonOnQATRight')
+        cmd.execute()
+
+        
+
+
 def run(context):
     try:
         global _ui, _app
@@ -211,6 +305,22 @@ def run(context):
             
 
         ###### AddInSample ############
+
+        #Create the RingButton command definition
+        popUpButton = cmdDef.addButtonDefinition(
+            'popUpButton01PYTHON', 
+            'Tutorial PopUp', 
+            'Imaginary tutorial PopUp Button that is not visible anywhere in the UI',
+            ''
+        )
+
+        #Connect to the command created event
+        popUpCommandCreated = popUpCommandCreatedEventHandler()
+        popUpButton.commandCreated.add(popUpCommandCreated)
+        handlers.append(popUpCommandCreated)
+
+        cmd = cmdDef.itemById('popUpButton01PYTHON')
+        cmd.execute()
     except:
         if _ui:
             _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
@@ -259,6 +369,11 @@ def stop(context):
         cmdDef = _ui.commandDefinitions.itemById('sendInfoToHTML')
         if cmdDef:
             cmdDef.deleteMe() 
+
+        popUp = _ui.commandDefinitions.itemById('popUpButton01PYTHON')
+        #popUp = _ui.commandDefinitions.itemById('popUpButton01PYTHON')
+        if popUp:
+            popUp.deleteMe()
             
         _ui.messageBox('Stop addin')
     except:
