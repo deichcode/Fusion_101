@@ -139,11 +139,12 @@ class CommandCreatedEventHandlerQATRight(adsk.core.CommandCreatedEventHandler):
             def notify(self, args):
                 try:
                     command = args.command
-                    onExecute = CommandExecuteHandler()
+                    #onExecute = CommandExecuteHandler()
+                    onExecute = ShowPaletteCommandExecuteHandler()
                     command.execute.add(onExecute)
                     # keep the handler referenced beyond this function
                     handlers.append(onExecute)
-                    _ui.messageBox('Right QAT command created successfully')
+                    #_ui.messageBox('Right QAT command created successfully')
                 except:
                     _ui.messageBox(' Right QAT command created failed: {}').format(traceback.format_exc())               
 ###########AddinSample#################
@@ -153,25 +154,6 @@ def run(context):
         global _ui, _app
         _app = adsk.core.Application.get()
         _ui  = _app.userInterface
-
-        #######AddInSAMPLE######
-
-        cmdDef = _ui.commandDefinitions
-
-        # add a button command on Quick Access Toolbar
-        if not _ui.toolbars.itemById('QATRight').controls.itemById('TutorialButtonOnQATRight'):
-            btnCmdDefinitionQATRight_ = cmdDef.itemById('TutorialButtonOnQATRight')
-            if not btnCmdDefinitionQATRight_:
-                btnCmdDefinitionQATRight_ = cmdDef.addButtonDefinition('TutorialButtonOnQATRight', 'Tutorial Command', 'Tutorial Command', './resources')
-            onButtonCommandCreated = CommandCreatedEventHandlerQATRight()
-            btnCmdDefinitionQATRight_.commandCreated.add(onButtonCommandCreated)
-            # keep the handler referenced beyond this function
-            handlers.append(onButtonCommandCreated)
-            _ui.toolbars.itemById('QATRight').controls.addCommand(btnCmdDefinitionQATRight_).isVisible = True
-            _ui.messageBox('A demo button command is successfully added to the right Quick Access Toolbar')
-            
-
-        ###### AddInSample ############
 
 
         # Add a command that displays the panel.
@@ -204,6 +186,31 @@ def run(context):
         cntrl = panel.controls.itemById('sendInfoToHTML')
         if not cntrl:
             panel.controls.addCommand(sendInfoCmdDef)
+
+
+                #######AddInSAMPLE######
+
+        cmdDef = _ui.commandDefinitions
+
+        # add a button command on Quick Access Toolbar
+        if not _ui.toolbars.itemById('QATRight').controls.itemById('TutorialButtonOnQATRight'):
+            btnCmdDefinitionQATRight_ = cmdDef.itemById('TutorialButtonOnQATRight')
+            if not btnCmdDefinitionQATRight_:
+                btnCmdDefinitionQATRight_ = cmdDef.addButtonDefinition('TutorialButtonOnQATRight', 'Tutorial Command', 'Tutorial Command', './resources')
+            onButtonCommandCreated = CommandCreatedEventHandlerQATRight()
+            btnCmdDefinitionQATRight_.commandCreated.add(onButtonCommandCreated)
+
+            # keep the handler referenced beyond this function
+            handlers.append(onButtonCommandCreated)
+
+
+            # Connect to Command Created event.
+            handlers.append(onCommandCreated)
+            _ui.toolbars.itemById('QATRight').controls.addCommand(btnCmdDefinitionQATRight_).isVisible = True
+            _ui.messageBox('A Tutorial button command is successfully added to the right Quick Access Toolbar')
+            
+
+        ###### AddInSample ############
     except:
         if _ui:
             _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
