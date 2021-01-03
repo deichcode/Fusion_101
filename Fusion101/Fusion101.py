@@ -26,6 +26,7 @@ class ShowPaletteCommandExecuteHandler(adsk.core.CommandEventHandler):
             palette = _ui.palettes.itemById(PALLET_ID)
             if not palette:
                 palette = initializePalette()
+                palette.isVisible = True
     
                 # Add handler to HTMLEvent of the palette.
                 onHTMLEvent = MyHTMLEventHandler()
@@ -385,11 +386,12 @@ def initializePalette():
         PALLET_ID,
         PALLET_NAME,
         PALLET_URL,
-        isVisible=True,
+        isVisible=False,
         showCloseButton=True,
         isResizable=True,
         width=400,
-        height=800)
+        height=800,
+        useNewWebBrowser=False)
     fusion101Palette.dockingOption = adsk.core.PaletteDockingOptions.PaletteDockOptionsToVerticalOnly
     fusion101Palette.dockingState = adsk.core.PaletteDockingStates.PaletteDockStateLeft
     fusion101Palette.setMaximumSize = 400
