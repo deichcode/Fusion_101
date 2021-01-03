@@ -1,0 +1,31 @@
+[
+  {
+    "id": "building-a-house",
+    "title": "Building a House",
+    "description": "While building a small house you'll get to know the most common tools used in Fusion 360.",
+    "chapters": [
+      {
+        "id": "1-square-sketch",
+        "title": "Let's get cubic",
+        "description": "The most common way to start creating an object is by creating a sketch. A sketch is a two dimensional shape, for example a circle or a rectangle. To create the cubic part of the house we start with a squared sketch on the 'ground'.",
+        "thumbnail": "square-sketch.png",
+        "thumbnailAlt": "A screenshot of a sketched square.",
+        "steps": [
+          {
+            "order": 1,
+            "text": "Click on the \"Create Sketch\" icon.",
+            "hint": "click-create-sketch.mp4"
+          }
+        ]
+      },
+      {
+        "id": "2-get-cubic",
+        "title": "Let's get cubic",
+        "description": "The most common way to start creating an object is by creating a sketch. A sketch is a two dimensional shape, for example a circle or a rectangle. To create the cubic part of the house we start with a squared sketch on the 'ground'.",
+        "thumbnail": "extruded-cube.png",
+        "steps": [
+        ]
+      }
+    ]
+  }
+]
