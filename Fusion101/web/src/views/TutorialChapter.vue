@@ -1,5 +1,5 @@
 <template>
-  <Title :text=""></Title>
+  <Title text="Kapitel 1"></Title>
 </template>
 
 <script>
