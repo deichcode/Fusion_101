@@ -14,6 +14,7 @@ handlers = []
 _app = adsk.core.Application.cast(None)
 _ui = adsk.core.UserInterface.cast(None)
 num = 0
+isDontShowAgain = False
 
 
 # Event handler for the commandExecuted event.
@@ -22,11 +23,17 @@ class ShowPaletteCommandExecuteHandler(adsk.core.CommandEventHandler):
         super().__init__()
     def notify(self, args):
         try:
+            #Open new document
+            _app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+
+
+
             # Create and display the palette.
             palette = _ui.palettes.itemById(PALLET_ID)
             if not palette:
                 palette = initializePalette()
                 palette.isVisible = True
+
     
                 # Add handler to HTMLEvent of the palette.
                 onHTMLEvent = MyHTMLEventHandler()
@@ -133,7 +140,7 @@ class CommandExecuteHandler(adsk.core.CommandEventHandler):
                     if _ui:
                         _ui.messageBox('command executed failed: {}').format(traceback.format_exc())
 
-#CommandExecuteHandler for Tutorial Button on Right QAT bar. AddInSample.py has been used as reference
+#CommandCreatedHandler for Tutorial Button on Right QAT bar. AddInSample.py has been used as reference
 class CommandCreatedEventHandlerQATRight(adsk.core.CommandCreatedEventHandler):
             def __init__(self):
                 super().__init__()
@@ -207,7 +214,7 @@ class popUpCommandCreatedEventHandler(adsk.core.CommandCreatedEventHandler):
         handlers.append(onExecute)
 
         #Connect to the inputChanged event
-        onInputChanged = popUpInputChangedHandler()
+        onInputChanged = popUpCommandInputChangedHandler()
         command.inputChanged.add(onInputChanged)
         handlers.append(onInputChanged)
 
@@ -221,7 +228,15 @@ class popUpCommandInputChangedHandler(adsk.core.InputChangedEventHandler):
         #Check the value of dont show again
         changedInput = eventArgs.input
         if changedInput.id == 'dontShowAgain':
-            isDontShowAgain = True
+
+
+            if changedInput.value == True:
+                isDontShowAgain = True
+                print(isDontShowAgain)
+            else:
+
+                isDontShowAgain = False
+                print(isDontShowAgain)
 
 #Event handler for the execute event
 class popUpCommandExecuteHandler(adsk.core.CommandEventHandler):
