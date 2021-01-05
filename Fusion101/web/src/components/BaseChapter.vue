@@ -1,5 +1,9 @@
 <template>
-  <div class="chapter" role="button" tabindex="0" v-on:click="openChapter(id)" v-on:keyup.enter="openChapter(id)" v-on:keyup.space="openChapter(id)">
+  <div class="chapter" role="button" tabindex="0"
+       v-on:click="openChapter(id)"
+       v-on:keyup.enter="openChapter(id)"
+       v-on:keydown.space.prevent
+       v-on:keyup.space="openChapter(id)">
     <h2>{{ title }}</h2>
     <img :src="thumbnailSrc" :alt="thumbnailAlt">
     <p>{{ description }}</p>
@@ -16,9 +20,6 @@ export default {
     thumbnailAlt: String,
     description: String,
     openChapter: Function
-  },
-  mounted() {
-    console.log(this.chapter)
   }
 }
 </script>
