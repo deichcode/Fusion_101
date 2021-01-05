@@ -1,13 +1,13 @@
 <template>
-  <Button v-on:click="closeApp" text="X"></Button>
+  <BaseButton v-on:click="closeApp" text="X"></BaseButton>
 </template>
 
 <script>
-import Button from './BaseButton'
+import BaseButton from './BaseButton'
 export default {
-  name: "CloseButton",
+  name: "ThePaletteCloseButton",
   components: {
-    Button
+    BaseButton
   },
   methods: {
     closeApp() {

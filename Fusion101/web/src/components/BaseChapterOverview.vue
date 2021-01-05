@@ -26,8 +26,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "src/css/variables/colors";
+@import "src/css/mixins/clickable";
 
 .chapter {
+  @include clickable;
   display: grid;
   grid-template-columns: 33% auto;
   grid-template-rows: auto auto;
@@ -37,17 +39,7 @@ export default {
   margin-bottom: 2rem;
 
   border: 1px solid $active;
-  border-radius: .4rem;
-  cursor: pointer;
-
-  &:hover {
-    background-color: $highlight;
-  }
-
-  &:active {
-    background-color: $active;
-    color: white;
-  }
+  border-radius: 4px;
 }
 
 h2 {

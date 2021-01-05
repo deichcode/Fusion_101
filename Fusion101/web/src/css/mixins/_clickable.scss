@@ -1,0 +1,14 @@
+@import "src/css/variables/colors";
+
+@mixin clickable {
+  background: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $highlight;
+  }
+  &:active {
+    background-color: $active;
+    color: $white;
+  }
+}

@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "Button",
+  name: "BaseButton",
   props: {
     text: String
   }
@@ -13,18 +13,11 @@ export default {
 
 <style lang="scss" scoped>
 @import "src/css/variables/colors";
+@import "src/css/mixins/clickable";
+
 button {
-  background: none;
+  @include clickable;
   border: none;
-  cursor: pointer;
-}
-
-button:hover{
-  background-color: $highlight;
-}
-
-button:active {
-  background-color: $active;
 }
 
 </style>

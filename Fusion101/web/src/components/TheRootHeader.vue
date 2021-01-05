@@ -1,26 +1,26 @@
 <template>
   <div id="header">
     <Title :text="title"/>
-    <CloseButton/>
+    <ThePaletteCloseButton/>
   </div>
 </template>
 
 <script>
 import Title from "./TheHeaderTitle.vue";
-import CloseButton from "./ThePaletteCloseButton.vue";
+import ThePaletteCloseButton from "./ThePaletteCloseButton.vue";
 
 export default {
-  name: "Header",
+  name: "TheRootHeader",
   components: {
     Title,
-    CloseButton
+    ThePaletteCloseButton
   },
   props: {
     title: String
   }
 }
 </script>
-2
+
 <style lang="scss" scoped>
 @import "src/css/variables/colors";
 

@@ -1,5 +1,5 @@
 <template>
-  <Header :title="tutorial.title"/>
+  <TheRootHeader :title="tutorial.title"/>
   <main>
     <div id="tutorial-description">{{ tutorial.description }}</div>
     <BaseChapter v-for="chapter in tutorial.chapters" :key="chapter.id"
@@ -13,16 +13,16 @@
 </template>
 
 <script>
-import Header from "../components/TheHeader.vue";
+import TheRootHeader from "../components/TheRootHeader.vue";
 import getTutorial from "@/tools/getTutorial";
-import BaseChapter from "@/components/BaseChapter";
+import BaseChapter from "@/components/BaseChapterOverview";
 import router from "@/router";
 
 export default {
   name: "TutorialContents",
   components: {
     BaseChapter,
-    Header
+    TheRootHeader
   },
   data() {
     return {
