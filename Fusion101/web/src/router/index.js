@@ -19,7 +19,7 @@ const routes = [
     },
     {
         path: '/tutorial-contents/:tutorialId',
-        name: 'tutorial-contents',
+        name: 'contents',
         component: () => import(/* webpackChunkName: "[request]" */ '../views/TutorialContents.vue') //https://vuedose.tips/naming-webpack-chunks-on-lazy-loaded-routes-in-vuejs/
     },
     {
