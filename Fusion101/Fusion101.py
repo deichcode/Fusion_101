@@ -322,7 +322,7 @@ def run(context):
 
         ###### AddInSample ############
 
-        #Create the RingButton command definition
+        #Create the popUpButton command definition
         popUpButton = cmdDef.addButtonDefinition(
             'popUpButton01PYTHON', 
             'Tutorial PopUp', 
@@ -337,6 +337,7 @@ def run(context):
 
         cmd = cmdDef.itemById('popUpButton01PYTHON')
         cmd.execute()
+
     except:
         if _ui:
             _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
