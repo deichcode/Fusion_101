@@ -6,7 +6,7 @@
     "chapters": [
       {
         "id": "1-square-sketch",
-        "title": "Let's get cubic",
+        "title": "It Begins With a Sketch",
         "description": "The most common way to start creating an object is by creating a sketch. A sketch is a two dimensional shape, for example a circle or a rectangle. To create the cubic part of the house we start with a squared sketch on the 'ground'.",
         "thumbnail": "square-sketch.png",
         "thumbnailAlt": "A screenshot of a sketched square.",
