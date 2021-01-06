@@ -17,7 +17,9 @@ export default {
 
 button {
   @include clickable;
-  border: none;
+  border: 1px solid $active;
+  border-radius: 2px;
+  height: 1.6rem;
 }
 
 </style>

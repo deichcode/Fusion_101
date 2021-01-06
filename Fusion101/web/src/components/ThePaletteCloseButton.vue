@@ -21,4 +21,7 @@ export default {
 </script>
 
 <style scoped>
+button {
+  min-width: 1.6rem;
+}
 </style>

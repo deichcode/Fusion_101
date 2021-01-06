@@ -2,26 +2,28 @@
   <TheRootHeader :title="tutorial.title"/>
   <main>
     <div id="tutorial-description">{{ tutorial.description }}</div>
-    <BaseChapter v-for="chapter in tutorial.chapters" :key="chapter.id"
-                 :id="chapter.id"
-                 :title="chapter.title"
-                 :description="chapter.description"
-                 :thumbnail-src="getThumbnailPath(chapter.thumbnail)"
-                 :openChapter="navigateToChapter"
+    <BaseChapterOverview v-for="chapter in tutorial.chapters" :key="chapter.id"
+                         :id="chapter.id"
+                         :title="chapter.title"
+                         :description="chapter.description"
+                         :thumbnail-src="getThumbnailPath(chapter.thumbnail)"
+                         :thumbnail-alt="chapter.thumbnailAlt"
+                         :openChapter="navigateToChapter"
     />
   </main>
 </template>
 
 <script>
 import TheRootHeader from "../components/TheRootHeader.vue";
-import getTutorial from "@/tools/getTutorial";
-import BaseChapter from "@/components/BaseChapterOverview";
+import getTutorial from "@/tools/tutorials/getTutorial";
+import BaseChapterOverview from "@/components/BaseChapterOverview";
 import router from "@/router";
+import getTutorialMedia from "@/tools/tutorials/getTutorialMedia";
 
 export default {
   name: "TutorialContents",
   components: {
-    BaseChapter,
+    BaseChapterOverview,
     TheRootHeader
   },
   data() {
@@ -37,7 +39,7 @@ export default {
       this.tutorial = getTutorial(this.$route.params.tutorialId)
     },
     getThumbnailPath(thumbnailFileName) {
-      return require(`@/assets/tutorials/${this.tutorial.id}/${thumbnailFileName}`) //https://github.com/vuejs/vue-loader/issues/896
+      return getTutorialMedia(this.tutorial.id, thumbnailFileName)
     },
     navigateToChapter(chapterId) {
       router.push({name: 'chapter', params: {tutorialId: this.tutorial.id, chapterId }})
@@ -47,10 +49,6 @@ export default {
 </script>
 
 <style scoped>
-main {
-  padding: 10px;
-}
-
 #tutorial-description {
   margin-bottom: 20px;
 }
