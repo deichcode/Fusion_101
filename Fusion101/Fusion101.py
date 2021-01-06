@@ -170,6 +170,7 @@ class popUpCommandCreatedEventHandler(adsk.core.CommandCreatedEventHandler):
         #Get the CommandInputs collection for new inputs
         inputs = command.commandInputs
 
+
         command.cancelButtonText = 'Close'
         command.okButtonText = 'Start Fusion 101'
 
@@ -228,9 +229,17 @@ class popUpCommandInputChangedHandler(adsk.core.InputChangedEventHandler):
         #Check the value of dont show again
         changedInput = eventArgs.input
         if changedInput.id == 'dontShowAgain':
-
+            
+        
 
             if changedInput.value == True:
+                #inputs = eventArgs.firingEvent.sender.commandInputs
+                #sliderInput = inputs.itemById('explicitAmountOfRings')
+                #command = adsk.core.CommandCreatedEventArgs.cast(args)
+                #commands = command.firingEvent.sender.command
+                #commands = "Remind me next time"
+               # command.cancelButtonText = 'Remind me next time'
+                print(eventArgs.objectType)
                 isDontShowAgain = True
                 print(isDontShowAgain)
             else:
