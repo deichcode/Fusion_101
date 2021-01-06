@@ -12,7 +12,7 @@
         "thumbnailAlt": "A screenshot of a sketched square.",
         "steps": [
           {
-            "order": 1,
+            "event": "clickedCreateSketch",
             "text": "Click on the \"Create Sketch\" icon.",
             "hint": "click-create-sketch.mp4"
           }

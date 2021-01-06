@@ -39,9 +39,5 @@ export default {
     align-items: flex-start;
     justify-content: space-between;
   }
-
-  > .title {
-    padding-left: 8px;
-  }
 }
 </style>

@@ -1,4 +1,4 @@
-import tutorialsJson from '../assets/tutorials.json'
+import tutorialsJson from '../../assets/tutorials.json'
 
 const getTutorial = (tutorialId) => {
     const tutorials = Array.from(tutorialsJson);

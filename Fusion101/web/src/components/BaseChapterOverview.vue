@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: "BaseChapter",
+  name: "BaseChapterOverview",
   props: {
     id: String,
     title: String,
@@ -34,7 +34,6 @@ export default {
   grid-template-columns: 33% auto;
   grid-template-rows: auto auto;
 
-  //background-color: $menu-background;
   padding: .8rem;
   margin-bottom: 2rem;
 
