@@ -47,7 +47,25 @@ def run(context):
         #Define Distance of Extrusion
         distance = adsk.core.ValueInput.createByReal(10)
         cube = rootComp.features.extrudeFeatures.addSimple(baseRectangleProfile, distance, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
-        #cube = rootComp.features.extrudeFeatures.createInput(baseRectangleProfile, 0)
+
+        #Chapter3
+        #Create Roof Sketch
+        #todo hier muss noch der richtige Face gefunden werden
+        face = cube.endFaces.item(0)
+        triangleSketchBase = sketches.add(face)
+        triangleSketch = triangleSketchBase.sketchCurves.sketchLines
+        baseTriangle1 = triangleSketch.addByTwoPoints(point.create(-5,-5,0),point.create(0,-5,5))
+        baseTriangle2 = triangleSketch.addByTwoPoints(point.create(0,-5,5),point.create(5,-5,0))
+        baseTriangle3 = triangleSketch.addByTwoPoints(point.create(5,-5,0),point.create(-5,-5,0))
+        
+        #Chapter4
+        #Extrude the triangle
+        triangleSketchProfile = triangleSketchBase.profiles.item(1)
+        distance = adsk.core.ValueInput.createByReal(-10)
+        roof = rootComp.features.extrudeFeatures.addSimple(triangleSketchProfile, distance, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+
+
+
 
         
 
