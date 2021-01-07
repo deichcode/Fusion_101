@@ -5,6 +5,8 @@ import adsk.core
 import adsk.fusion
 import adsk.cam
 import traceback
+from pop_up_handlers import popUpCommandCreatedEventHandler
+
 from .constants import PALLET_ID, PALLET_NAME, PALLET_URL
 import json
 
@@ -156,7 +158,7 @@ class CommandCreatedEventHandlerQATRight(adsk.core.CommandCreatedEventHandler):
                 except:
                     _ui.messageBox(' Right QAT command created failed: {}').format(traceback.format_exc())               
 ###########AddinSample#################
-
+"""
 #Event handler for the commandCreated event
 class popUpCommandCreatedEventHandler(adsk.core.CommandCreatedEventHandler):
     def __init__(self):
@@ -266,7 +268,7 @@ class popUpCommandExecuteHandler(adsk.core.CommandEventHandler):
         cmd.execute()
 
         
-
+"""
 
 def run(context):
     try:

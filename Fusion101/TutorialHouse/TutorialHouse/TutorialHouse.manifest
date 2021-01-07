@@ -1,0 +1,13 @@
+{
+	"autodeskProduct":	"Fusion360",
+	"type":	"addin",
+	"id":	"271c0e5e-5c74-4c31-9d25-676d38250e47",
+	"author":	"",
+	"description":	{
+		"":	"Creates the House that is necessary for the tutorial in Fusion101"
+	},
+	"version":	"",
+	"runOnStartup":	false,
+	"supportedOS":	"windows|mac",
+	"editEnabled":	true
+}
