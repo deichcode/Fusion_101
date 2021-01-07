@@ -34,10 +34,22 @@ def run(context):
 
         #circles = sketch.sketchCurves.sketchCircles
 
+        #Chapter1
+        #Create the base square sketch of the house
         lines = sketch.sketchCurves.sketchLines
         baseRectangle = lines.addCenterPointRectangle(point.create(0,0,0), point.create(5,5,0))
 
+        #Chapter2
+        #Extrude the sketch and create a cube
 
+        #Get profile defined by baseRectangle
+        baseRectangleProfile = sketch.profiles.item(0)
+        #Define Distance of Extrusion
+        distance = adsk.core.ValueInput.createByReal(10)
+        cube = rootComp.features.extrudeFeatures.addSimple(baseRectangleProfile, distance, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+        #cube = rootComp.features.extrudeFeatures.createInput(baseRectangleProfile, 0)
+
+        
 
 
         """
