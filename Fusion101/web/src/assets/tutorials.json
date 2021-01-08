@@ -14,7 +14,7 @@
           {
             "event": "clickedCreateSketch",
             "text": "Click on the \"Create Sketch\" icon.",
-            "hint": "click-create-sketch.webm"
+            "hint": "click-create-sketch"
           }
         ]
       },

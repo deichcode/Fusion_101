@@ -23,6 +23,7 @@ export default {
   data() {
     return {
       tutorialId: this.$route.params.tutorialId,
+      videoFormats: ["mp4", "webm"]
     }
   }, mounted() {
     this.$refs.hintVideo.addEventListener('ended', async () => {
@@ -31,8 +32,11 @@ export default {
   },
   methods: {
     showHint(hint) {
-      let sourceElement = this.createSourceElementFor(hint);
-      this.addSourceToHintVideo(sourceElement);
+      this.videoFormats.forEach(format => {
+        let videoFilename = `${hint}.${format}`;
+        let sourceElement = this.createSourceElementFor(videoFilename);
+        this.addSourceToHintVideo(sourceElement);
+      })
       this.playVideo()
     },
     createSourceElementFor: function (hint) {
