@@ -38,6 +38,7 @@ export default {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+    margin-bottom: .8rem;
   }
 }
 </style>

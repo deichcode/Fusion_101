@@ -1,5 +1,8 @@
 <template>
-  <video class="hint" ref="hintVideo"/>
+  <video class="hint" ref="hintVideo" poster="@/assets/images/hint-video-placeholder.png">
+    No Video
+<!--    <div class="hint__placeholder">Not sure how to perform the next step? Hover the (i) besides the current step in the list below.</div>-->
+  </video>
 </template>
 
 <script>
@@ -57,7 +60,7 @@ export default {
       this.stopAndHideVideo();
     },
     removeVideoSource() {
-      this.$refs.hintVideo.innerHTML = '';
+      this.$refs.hintVideo.innerHTML = '<div class="hint__placeholder">Not sure how to perform the next step? Hover the (i) besides the current step in the list below.</div>';
     },
     stopAndHideVideo() {
       this.$refs.hintVideo.pause();
