@@ -14,6 +14,16 @@
           {
             "event": "clickedCreateSketch",
             "text": "Click on the \"Create Sketch\" icon.",
+            "tooltips": [],
+            "hint": "click-create-sketch"
+          },
+          {
+            "event": "selectXYPlane",
+            "text": "Inside the ___workspace___ click the orange square on the ___XY-plane___",
+            "tooltips": [
+              "The workspace is the big area in the center of the Fusion 360 window where you can see your model and manipulate it.",
+              "The XY-plane is spanned by the X-axis (red) and the Y-axis (green). You can also determine which is the x, y, and z-ais by comparing position of the axes in the workspace with the axes on the cube in the upper right corner."
+              ],
             "hint": "click-create-sketch"
           }
         ]
