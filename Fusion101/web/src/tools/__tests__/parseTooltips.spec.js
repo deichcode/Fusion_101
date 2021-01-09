@@ -1,5 +1,4 @@
 import parseTooltips from "@/tools/parseTooltips";
-import ParseTooltipError from "@/errors/parseTooltipError";
 
 describe('parseTooltips', function () {
     it('should not change text if no tooltip marker exists', () => {
@@ -10,8 +9,8 @@ describe('parseTooltips', function () {
         expect(result).toBe(text)
     });
 
-    it('should replace first __ with trigger open tag', () => {
-        const text = "Text __with__ tooltip";
+    it('should replace first ___ with trigger open tag', () => {
+        const text = "Text ___with___ tooltip";
 
         const result = parseTooltips(text, [""])
 
@@ -19,7 +18,7 @@ describe('parseTooltips', function () {
     })
 
     it('should insert close tag after tooltip content', () => {
-        const text = "Text __with__ tooltip";
+        const text = "Text ___with___ tooltip";
 
         const result = parseTooltips(text, [""])
 
@@ -27,7 +26,7 @@ describe('parseTooltips', function () {
     })
 
     it('should insert tooltip content before trigger close tag', () => {
-        const text = "Text __with__ tooltip";
+        const text = "Text ___with___ tooltip";
         const tooltipContent = "Tooltip content"
 
         const result = parseTooltips(text, [tooltipContent])
@@ -35,8 +34,26 @@ describe('parseTooltips', function () {
         expect(result).toContain(`with<span class="tooltip__content">${tooltipContent}</span></span>`)
     })
 
+    it('should enter open span at start of text', function () {
+        const text = "___Starts___ with tooltip";
+        const tooltipContent = "Tooltip content"
+
+        const result = parseTooltips(text, [tooltipContent])
+
+        expect(result).toContain('<span class="tooltip__trigger">Start')
+    });
+
+    it('should enter open span at start of text', function () {
+        const text = "Ends with ___tooltip___";
+        const tooltipContent = "Tooltip content"
+
+        const result = parseTooltips(text, [tooltipContent])
+
+        expect(result).toContain('</span>')
+    });
+
     it('should insert tooltips at multiple positions', () => {
-        const text = "Text with __first__ and __second__ tooltip"
+        const text = "Text with ___first___ and ___second___ tooltip"
         const firstTooltipContent = "First tooltip"
         const secondTooltipContent = "Second tooltip"
         const tooltips = [firstTooltipContent, secondTooltipContent]
@@ -60,7 +77,6 @@ describe('parseTooltips', function () {
 
         expect(result).toBe(text)
     })
-
 
     it('should not throw an error if no tooltips are provided', () => {
         const text = "Text __without__ markdown for tooltip"
