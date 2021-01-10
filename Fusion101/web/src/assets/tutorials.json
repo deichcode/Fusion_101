@@ -7,25 +7,49 @@
       {
         "id": "1-square-sketch",
         "title": "It Begins With a Sketch",
-        "description": "The most common way to start creating an object is by creating a sketch. A sketch is a two dimensional shape, for example a circle or a rectangle. To create the cubic part of the house we start with a squared sketch on the 'ground'.",
+        "description": "The most common way to create an object is by starting with creating a sketch. A sketch is a two-dimensional shape (e.g. a circle or a rectangle). To create the cubic part of the house we begin with a square sketch on the bottom plane",
         "thumbnail": "square-sketch.png",
         "thumbnailAlt": "A screenshot of a sketched square.",
         "steps": [
           {
             "event": "clickedCreateSketch",
-            "text": "Click on the \"Create Sketch\" icon.",
+            "text": "Click on the <strong>Create Sketch</strong> icon.",
             "tooltips": [],
             "hint": "click-create-sketch"
           },
           {
             "event": "selectXYPlane",
-            "text": "Inside the ___workspace___ click the orange square on the ___XY-plane___",
+            "text": "Inside the ___workspace___ click the orange square on the ___<strong>XY-plane</strong>___",
             "tooltips": [
               "The workspace is the big area in the center of the Fusion 360 window where you can see your model and manipulate it.",
               "The XY-plane is spanned by the X-axis (red) and the Y-axis (green). You can also determine which is the x, y, and z-ais by comparing position of the axes in the workspace with the axes on the cube in the upper right corner."
-              ],
-            "hint": "click-create-sketch"
-          }
+            ],
+            "hint": ""
+          },
+          {
+            "event": "selectCenterRectangle",
+            "text": "Select <strong>Center-Rectangle</strong> from the <strong>Create</strong> menu",
+            "tooltips": [],
+            "hint": ""
+          },
+          {
+            "event": "clickXYIntersection",
+            "text": "Set the center of the rectangle by clicking at the intersection of the x- and y-axis",
+            "tooltips": [],
+            "hint": ""
+          },
+          {
+            "event": "createRectangle100",
+            "text": "Specify a size of <strong>100x100 mm</strong> and click to confirm. You can press ___<strong>tabulator-key</strong>___ to switch between specifying width and height. ",
+            "tooltips": ["On most keyboards the tabular-key, or short tab, is left to the Q"],
+            "hint": ""
+          },
+                    {
+                      "event": "finishSketch",
+                      "text": "Click on Finish Sketch",
+                      "tooltips": [],
+                      "hint": ""
+                    }
         ]
       },
       {

@@ -1,8 +1,9 @@
 <template>
-  <ol>
+  <ol class="chapter-steps">
     <li v-for="step in chapter.steps" :key="step.order">
       <BaseTooltipText :text="step.text" :tooltips="step.tooltips"/>
-      <span v-on:mouseover="() => setHintToShow(step.hint)"
+      <span v-if="step.hint"
+            v-on:mouseover="() => setHintToShow(step.hint)"
             v-on:mouseleave="() => setHintToShow('')"> (i)</span>
     </li>
   </ol>
@@ -20,3 +21,13 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.chapter-steps {
+  padding-left: 30px;
+
+  li {
+    margin-bottom: 10px;
+  }
+}
+</style>

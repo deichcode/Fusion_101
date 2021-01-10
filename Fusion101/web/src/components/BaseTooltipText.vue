@@ -73,7 +73,9 @@ $tooltipWidth: 200px;
   ::v-deep(.tooltip__trigger) {
     position: relative;
     display: inline-block;
-    border-bottom: 1px dotted $link; /* If you want dots under the hoverable text */
+    //border-bottom: 1px dotted $link; /* If you want dots under the hoverable text */
+    text-decoration: underline dotted $link;
+    text-underline-offset: 3px;
     cursor: help;
   }
 
@@ -90,7 +92,7 @@ $tooltipWidth: 200px;
     /* Position the tooltip text - see examples below! */
     position: absolute;
     z-index: 1;
-    top: 100%;
+    top: calc(100% + 4px);
     left: 50%;
     margin-left: -$tooltipWidth/2; /* Use half of the width (120/2 = 60), to center the tooltip */
 
