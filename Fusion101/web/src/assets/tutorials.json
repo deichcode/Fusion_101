@@ -208,7 +208,69 @@
           },
           {
             "event": "confirmShell",
-            "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>"
+            "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>",
+            "tooltips": [],
+            "hint":"click-create-sketch"
+          }
+        ]
+      },
+      {
+        "id": "6-entrance",
+        "title": "Make an Entrance",
+        "description": "Every house needs a door. We will create an entrance by using the Extrude feature again but by dragging it in the opposite direction. But first we will have to create a sketch for the shape of the entrance.",
+        "thumbnail": "extruded-cube.png",
+        "steps": [
+          {
+            "event": "clickedCreateSketch",
+            "text": "Click on the <strong>Create Sketch</strong> icon.",
+            "tooltips": [],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "clicked2PointRectangle",
+            "text": "Select the <strong>2-Point Rectangle</strong> from the <strong>CREATE</strong> menu or press the <strong>R</strong> Button",
+            "tooltips": [],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "created2PointRectangle",
+            "text": "Create a ___50x40mm___ door in the bottom middle of the plane",
+            "tooltips": [
+              "You can either use the mouse or press the Tabulator Key to switch between specifying width and height."
+              ],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "clickedFinishSketch",
+            "text": "Click on <strong>Finish Sketch</strong> to confirm",
+            "tooltips": [],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "clickedExtrudeFeauture",
+            "text": "Select the <strong>Extrude Feature</strong> in the <strong>CREATE</strong> menu or in the right-click menu under <strong>Press/Pull</strong> or press the letter <strong>E</strong> on your keyboard",
+            "tooltips": [],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "selectEntranceSketch",
+            "text": "Select the entrance sketch",
+            "tooltips": [],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "createdEntrance",
+            "text": "Drag the arrow inside the house of select a distance of at least ___-10mm___",
+            "tooltips": [
+              "Because our walls have a thickness of 10mm"
+              ],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "confirmExtrude",
+            "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>",
+            "tooltips": [],
+            "hint":"click-create-sketch"
           }
         ]
       }
