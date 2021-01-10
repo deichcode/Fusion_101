@@ -62,9 +62,30 @@
       {
         "id": "2-get-cubic",
         "title": "Let's get cubic",
-        "description": "The most common way to start creating an object is by creating a sketch. A sketch is a two dimensional shape, for example a circle or a rectangle. To create the cubic part of the house we start with a squared sketch on the 'ground'.",
+        "description": "After a sketch is created, we want to build a three-dimensional shape from the two-dimensional sketch. The extrude feature represents a way to extrude these sketches into 3-dimensional shapes. We will extrude our quare sketch from the first chapter into a cube",
         "thumbnail": "extruded-cube.png",
         "steps": [
+          {
+            "event": "clickedExtrudeFeauture",
+            "text": "Select the <strong>Extrude Feauture</strong> in the <strong>CREATE</strong> menu or in the right-click menu under <strong>Press/Pull</strong> or press the letter <strong>E</strong> on your keyboard",
+            "tooltips": [],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "extrudeSquare",
+            "text": "Drag your square ___upwards___ for a distance of a ___100mm___",
+            "tooltips": [
+              "Along the y-axis that is represented in green",
+              "You may also just type 100 into the height box"
+              ],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "confirmExtrude",
+            "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing Enter",
+            "tooltips": [],
+            "hint":"click-create-sketch"
+          }
         ]
       },
       {
