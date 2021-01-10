@@ -1,17 +1,19 @@
 <template>
-  <TheSubpageHeader
-      :title="chapter.title"
-      back-button-title="< Tutorial Overview"
-      :back-button-action="navigateToOverview"
-  />
-  <main>
-    <p class="description">{{ chapter.description }}</p>
-    <ChapterStepHintVideo :hint="hintToShow"/>
-    <ChapterSteps :chapter="chapter" :set-hint-to-show="setHintToShow"/>
-    <ChapterNavigation :tutorial-id="tutorialId" :chapter-id="chapterId" :navigate-to-overview="navigateToOverview" />
-  </main>
-  <footer>
-  </footer>
+  <div :key="tutorialId + chapterId">
+    <TheSubpageHeader
+        :title="chapter.title"
+        back-button-title="< Tutorial Overview"
+        :back-button-action="navigateToOverview"
+    />
+    <main>
+      <p class="description">{{ chapter.description }}</p>
+      <ChapterStepHintVideo :hint="hintToShow"/>
+      <ChapterSteps :chapter="chapter" :set-hint-to-show="setHintToShow"/>
+      <ChapterNavigation :tutorial-id="tutorialId" :chapter-id="chapterId" :navigate-to-overview="navigateToOverview"/>
+    </main>
+    <footer>
+    </footer>
+  </div>
 </template>
 
 <script>
