@@ -90,7 +90,7 @@
         "id": "3-raise-roof",
         "title": "Raise the roof",
         "description": "Now we want to create a roof by starting with a sketch again. We can create sketches on either selected planes or planes that are created by our components themselves. In this chapter we will create a sketch on the front of our cube.",
-        "thumbnail": "extruded-cube.png",
+        "thumbnail": "Chapter3.png",
         "steps": [
           {
             "event": "clickedCreateSketch",
@@ -150,7 +150,7 @@
         "id": "4-rain-protection",
         "title": "Rain Protection",
         "description": "A simple triangle is not enough to protect our house from the rain. We need to extrude our triangle-roof just as we did with the square foundation of our house.",
-        "thumbnail": "extruded-cube.png",
+        "thumbnail": "Chapter4.png",
         "steps": [
           {
             "event": "clickedTrianglePlane",
@@ -182,7 +182,7 @@
         "id": "5-create-room",
         "title": "Create some room",
         "description": "Our house consists of a solid block o material as of right now but we need place inside for people to live in. That is why we are going to hollow it out from the bottom. This is where the Shell Feature comes into play.",
-        "thumbnail": "extruded-cube.png",
+        "thumbnail": "Chapter5.png",
         "steps": [
           {
             "event": "clickedOnShell",
@@ -216,7 +216,7 @@
         "id": "6-entrance",
         "title": "Make an Entrance",
         "description": "Every house needs a door. We will create an entrance by using the Extrude feature again but by dragging it in the opposite direction. But first we will have to create a sketch for the shape of the entrance.",
-        "thumbnail": "extruded-cube.png",
+        "thumbnail": "Chapter6.png",
         "steps": [
           {
             "event": "clickedCreateSketch",
@@ -276,7 +276,7 @@
         "id": "7-offset-plane",
         "title": "Offset Plane",
         "description": "Sometimes we want a sketch that is not located on one of the original planes nor a plane from our component. This is when we can use offset planes to create planes that lay parallel to another plane in our design.",
-        "thumbnail": "extruded-cube.png",
+        "thumbnail": "Chapter7.png",
         "steps": [
           {
             "event": "clickedOffsetPlane",
@@ -313,7 +313,7 @@
         "id": "8-chimney",
         "title": "Finish Chimney",
         "description": "We will design our chimney by creating a box on the offset plane and extruding it afterwards. For this we are going to use the Box feature unlike in the first chapter when we created the base cube of the house. Both options lead to the same result. Afterwards we will use the Extrude feature but unlike we did before, we will not drag the arrow but extrude to another object. This allows us to combine shapes that have a different angle to each other without part of the roof stretching into the inside of the house.",
-        "thumbnail": "extruded-cube.png",
+        "thumbnail": "Chapter8.png",
         "steps": [
           {
             "event": "clickedBox",
@@ -377,7 +377,7 @@
         "id": "9-back-in-time",
         "title": "Go back in Time",
         "description": "We decided that we did not like the look of our new chimney. It seems very boring compared to the other houses in our neighborhood. Wouldn’t it be great to go back in time and change the design of our roof? How convenient that Fusion 360 has this option.",
-        "thumbnail": "extruded-cube.png",
+        "thumbnail": "Chapter9.png",
         "steps": [
           {
             "event": "wentBackInTime",
@@ -393,7 +393,7 @@
         "id": "10-cylindrical-chimney",
         "title": "Create cylindrical chimney",
         "description": "We decided on a cylindrical, tapered chimney for our roof to make it look a little more fancy. We will therefore create a cylinder instead of the box from the previous chapter. Draw a circle with a bigger radius then the cylinder on the roof and combine these with the “Loft” feature.",
-        "thumbnail": "extruded-cube.png",
+        "thumbnail": "Chapter10.png",
         "steps": [
           {
             "event": "selectOffsetPlane",
