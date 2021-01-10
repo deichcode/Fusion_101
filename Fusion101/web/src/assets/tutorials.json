@@ -372,6 +372,122 @@
             "hint":"click-create-sketch"
           }
         ]
+      },
+      {
+        "id": "9-back-in-time",
+        "title": "Go back in Time",
+        "description": "We decided that we did not like the look of our new chimney. It seems very boring compared to the other houses in our neighborhood. Wouldn’t it be great to go back in time and change the design of our roof? How convenient that Fusion 360 has this option.",
+        "thumbnail": "extruded-cube.png",
+        "steps": [
+          {
+            "event": "wentBackInTime",
+            "text": "We want to ___erase___ the roof that we created, therefore either drag the pointer two places back or press the button left from the play button twice.",
+            "tooltips": [
+              "You can see every steps of our journey in the timeline at the bottom of our window. You can control them by either dragging the pointer left and right or by using the arrows on the left. The Play Button in the middle shows the construction of our design step by step. Try it out if you want. The buttons beside the Play Button push the pointer one step left or right. The buttons far left and right push the pointer to the beginning and the end of our design."
+            ],
+            "hint":"click-create-sketch"
+          }
+        ]
+      },
+      {
+        "id": "10-cylindrical-chimney",
+        "title": "Create cylindrical chimney",
+        "description": "We decided on a cylindrical, tapered chimney for our roof to make it look a little more fancy. We will therefore create a cylinder instead of the box from the previous chapter. Draw a circle with a bigger radius then the cylinder on the roof and combine these with the “Loft” feature.",
+        "thumbnail": "extruded-cube.png",
+        "steps": [
+          {
+            "event": "selectOffsetPlane",
+            "text": "Select the previously created offset plane",
+            "tooltips": [],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "clickedCylinder",
+            "text": "Select <strong>Cylinder</strong> from the <strong>CREATE</strong> menu",
+            "tooltips": [],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "clickedCylinderCenter",
+            "text": "Click on the middle of the roof for the center of the cylinder",
+            "tooltips": [],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "selectedCylinderDiameter",
+            "text": "Drag or type a diameter of 20mm",
+            "tooltips": [],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "confirmCylinder",
+            "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>.",
+            "tooltips": [],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "clickedCreateSketch",
+            "text": "Click on the <strong>Create Sketch</strong> icon.",
+            "tooltips": [],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "selectedRightSideofRoof",
+            "text": "Select the right side of our roof",
+            "tooltips": [],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "clickedCircle",
+            "text": "Select the <strong>Center Diameter Circle</strong> icon or press the <strong>C</strong> button",
+            "tooltips": [],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "clickedCircleCenter",
+            "text": "Click on the center of the roof to assign the center of the circne",
+            "tooltips": [],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "draggedCircleDiameter",
+            "text": "Drag or enter a diameter of 40mm.",
+            "tooltips": [],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "clickedFinishSketch",
+            "text": "Click on <strong>Finish Sketch</strong> to confirm.",
+            "tooltips": [],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "clickedLoft",
+            "text": "Select the <strong>Loft Feature</strong> from the <strong>CREATE</strong> menu.",
+            "tooltips": [],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "selectBottomOfCylinder",
+            "text": "Select the ___bottom___ of the cylinder",
+            "tooltips": [
+              "You can drag the cube in the right upper corner of the workspace to orientate in your design."
+              ],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "selectedCircleOnRoof",
+            "text": "Select the circle sketch on the roof",
+            "tooltips": [],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "confirmLoft",
+            "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>.",
+            "tooltips": [],
+            "hint":"click-create-sketch"
+          }
+        ]
       }
     ]
   }
