@@ -149,7 +149,7 @@
         ]
       },
       {
-        "id": "3-rain-protection",
+        "id": "4-rain-protection",
         "title": "Rain Protection",
         "description": "A simple triangle is not enough to protect our house from the rain. We need to extrude our triangle-roof just as we did with the square foundation of our house",
         "thumbnail": "extruded-cube.png",
@@ -177,6 +177,38 @@
             "text": "Click <strong>Ok</strong> in the command dialog or press <strong>Enter</strong> to confirm",
             "tooltips": [],
             "hint": "click-create-sketch"
+          }
+        ]
+      },
+      {
+        "id": "5-create-room",
+        "title": "Create some room",
+        "description": "Our house consists of a solid block o material as of right now but we need place inside for people to live in. That is why we are going to hollow it out from the bottom. This is where the Shell Feature comes into play",
+        "thumbnail": "extruded-cube.png",
+        "steps": [
+          {
+            "event": "clickedOnShell",
+            "text": "Select the <strong>Shell Feature</strong> from the <strong>MODIFY</strong> menu",
+            "tooltips": [],
+            "hint": "click-create-sketch"
+          },
+          {
+            "event": "selectBottomPlane",
+            "text": "Select the ___bottom___ plane of our house",
+            "tooltips": [
+              "You can drag the cube in the right upper corner of the workspace to orientate in your design"
+              ],
+            "hint": "click-create-sketch"
+          },
+          {
+            "event": "draggedShell",
+            "text": "Drag the arrow or type a thickness of 10mm",
+            "tooltips": [],
+            "hint": "click-create-sketch"
+          },
+          {
+            "event": "confirmShell",
+            "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>"
           }
         ]
       }
