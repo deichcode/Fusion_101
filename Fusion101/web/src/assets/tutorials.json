@@ -6,13 +6,8 @@
     "chapters": [
       {
         "id": "1-square-sketch",
-<<<<<<< HEAD
         "title": "It begins with a Sketch",
         "description": "The most common way to create an object is by starting with creating a sketch. A sketch is a two-dimensional shape i.e. a circle or rectangle. To create the cubic part of the house we begin with a square sketch on the bottom plane",
-=======
-        "title": "It Begins With a Sketch",
-        "description": "The most common way to create an object is by starting with creating a sketch. A sketch is a two-dimensional shape (e.g. a circle or a rectangle). To create the cubic part of the house we begin with a square sketch on the bottom plane",
->>>>>>> 244a6fc2814cadb5111595e0dcf5668518aa1b38
         "thumbnail": "square-sketch.png",
         "thumbnailAlt": "A screenshot of a sketched square.",
         "steps": [
@@ -28,7 +23,6 @@
             "tooltips": [
               "The workspace is the big area in the center of the Fusion 360 window where you can see your model and manipulate it.",
               "The XY-plane is spanned by the X-axis (red) and the Y-axis (green). You can also determine which is the x, y, and z-ais by comparing position of the axes in the workspace with the axes on the cube in the upper right corner."
-<<<<<<< HEAD
               ],
             "hint": "click-create-sketch"
           },
@@ -63,35 +57,6 @@
             "tooltips": [],
             "hint":"click-create-sketch"
           }
-=======
-            ],
-            "hint": ""
-          },
-          {
-            "event": "selectCenterRectangle",
-            "text": "Select <strong>Center-Rectangle</strong> from the <strong>Create</strong> menu",
-            "tooltips": [],
-            "hint": ""
-          },
-          {
-            "event": "clickXYIntersection",
-            "text": "Set the center of the rectangle by clicking at the intersection of the x- and y-axis",
-            "tooltips": [],
-            "hint": ""
-          },
-          {
-            "event": "createRectangle100",
-            "text": "Specify a size of <strong>100x100 mm</strong> and click to confirm. You can press ___<strong>tabulator-key</strong>___ to switch between specifying width and height. ",
-            "tooltips": ["On most keyboards the tabular-key, or short tab, is left to the Q"],
-            "hint": ""
-          },
-                    {
-                      "event": "finishSketch",
-                      "text": "Click on Finish Sketch",
-                      "tooltips": [],
-                      "hint": ""
-                    }
->>>>>>> 244a6fc2814cadb5111595e0dcf5668518aa1b38
         ]
       },
       {
@@ -303,6 +268,43 @@
           },
           {
             "event": "confirmExtrude",
+            "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>",
+            "tooltips": [],
+            "hint":"click-create-sketch"
+          }
+        ]
+      },
+      {
+        "id": "7-offset-plane",
+        "title": "Offset Plane",
+        "description": "Sometimes we want a sketch that is not located on one of the original planes nor a plane from our component. This is when we can use offset planes to create planes that lay parallel to another plane in our design.",
+        "thumbnail": "extruded-cube.png",
+        "steps": [
+          {
+            "event": "clickedOffsetPlane",
+            "text": "Select <strong>Offset plane</strong> from the <strong>CONSTRUCT</strong> menu.",
+            "tooltips": [],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "selectXYPlane",
+            "text": "Inside the ___workspace___ click the orange square on the ___<strong>XY-plane</strong>___",
+            "tooltips": [
+              "The workspace is the big area in the center of the Fusion 360 window where you can see your model and manipulate it.",
+              "The XY-plane is spanned by the X-axis (red) and the Y-axis (green). You can also determine which is the x, y, and z-ais by comparing position of the axes in the workspace with the axes on the cube in the upper right corner."
+              ],
+            "hint": "click-create-sketch"
+          },
+          {
+            "event": "draggedOffsetPlane",
+            "text": "Drag the arrow ___upwards___ or type a distance of 160mm.",
+            "tooltips": [
+              "Along the y-axis that is represented in green"
+              ],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "confirmOffsetPlane",
             "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>",
             "tooltips": [],
             "hint":"click-create-sketch"
