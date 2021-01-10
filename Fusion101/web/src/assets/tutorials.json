@@ -82,7 +82,7 @@
           },
           {
             "event": "confirmExtrude",
-            "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing Enter",
+            "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>",
             "tooltips": [],
             "hint":"click-create-sketch"
           }
@@ -94,7 +94,58 @@
         "description": "Now we want to create a roof by starting with a sketch again. We can create sketches on either selected planes or planes that are created by our components themselves. In this chapter we will create a sketch on the front of our cube.",
         "thumbnail": "extruded-cube.png",
         "steps": [
-
+          {
+            "event": "clickedCreateSketch",
+            "text": "Click on the <strong>Create Sketch</strong> icon.",
+            "tooltips": [],
+            "hint": "click-create-sketch"
+          },
+          {
+            "event": "selectFrontPlane",
+            "text": "Select the ___front___ plane of our cube",
+            "tooltips": [
+              "You can drag the cube in the right upper corner of the workspace to orientate in your design"
+              ],
+            "hint": "click-create-sketch"
+          },
+          {
+            "event": "clickedLine",
+            "text": "Select <strong>Line</strong> in the <strong>CREATE</strong> menu or press the <strong>L</strong> Button",
+            "tooltips": [],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "clickedFirstTriangleLine",
+            "text": "Click on the upper left edge of our square plane",
+            "tooltips": [],
+            "hint": "click-create-sketch"
+          },
+          {
+            "event": "clickedSecondTriangleLine",
+            "text": "Click on the point of the ___y-axis___ such that the angle is 45°",
+            "tooltips": [
+              "The y-axis has a green color in the workspace"
+              ],
+            "hint": "click-create-sketch"
+          },
+          {
+            "event": "clickedThirdTriangleLine",
+            "text":"Click on the upper right edge of our square plane",
+            "tooltips": [],
+            "hint": "click-create-sketch"
+          },
+          {
+            "event": "clickedFirstTriangleLine",
+            "text": "Click on the upper left edge of our square plane again to finish the triangle",
+            "tooltips": [],
+            "hint": "click-create-sketch"
+          },
+          {
+            "event": "clickedFinishSketch",
+            "text": "Click on <strong>Finish Sketch</strong> to confirm",
+            "tooltips": [],
+            "hint": "click-create-sketch"
+          }
         ]
       }
     ]
