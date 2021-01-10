@@ -67,7 +67,7 @@
         "steps": [
           {
             "event": "clickedExtrudeFeauture",
-            "text": "Select the <strong>Extrude Feauture</strong> in the <strong>CREATE</strong> menu or in the right-click menu under <strong>Press/Pull</strong> or press the letter <strong>E</strong> on your keyboard",
+            "text": "Select the <strong>Extrude Feature</strong> in the <strong>CREATE</strong> menu or in the right-click menu under <strong>Press/Pull</strong> or press the letter <strong>E</strong> on your keyboard",
             "tooltips": [],
             "hint":"click-create-sketch"
           },
@@ -143,6 +143,38 @@
           {
             "event": "clickedFinishSketch",
             "text": "Click on <strong>Finish Sketch</strong> to confirm",
+            "tooltips": [],
+            "hint": "click-create-sketch"
+          }
+        ]
+      },
+      {
+        "id": "3-rain-protection",
+        "title": "Rain Protection",
+        "description": "A simple triangle is not enough to protect our house from the rain. We need to extrude our triangle-roof just as we did with the square foundation of our house",
+        "thumbnail": "extruded-cube.png",
+        "steps": [
+          {
+            "event": "clickedTrianglePlane",
+            "text": "Click on the triangle sketch, we created in the last chapter",
+            "tooltips": [],
+            "hint": "click-create-sketch"
+          },
+          {
+            "event": "clickedExtrudeFeauture",
+            "text": "Select the <strong>Extrude Feature</strong> in the <strong>CREATE</strong> menu or in the right-click menu under <strong>Press/Pull</strong> or press the letter <strong>E</strong> on your keyboard",
+            "tooltips": [],
+            "hint":"click-create-sketch"
+          },
+          {
+            "event": "extrudeRoof",
+            "text": "Drag the arrow to the back of the square or define a distance of -100mm",
+            "tooltips": [],
+            "hint": "click-create-sketch"
+          },
+          {
+            "event": "confirmExtrude",
+            "text": "Click <strong>Ok</strong> in the command dialog or press <strong>Enter</strong> to confirm",
             "tooltips": [],
             "hint": "click-create-sketch"
           }
