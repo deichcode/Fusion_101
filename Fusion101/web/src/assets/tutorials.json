@@ -23,14 +23,14 @@
             "tooltips": [
               "The workspace is the big area in the center of the Fusion 360 window where you can see your model and manipulate it.",
               "The XY-plane is spanned by the X-axis (red) and the Y-axis (green). You can also determine which is the x, y, and z-ais by comparing position of the axes in the workspace with the axes on the cube in the upper right corner."
-              ],
-            "hint": "click-create-sketch"
+            ],
+            "hint": "select-x-y-plane"
           },
           {
             "event": "centerRectangle",
             "text": "Select the <strong>Center-Rectangle</strong> from the <strong>CREATE</strong> menu.",
             "tooltips": [],
-            "hint": "click-create-sketch"
+            "hint": "select-center-rectangle"
           },
           {
             "event": "setCenterRectangleCenter",
@@ -38,22 +38,22 @@
             "tooltips": [
               "The x-axis has a red color in the workspace",
               "The y-axis has a green color in the workspace"
-              ],
-            "hint": "click-create-sketch"
+            ],
+            "hint": "set-center-rectangle-at-x-0-y-0"
           },
           {
-            "event": "setCenterRectangleSize",
+            "event": "specify100100square",
             "text": "Specify a ___size___ of 100x100mm and click to confirm.",
             "tooltips": [
               "You can either use the mouse or press the Tabulator Key to switch between specifying width and height."
-              ],
-            "hint": "click-create-sketch"
+            ],
+            "hint": "specify-100x100-square"
           },
           {
             "event": "clickedFinishSketch",
             "text": "Click on <strong>Finish Sketch</strong>.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": "click-finish-sketch"
           }
         ]
       },
@@ -67,7 +67,7 @@
             "event": "clickedExtrudeFeauture",
             "text": "Select the <strong>Extrude Feature</strong> in the <strong>CREATE</strong> menu or in the right-click menu under <strong>Press/Pull</strong> or press the letter <strong>E</strong> on your keyboard.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": "select-extrude-feature"
           },
           {
             "event": "extrudeSquare",
@@ -75,14 +75,14 @@
             "tooltips": [
               "Along the y-axis that is represented in green.",
               "You may also just type 100 into the height box."
-              ],
-            "hint":"click-create-sketch"
+            ],
+            "hint": "extrude-square-100"
           },
           {
             "event": "confirmExtrude",
             "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": "confirm-extrude-square"
           }
         ]
       },
@@ -99,56 +99,50 @@
             "hint": "click-create-sketch"
           },
           {
-            "event": "selectFrontPlane",
+            "event": "selectCubeFrontPlane",
             "text": "Select the ___front___ plane of our cube.",
             "tooltips": [
               "You can drag the cube in the right upper corner of the workspace to orientate in your design."
-              ],
-            "hint": "click-create-sketch"
+            ],
+            "hint": "select-cube-front-plane"
           },
           {
             "event": "clickedLine",
             "text": "Select <strong>Line</strong> in the <strong>CREATE</strong> menu or press the <strong>L</strong> Button.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": "select-line-tool"
           },
           {
             "event": "clickedFirstTriangleLine",
-            "text": "Click on the upper left edge of our square plane.",
+            "text": "Click on the upper left corner of our square plane.",
             "tooltips": [],
-            "hint": "click-create-sketch"
+            "hint": "click-upper-left-corner-square"
           },
           {
             "event": "clickedSecondTriangleLine",
             "text": "Click on the point of the ___y-axis___ such that the angle is 45°.",
             "tooltips": [
               "The y-axis has a green color in the workspace."
-              ],
-            "hint": "click-create-sketch"
+            ],
+            "hint": "click-second-roof-triangle-point"
           },
           {
             "event": "clickedThirdTriangleLine",
-            "text":"Click on the upper right edge of our square plane.",
+            "text": "Click on the upper right edge of our square plane.",
             "tooltips": [],
-            "hint": "click-create-sketch"
-          },
-          {
-            "event": "clickedFirstTriangleLine",
-            "text": "Click on the upper left edge of our square plane again to finish the triangle.",
-            "tooltips": [],
-            "hint": "click-create-sketch"
+            "hint": "click-third-roof-triangle-point"
           },
           {
             "event": "clickedFinishSketch",
             "text": "Click on <strong>Finish Sketch</strong> to confirm.",
             "tooltips": [],
-            "hint": "click-create-sketch"
+            "hint": "click-finish-sketch"
           }
         ]
       },
       {
         "id": "4-rain-protection",
-        "title": "Rain Protection",
+        "title": "Rain protection",
         "description": "A simple triangle is not enough to protect our house from the rain. We need to extrude our triangle-roof just as we did with the square foundation of our house.",
         "thumbnail": "Chapter4.png",
         "steps": [
@@ -156,25 +150,25 @@
             "event": "clickedTrianglePlane",
             "text": "Click on the triangle sketch, we created in the last chapter.",
             "tooltips": [],
-            "hint": "click-create-sketch"
+            "hint": "select-roof-triangle"
           },
           {
             "event": "clickedExtrudeFeauture",
             "text": "Select the <strong>Extrude Feature</strong> in the <strong>CREATE</strong> menu or in the right-click menu under <strong>Press/Pull</strong> or press the letter <strong>E</strong> on your keyboard.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": "select-extrude-feature"
           },
           {
             "event": "extrudeRoof",
             "text": "Drag the arrow to the back of the square or define a distance of -100mm.",
             "tooltips": [],
-            "hint": "click-create-sketch"
+            "hint": "extruede-roof"
           },
           {
             "event": "confirmExtrude",
             "text": "Click <strong>Ok</strong> in the command dialog or press <strong>Enter</strong> to confirm.",
             "tooltips": [],
-            "hint": "click-create-sketch"
+            "hint": "extrude-roof-confirmation"
           }
         ]
       },
@@ -188,27 +182,27 @@
             "event": "clickedOnShell",
             "text": "Select the <strong>Shell Feature</strong> from the <strong>MODIFY</strong> menu.",
             "tooltips": [],
-            "hint": "click-create-sketch"
+            "hint": "select-shell"
           },
           {
             "event": "selectBottomPlane",
             "text": "Select the ___bottom___ plane of our house.",
             "tooltips": [
               "You can drag the cube in the right upper corner of the workspace to orientate in your design."
-              ],
-            "hint": "click-create-sketch"
+            ],
+            "hint": "shell-select-house-bottom"
           },
           {
             "event": "draggedShell",
             "text": "Drag the arrow or type a thickness of 10mm.",
             "tooltips": [],
-            "hint": "click-create-sketch"
+            "hint": "drag-cube-shell"
           },
           {
             "event": "confirmShell",
             "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": "confirm-cube-shell"
           }
         ]
       },
@@ -222,53 +216,61 @@
             "event": "clickedCreateSketch",
             "text": "Click on the <strong>Create Sketch</strong> icon.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": "click-create-sketch"
+          },
+          {
+            "event": "selectCubeFrontPlane",
+            "text": "Select the ___front___ plane of our cube.",
+            "tooltips": [
+              "You can drag the cube in the right upper corner of the workspace to orientate in your design."
+            ],
+            "hint": "select-house-front-plane"
           },
           {
             "event": "clicked2PointRectangle",
             "text": "Select the <strong>2-Point Rectangle</strong> from the <strong>CREATE</strong> menu or press the <strong>R</strong> Button.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": "select-2-point-rectangle"
           },
           {
             "event": "created2PointRectangle",
             "text": "Create a ___50x40mm___ door in the bottom middle of the plane.",
             "tooltips": [
               "You can either use the mouse or press the Tabulator Key to switch between specifying width and height."
-              ],
-            "hint":"click-create-sketch"
+            ],
+            "hint": "create-door-rectangle"
           },
           {
             "event": "clickedFinishSketch",
             "text": "Click on <strong>Finish Sketch</strong> to confirm.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": "click-finish-sketch"
           },
           {
             "event": "clickedExtrudeFeauture",
             "text": "Select the <strong>Extrude Feature</strong> in the <strong>CREATE</strong> menu or in the right-click menu under <strong>Press/Pull</strong> or press the letter <strong>E</strong> on your keyboard.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": "select-extrude-feature"
           },
           {
             "event": "selectEntranceSketch",
             "text": "Select the entrance sketch.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": "select-entrance-sketch"
           },
           {
             "event": "createdEntrance",
             "text": "Drag the arrow inside the house of select a distance of at least ___-10mm___.",
             "tooltips": [
               "Because our walls have a thickness of 10mm."
-              ],
-            "hint":"click-create-sketch"
+            ],
+            "hint": "extrude-entrance"
           },
           {
             "event": "confirmExtrude",
             "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": "confirm-extrude-entrance"
           }
         ]
       },
@@ -282,7 +284,7 @@
             "event": "clickedOffsetPlane",
             "text": "Select <strong>Offset plane</strong> from the <strong>CONSTRUCT</strong> menu.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": ""
           },
           {
             "event": "selectXYPlane",
@@ -290,22 +292,22 @@
             "tooltips": [
               "The workspace is the big area in the center of the Fusion 360 window where you can see your model and manipulate it.",
               "The XY-plane is spanned by the X-axis (red) and the Y-axis (green). You can also determine which is the x, y, and z-ais by comparing position of the axes in the workspace with the axes on the cube in the upper right corner."
-              ],
-            "hint": "click-create-sketch"
+            ],
+            "hint": ""
           },
           {
             "event": "draggedOffsetPlane",
             "text": "Drag the arrow ___upwards___ or type a distance of 160mm.",
             "tooltips": [
               "Along the y-axis that is represented in green."
-              ],
-            "hint":"click-create-sketch"
+            ],
+            "hint": ""
           },
           {
             "event": "confirmOffsetPlane",
             "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": ""
           }
         ]
       },
@@ -319,31 +321,31 @@
             "event": "clickedBox",
             "text": "Select <strong>Box</strong> from the <strong>CREATE</strong> menu.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": ""
           },
           {
             "event": "selectOffsetPlane",
             "text": "Click on the offset plane that we created in the previous chapter.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": ""
           },
           {
             "event": "createdBox",
             "text": "Create a 20x20mm Box in the middle of the roof by selecting two diagonal points in the plane.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": ""
           },
           {
             "event": "confirmBox",
             "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": ""
           },
           {
             "event": "clickedExtrudeFeauture",
             "text": "Select the <strong>Extrude Feature</strong> in the <strong>CREATE</strong> menu or in the right-click menu under <strong>Press/Pull</strong> or press the letter <strong>E</strong> on your keyboard.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": ""
           },
           {
             "event": "selectBottomOfBox",
@@ -351,25 +353,25 @@
             "tooltips": [
               "You can drag the cube in the right upper corner of the workspace to orientate in your design."
             ],
-            "hint":"click-create-sketch"
+            "hint": ""
           },
           {
             "event": "clickedToObject",
             "text": "In the command dialog under <strong>Extend</strong> select the option <strong>To object</strong>.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": ""
           },
           {
             "event": "selectedRightSideofRoof",
             "text": "Click on the right side of our roof",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": ""
           },
           {
             "event": "confirmExtrude",
             "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": ""
           }
         ]
       },
@@ -385,7 +387,7 @@
             "tooltips": [
               "You can see every steps of our journey in the timeline at the bottom of our window. You can control them by either dragging the pointer left and right or by using the arrows on the left. The Play Button in the middle shows the construction of our design step by step. Try it out if you want. The buttons beside the Play Button push the pointer one step left or right. The buttons far left and right push the pointer to the beginning and the end of our design."
             ],
-            "hint":"click-create-sketch"
+            "hint": ""
           }
         ]
       },
@@ -399,93 +401,93 @@
             "event": "selectOffsetPlane",
             "text": "Select the previously created offset plane",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": ""
           },
           {
             "event": "clickedCylinder",
             "text": "Select <strong>Cylinder</strong> from the <strong>CREATE</strong> menu",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": ""
           },
           {
             "event": "clickedCylinderCenter",
             "text": "Click on the middle of the roof for the center of the cylinder",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": ""
           },
           {
             "event": "selectedCylinderDiameter",
             "text": "Drag or type a diameter of 20mm",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": ""
           },
           {
             "event": "confirmCylinder",
             "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": ""
           },
           {
             "event": "clickedCreateSketch",
             "text": "Click on the <strong>Create Sketch</strong> icon.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": ""
           },
           {
             "event": "selectedRightSideofRoof",
             "text": "Select the right side of our roof",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": ""
           },
           {
             "event": "clickedCircle",
             "text": "Select the <strong>Center Diameter Circle</strong> icon or press the <strong>C</strong> button",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": ""
           },
           {
             "event": "clickedCircleCenter",
             "text": "Click on the center of the roof to assign the center of the circne",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": ""
           },
           {
             "event": "draggedCircleDiameter",
             "text": "Drag or enter a diameter of 40mm.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": ""
           },
           {
             "event": "clickedFinishSketch",
             "text": "Click on <strong>Finish Sketch</strong> to confirm.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": ""
           },
           {
             "event": "clickedLoft",
             "text": "Select the <strong>Loft Feature</strong> from the <strong>CREATE</strong> menu.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": ""
           },
           {
             "event": "selectBottomOfCylinder",
             "text": "Select the ___bottom___ of the cylinder",
             "tooltips": [
               "You can drag the cube in the right upper corner of the workspace to orientate in your design."
-              ],
-            "hint":"click-create-sketch"
+            ],
+            "hint": ""
           },
           {
             "event": "selectedCircleOnRoof",
             "text": "Select the circle sketch on the roof",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": ""
           },
           {
             "event": "confirmLoft",
             "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>.",
             "tooltips": [],
-            "hint":"click-create-sketch"
+            "hint": ""
           }
         ]
       }

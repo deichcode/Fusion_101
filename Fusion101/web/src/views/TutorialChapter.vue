@@ -7,6 +7,7 @@
     />
     <main>
       <p class="description">{{ chapter.description }}</p>
+      <!--      Hint Videos have a size of 380x163@2 (double resolution)-->
       <ChapterStepHintVideo :hint="hintToShow"/>
       <ChapterSteps :chapter="chapter" :set-hint-to-show="setHintToShow"/>
       <ChapterNavigation :tutorial-id="tutorialId" :chapter-id="chapterId" :navigate-to-overview="navigateToOverview"/>
@@ -36,19 +37,16 @@ export default {
     }
   },
   mounted() {
-    this.loadTutorialData();
+    this.loadChapter();
   },
   watch: {
-    $route() {
+    $route() { //Watch on changes in route and load chapter data if chapter and/or tutorial have changed
       this.tutorialId = this.$route.params.tutorialId
       this.chapterId = this.$route.params.chapterId
-      this.loadTutorialData();
+      this.loadChapter();
     }
   },
   methods: {
-    loadTutorialData: function () {
-      this.loadChapter()
-    },
     loadChapter() {
       this.chapter = getTutorialChapter(this.tutorialId, this.chapterId)
     },
@@ -68,3 +66,8 @@ export default {
 }
 
 </style>
+
+ffmpeg -i click-create-sketch.mov -vcodec h264 -acodec mp2 click-create-sketch.mp4
+ffmpeg -i click-create-sketch.mp4 -c:v libvpx-vp9 -lossless 1 click-create-sketch.webm
+for f in *.*;do ffmpeg -i "$f" -vcodec h264 -acodec mp2 "${f%mov}mp4";done
+for f in *.mp4;do ffmpeg -i "$f" -c:v libvpx-vp9 -lossless 1 "${f%mp4}webm";done

@@ -59,5 +59,6 @@ p {
   margin-top: 0;
   margin-left: .8rem;
   grid-row-start: 2;
+  font-size: .8rem
 }
 </style>
