@@ -50,13 +50,14 @@ def run(context):
 
         #Chapter3
         #Create Roof Sketch
-        #todo hier muss noch der richtige Face gefunden werden
+        #todo hier muss möglicherweise anders vorgegangen werden. Sideface nehmen und von dort aus statt combine
         face = cube.endFaces.item(0)
         triangleSketchBase = sketches.add(face)
         triangleSketch = triangleSketchBase.sketchCurves.sketchLines
         baseTriangle1 = triangleSketch.addByTwoPoints(point.create(-5,-5,0),point.create(0,-5,5))
         baseTriangle2 = triangleSketch.addByTwoPoints(point.create(0,-5,5),point.create(5,-5,0))
         baseTriangle3 = triangleSketch.addByTwoPoints(point.create(5,-5,0),point.create(-5,-5,0))
+
         
         #Chapter4
         #Extrude the triangle
@@ -64,10 +65,25 @@ def run(context):
         distance = adsk.core.ValueInput.createByReal(-10)
         roof = rootComp.features.extrudeFeatures.addSimple(triangleSketchProfile, distance, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
 
+        #Combine the two resulting bodies
+        cubeBody = cube.bodies.item(0)
+        roofBody = roof.bodies.item(0)
+        roofBodyCollection = adsk.core.ObjectCollection.create()
+        roofBodyCollection.add(roofBody)
+        combFeatInput = rootComp.features.combineFeatures.createInput(cubeBody, roofBodyCollection)
+        houseWithRoof = rootComp.features.combineFeatures.add(combFeatInput)
+
+        #Chapter5
+        shellEntities = adsk.core.ObjectCollection.create()
+        shellEntities.add(cube.startFaces.item(0))
 
 
+        shellInput = rootComp.features.shellFeatures.createInput(shellEntities, False)
+        thickness = adsk.core.ValueInput.createByReal(1)
+        shellInput.insideThickness = thickness
+        print(shellInput)
+        shell = rootComp.features.shellFeatures.add(shellInput)
 
-        
 
 
         """

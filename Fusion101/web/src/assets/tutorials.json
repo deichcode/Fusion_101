@@ -6,14 +6,14 @@
     "chapters": [
       {
         "id": "1-square-sketch",
-        "title": "It Begins With a Sketch",
-        "description": "The most common way to start creating an object is by creating a sketch. A sketch is a two dimensional shape, for example a circle or a rectangle. To create the cubic part of the house we start with a squared sketch on the 'ground'.",
+        "title": "It begins with a Sketch",
+        "description": "The most common way to create an object is by starting with creating a sketch. A sketch is a two-dimensional shape i.e. a circle or rectangle. To create the cubic part of the house we begin with a square sketch on the bottom plane",
         "thumbnail": "square-sketch.png",
         "thumbnailAlt": "A screenshot of a sketched square.",
         "steps": [
           {
             "event": "clickedCreateSketch",
-            "text": "Click on the \"Create Sketch\" icon.",
+            "text": "Click on the <strong>Create Sketch</strong> icon.",
             "tooltips": [],
             "hint": "click-create-sketch"
           },
@@ -25,6 +25,37 @@
               "The XY-plane is spanned by the X-axis (red) and the Y-axis (green). You can also determine which is the x, y, and z-ais by comparing position of the axes in the workspace with the axes on the cube in the upper right corner."
               ],
             "hint": "click-create-sketch"
+          },
+          {
+            "event": "centerRectangle",
+            "text": "Select the <strong>Center-Rectangle</strong> from the <strong>CREATE</strong> menu",
+            "tooltips": [
+
+              ],
+            "hint": "click-create-sketch"
+          },
+          {
+            "event": "setCenterRectangleCenter",
+            "text": "Set the center of the rectangle by clicking on the intersection between the ___x-axis___ and the ___y-axis___",
+            "tooltips": [
+              "The x-axis has a red color in the workspace",
+              "The y-axis has a green color in the workspace"
+              ],
+            "hint": "click-create-sketch"
+          },
+          {
+            "event": "setCenterRectangleSize",
+            "text": "Specify a ___size___ of 100x100mm and click to confirm",
+            "tooltips": [
+              "You can either use the mouse or press the Tabulator Key to switch between specifying width and height."
+              ],
+            "hint": "click-create-sketch"
+          },
+          {
+            "event": "clickedFinishSketch",
+            "text": "Click on <strong>Finish Sketch</strong>",
+            "tooltips": [],
+            "hint":"click-create-sketch"
           }
         ]
       },
@@ -34,6 +65,15 @@
         "description": "The most common way to start creating an object is by creating a sketch. A sketch is a two dimensional shape, for example a circle or a rectangle. To create the cubic part of the house we start with a squared sketch on the 'ground'.",
         "thumbnail": "extruded-cube.png",
         "steps": [
+        ]
+      },
+      {
+        "id": "3-raise-roof",
+        "title": "Raise the roof",
+        "description": "Now we want to create a roof by starting with a sketch again. We can create sketches on either selected planes or planes that are created by our components themselves. In this chapter we will create a sketch on the front of our cube.",
+        "thumbnail": "extruded-cube.png",
+        "steps": [
+
         ]
       }
     ]
