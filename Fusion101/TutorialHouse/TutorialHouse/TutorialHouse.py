@@ -130,7 +130,6 @@ def run(context):
         #Chapter8
         #Finish Chimney
 
-
         #Create a center rectangle box sketch
         #Use the offset plane as sketch base
         boxSketchBase = sketches.add(offsetPlane)
@@ -139,10 +138,13 @@ def run(context):
         #Create center point rectnagle sketch for box
         boxSketch = lines.addCenterPointRectangle(point.create(2.5,0,0), point.create(3.5,1,0))
 
-
-
-        #Extrude the box sketch
+        #Extrude the  sketch upwards
         boxSketchProfile = boxSketchBase.profiles.item(0)
+        distance = adsk.core.ValueInput.createByReal(0.5)
+        boxUp = rootComp.features.extrudeFeatures.addSimple(boxSketchProfile, distance, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+
+        #Extrude the box sketch to entity
+        boxUpProfile = boxSketchBase.profiles.item(0)
         extrudeBoxInput = rootComp.features.extrudeFeatures.createInput(boxSketchProfile, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
         extrudeBoxToEntity = adsk.fusion.ToEntityExtentDefinition.create(cubeBody, True)
         extrudeBoxInput.setOneSideExtent(extrudeBoxToEntity, adsk.fusion.ExtentDirections.PositiveExtentDirection)
@@ -150,10 +152,67 @@ def run(context):
 
         #Chapter9
         #Go back in time
+        timeline = design.timeline
+        print(timeline.markerPosition)
+        timeline.markerPosition = 9
+        print(timeline.markerPosition)
 
         #Chapter10
         #Create cylindrical Chimney
 
+        #Create a circle sketch
+        #Use the offset plane as sketch base
+        circleSketchBase = sketches.add(offsetPlane)
+        circles = circleSketchBase.sketchCurves.sketchCircles
+
+        #Create circle sketch for box
+        upperCircleSketch = circles.addByCenterRadius(point.create(2.5,0,0), 1)
+
+        #Extrude the  sketch
+        circleSketchProfile = circleSketchBase.profiles.item(0)
+        distance = adsk.core.ValueInput.createByReal(0.5)
+        cylinder = rootComp.features.extrudeFeatures.addSimple(circleSketchProfile, distance, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+
+
+        #Do the Loft, Ju lie
+        #First we create the Circle on the roof
+
+        #Select the body of our component
+        #cubeBody = cube.bodies.item(0)
+        cubeBody = houseWithRoof.bodies.item(0)
+        cubeBodyFaces = cubeBody.faces
+        #Count the number of faces
+        cubeBodyFacesCount = cubeBody.faces.count
+
+        #The centroid of the frontal face
+        rightRoofCentroid = point.create(2.5,0.0, 12.5)
+
+        #Select the face, that has the same centroid as our frontal face
+        for face in range(cubeBodyFacesCount):
+            if cubeBodyFaces.item(face).centroid.isEqualTo(rightRoofCentroid):
+                potentialFace = cubeBodyFaces.item(face)
+        
+
+        #Use the right Roof face as sketch base
+        LowerCircleSketchBase = sketches.add(potentialFace)
+        Lowercircles = LowerCircleSketchBase.sketchCurves.sketchCircles
+
+        LowerCircleSketch = Lowercircles.addByCenterRadius(point.create(-7.5,0,0), 2)
+
+        #Loft between LowerCircleSketch and Cylinderbottom
+        #Get profile of bottom of clyinder
+        cylinderProfile = cylinder.profile
+
+        #Get profile of circle sketch on roof
+        cirlceProfile = LowerCircleSketchBase.profiles.item(1)
+
+
+        loftInput = rootComp.features.loftFeatures.createInput(adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+        loftSections = loftInput.loftSections
+        loftSections.add(cylinderProfile)
+        loftSections.add(cirlceProfile)
+        loftInput.isSolid = False
+        loft = rootComp.features.loftFeatures.add(loftInput)
 
     except:
         if ui:
