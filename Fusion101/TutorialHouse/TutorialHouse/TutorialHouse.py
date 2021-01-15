@@ -32,7 +32,6 @@ def run(context):
         xyPlane = rootComp.xYConstructionPlane
         sketch = sketches.add(xyPlane)
 
-        #circles = sketch.sketchCurves.sketchCircles
 
         #Chapter1
         #Create the base square sketch of the house
@@ -74,6 +73,7 @@ def run(context):
         houseWithRoof = rootComp.features.combineFeatures.add(combFeatInput)
 
         #Chapter5
+        #Create a shell in the house
         shellEntities = adsk.core.ObjectCollection.create()
         shellEntities.add(cube.startFaces.item(0))
 
@@ -81,8 +81,40 @@ def run(context):
         shellInput = rootComp.features.shellFeatures.createInput(shellEntities, False)
         thickness = adsk.core.ValueInput.createByReal(1)
         shellInput.insideThickness = thickness
-        print(shellInput)
         shell = rootComp.features.shellFeatures.add(shellInput)
+
+
+        #Chapter6
+        #Make an Entrance
+
+        #Select the body of our component
+        cubeBody = cube.bodies.item(0)
+        cubeBodyFaces = cubeBody.faces
+        #Count the number of faces
+        cubeBodyFacesCount = cubeBody.faces.count
+
+        #The centroid of the frontal face
+        frontalCentroid = point.create(-1.1368683772161603e-16, -5.0, 6.333333333333333)
+
+        #Select the face, that has the same centroid as our frontal face
+        for face in range(cubeBodyFacesCount):
+            if cubeBodyFaces.item(face).centroid.isEqualTo(frontalCentroid):
+                potentialFace = cubeBodyFaces.item(face)
+
+        #Create a twoPointRectangle entrance sketch
+        #Use the frontal face as sketch base
+        entranceSketchBase = sketches.add(potentialFace)
+        lines = entranceSketchBase.sketchCurves.sketchLines
+        #Create two diagonally facing points for the rectangle
+        point1 = point.create(2,0,0)
+        point2 = point.create(-2,5,0)
+        entranceSketch = lines.addTwoPointRectangle(point1, point2)
+
+        #Extrude the entrance sketch
+        entranceSketchProfile = entranceSketchBase.profiles.item(1)
+        distance = adsk.core.ValueInput.createByReal(-1)
+        entrance = rootComp.features.extrudeFeatures.addSimple(entranceSketchProfile, distance, adsk.fusion.FeatureOperations.CutFeatureOperation)
+
 
 
 
