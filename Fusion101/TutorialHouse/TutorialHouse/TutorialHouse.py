@@ -115,52 +115,45 @@ def run(context):
         distance = adsk.core.ValueInput.createByReal(-1)
         entrance = rootComp.features.extrudeFeatures.addSimple(entranceSketchProfile, distance, adsk.fusion.FeatureOperations.CutFeatureOperation)
 
+        #Chapter7 
+        #Offset Plane
+
+        # Create construction plane input
+        offsetPlaneInput = rootComp.constructionPlanes.createInput()
+        
+        # Add offset plane
+        #Maybe you will have to use another value here too 
+        offsetValue = adsk.core.ValueInput.createByReal(16)
+        offsetPlaneInput.setByOffset(baseRectangleProfile, offsetValue)
+        offsetPlane = rootComp.constructionPlanes.add(offsetPlaneInput)
+
+        #Chapter8
+        #Finish Chimney
+
+
+        #Create a center rectangle box sketch
+        #Use the offset plane as sketch base
+        boxSketchBase = sketches.add(offsetPlane)
+        lines = boxSketchBase.sketchCurves.sketchLines
+
+        #Create center point rectnagle sketch for box
+        boxSketch = lines.addCenterPointRectangle(point.create(2.5,0,0), point.create(3.5,1,0))
 
 
 
-        """
-        # Create a new circle by adding to the collection
-         circle1 = circles.addByCenterRadius(adsk.core.Point3D.create(x*ringDistance,0,0), 2)
+        #Extrude the box sketch
+        boxSketchProfile = boxSketchBase.profiles.item(0)
+        extrudeBoxInput = rootComp.features.extrudeFeatures.createInput(boxSketchProfile, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+        extrudeBoxToEntity = adsk.fusion.ToEntityExtentDefinition.create(cubeBody, True)
+        extrudeBoxInput.setOneSideExtent(extrudeBoxToEntity, adsk.fusion.ExtentDirections.PositiveExtentDirection)
+        box = rootComp.features.extrudeFeatures.add(extrudeBoxInput)
 
-        # Get the SketchLines collection from an existing sketch (line)
-        lines = sketch.sketchCurves.sketchLines
+        #Chapter9
+        #Go back in time
 
-        # Create a new line by adding to collection
-        axis = lines.addByTwoPoints(adsk.core.Point3D.create(-1,-4,0), adsk.core.Point3D.create(1,-4,0))
+        #Chapter10
+        #Create cylindrical Chimney
 
-        # Get the first profile from the sketch (profile of the circle)
-        prof = sketch.profiles.item(0)
-
-        # For using revolves, you have to get the revolveFeatures Collection first
-        revolves = rootComp.features.revolveFeatures
-
-        # Create a revolve input object that will be edited later
-        revInput = revolves.createInput(prof, axis, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
-
-
-        # Define a revolve by specifying 360° with math and multiplicating it with x+1/r 
-        # for growing angle with every body .
-        angle = adsk.core.ValueInput.createByReal(((x+1) / r)*(math.pi * 2))
-        revInput.setAngleExtent(False, angle)
-		
-        # Create a revolve by adding it with the input
-        rev = revolves.add(revInput)
-        #Get the current body
-        body = rootComp.bRepBodies.item(x)
-
-        #Get the material Libraries
-        libraries = app.materialLibraries
-        #Get the appearance library
-        library = libraries.itemByName("Fusion 360 Appearance Library")
-        #Select a random appearance between 86 and 100 and exclude ugly colors like black, dark grey...
-        color = random.choice([i for i in range(86,100) if i in [87,89,91,93,95]])
-            
-        libApp = library.appearances.item(color)
-            
-        #Set the appearance of the body
-        body.appearance = libApp
-
-        """
 
     except:
         if ui:
