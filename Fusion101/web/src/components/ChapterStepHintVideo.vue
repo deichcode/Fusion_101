@@ -47,7 +47,11 @@ export default {
       return sourceElement;
     },
     getVideoSrc(fileName) {
-      return getTutorialMedia(this.tutorialId, fileName)
+      try {
+        return getTutorialMedia(this.tutorialId, fileName)
+      } catch (e){
+        return ""
+      }
     },
     addSourceToHintVideo: function (sourceElement) {
       this.$refs.hintVideo.appendChild(sourceElement)

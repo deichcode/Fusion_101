@@ -39,7 +39,11 @@ export default {
       this.tutorial = getTutorial(this.$route.params.tutorialId)
     },
     getThumbnailPath(thumbnailFileName) {
-      return getTutorialMedia(this.tutorial.id, thumbnailFileName)
+      try {
+        return getTutorialMedia(this.tutorial.id, thumbnailFileName)
+      } catch (e) {
+        return ""
+      }
     },
     navigateToChapter(chapterId) {
       router.push({name: 'chapter', params: {tutorialId: this.tutorial.id, chapterId }})
