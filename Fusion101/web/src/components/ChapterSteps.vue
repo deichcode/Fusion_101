@@ -1,22 +1,17 @@
 <template>
   <ol class="chapter-steps">
-    <!--    Create a li element for each step in chapter-->
-    <li v-for="step in chapter.steps" :key="step.order">
-      <BaseTooltipText :text="step.text" :tooltips="step.tooltips"/>
-      <!--      Set Hint when mouse if over hint icon and remove when mouse is no longer over icon-->
-      <span v-if="step.hint"
-            v-on:mouseover="() => setHintToShow(step.hint)"
-            v-on:mouseleave="() => setHintToShow('')"> (i)</span>
-    </li>
+    <!--    Create a ChapterStep element for each step in chapter-->
+    <ChapterStep v-for="step in chapter.steps" :key="step" :step="step"
+                 :set-hint-to-show="setHintToShow"/>
   </ol>
 </template>
 
 <script>
-import BaseTooltipText from "@/components/BaseTooltipText";
+import ChapterStep from "@/components/ChapterStep";
 
 export default {
   name: 'ChapterSteps',
-  components: {BaseTooltipText},
+  components: {ChapterStep},
   props: {
     chapter: {},
     setHintToShow: {}
@@ -27,9 +22,5 @@ export default {
 <style lang="scss" scoped>
 .chapter-steps {
   padding-left: 30px;
-
-  li {
-    margin-bottom: 10px;
-  }
 }
 </style>
