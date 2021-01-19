@@ -35,7 +35,6 @@ class ShowPaletteCommandExecuteHandler(adsk.core.CommandEventHandler):
                 palette = initializePalette()
                 palette.isVisible = True
 
-    
                 # Add handler to HTMLEvent of the palette.
                 onHTMLEvent = MyHTMLEventHandler()
                 palette.incomingFromHTML.add(onHTMLEvent)   
@@ -46,7 +45,22 @@ class ShowPaletteCommandExecuteHandler(adsk.core.CommandEventHandler):
                 palette.closed.add(onClosed)
                 handlers.append(onClosed)   
             else:
-                palette.isVisible = True                               
+                palette.isVisible = True      
+
+            # Add handler to react in palette on startedCommands
+            onCommandStarting = MyCommandStartingHandler(palette)
+            _ui.commandStarting.add(onCommandStarting)
+            handlers.append(onCommandStarting)
+            
+            # Add handler to react in palette on terminatedCommands
+            onCommandTerminated = MyCommandTerminatedHandler(palette)
+            _ui.commandTerminated.add(onCommandTerminated)
+            handlers.append(onCommandTerminated)    
+
+            # Add handler to react in palette on changes of the camera
+            onCameraChanged = MyCameraChangedHandler(palette)
+            _app.cameraChanged.add(onCameraChanged)
+            handlers.append(onCameraChanged)                     
         except:
             _ui.messageBox('Command executed failed: {}'.format(traceback.format_exc()))
 
@@ -266,15 +280,55 @@ class popUpCommandExecuteHandler(adsk.core.CommandEventHandler):
         cmd = ui.commandDefinitions.itemById('TutorialButtonOnQATRight')
         cmd.execute()
 
-        
+class UserInterfaceGeneralEventHandlerImpl(adsk.core.UserInterfaceGeneralEvent):
+    # def __init__(self):
+    #     super().__init__()
+    def notify(self, args):
+        print(args)         
 
+# https://help.autodesk.com/view/fusion360/ENU/?guid=GUID-EBB6C82A-A256-4AB7-9A86-0F7A9653A7E9
+class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
+    def __init__(self, palette):
+        self.palette = palette
+        super().__init__()
+    def notify(self, args):
+        eventArgs = adsk.core.ApplicationCommandEventArgs.cast(args)
+        # Code to react to the event.
+        # _ui.messageBox(str(eventArgs))
+        if not self.palette:
+            return
+        if eventArgs.commandId == 'SketchCreate':
+                self.palette.sendInfoToHTML('send', 'clickedCreateSketch')
+        elif eventArgs.commandId == 'ShapeRectangleCenter':
+                self.palette.sendInfoToHTML('send', 'clickedCenterRectangle')
+
+
+class MyCommandTerminatedHandler(adsk.core.ApplicationCommandEventHandler):
+    def __init__(self, palette):
+        self.palette = palette
+        super().__init__()
+    def notify(self, args):
+        eventArgs = adsk.core.ApplicationCommandEventArgs.cast(args)
+        args = eventArgs
+        # Code to react to the event.
+        # _ui.messageBox(str(eventArgs))
+
+# https://help.autodesk.com/view/fusion360/ENU/?guid=GUID-7D12B291-979B-4620-870F-D4C10E72DE1E
+class MyCameraChangedHandler(adsk.core.CameraEventHandler):
+    def __init__(self, palette):
+        self.palette = palette
+        super().__init__()
+    def notify(self, args):
+        eventArgs = adsk.core.CameraEventArgs.cast(args)
+        args = eventArgs
+        # Code to react to the event.
+        # _ui.messageBox(eventArgs.commandId)
 
 def run(context):
     try:
         global _ui, _app
         _app = adsk.core.Application.get()
         _ui  = _app.userInterface
-
 
         # Add a command that displays the panel.
         showPaletteCmdDef = _ui.commandDefinitions.itemById('showPalette')
