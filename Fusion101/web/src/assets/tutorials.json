@@ -3,7 +3,30 @@
     "id": "building-a-house",
     "title": "Building a House",
     "description": "While building a small house you'll get to know the most common tools used in Fusion 360.",
+    "startChapterNumbersWith": 0,
     "chapters": [
+      {
+        "id": "0-setup-environment",
+        "number": "Prolog",
+        "title": "Setup",
+        "description": "To ensure that your Fusion 360 settings match the ones that were applied when creating this tutorial we would kindly ask you to adjust the settings as followed. Some or all settings might already be configured in the same way.",
+        "thumbnail": "",
+        "thumbnailAlt": "A screenshot of Fusion 360's <strong>View Cube</strong>",
+        "steps": [
+          {
+            "event": "",
+            "text": "Select <strong>Perspective with Ortho Faces</strong> in the ___View Cube___'s drop down menu.",
+            "tooltips": ["The cube in the upper right of the workspace"],
+            "hint": "set-view-mode-perspective-ortho-faces"
+          },
+          {
+            "event": "",
+            "text": "Select <strong>Perspective with Ortho Faces</strong> in the ___View Cube___'s drop down menu.",
+            "tooltips": ["The cube in the upper right of the workspace"],
+            "hint": "set-view-mode-perspective-ortho-faces"
+          }
+        ]
+      },
       {
         "id": "1-square-sketch",
         "title": "It begins with a Sketch",
@@ -27,7 +50,7 @@
             "hint": "select-x-y-plane"
           },
           {
-            "event": "centerRectangle",
+            "event": "clickedCenterRectangle",
             "text": "Select the <strong>Center-Rectangle</strong> from the <strong>CREATE</strong> menu.",
             "tooltips": [],
             "hint": "select-center-rectangle"
@@ -284,16 +307,17 @@
             "event": "clickedOffsetPlane",
             "text": "Select <strong>Offset plane</strong> from the <strong>CONSTRUCT</strong> menu.",
             "tooltips": [],
-            "hint": ""
+            "hint": "click-offset-plane"
           },
           {
             "event": "selectXYPlane",
-            "text": "Inside the ___workspace___ click the orange square on the ___<strong>XY-plane</strong>___.",
+            "text": "Inside the ___workspace___ ___click___ the orange square on the ___<strong>XY-plane</strong>___.",
             "tooltips": [
               "The workspace is the big area in the center of the Fusion 360 window where you can see your model and manipulate it.",
+              "If the square is covered by the house, rotate the cube in the upper right corner until you can see it through the house's bottom hole.",
               "The XY-plane is spanned by the X-axis (red) and the Y-axis (green). You can also determine which is the x, y, and z-ais by comparing position of the axes in the workspace with the axes on the cube in the upper right corner."
             ],
-            "hint": ""
+            "hint": "select-x-y-plane-for-offset"
           },
           {
             "event": "draggedOffsetPlane",
@@ -301,13 +325,13 @@
             "tooltips": [
               "Along the y-axis that is represented in green."
             ],
-            "hint": ""
+            "hint": "set-offset-plane-160"
           },
           {
             "event": "confirmOffsetPlane",
             "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>.",
             "tooltips": [],
-            "hint": ""
+            "hint": "confirm-set-offset-plane-160"
           }
         ]
       },
@@ -321,105 +345,116 @@
             "event": "clickedBox",
             "text": "Select <strong>Box</strong> from the <strong>CREATE</strong> menu.",
             "tooltips": [],
-            "hint": ""
+            "hint": "select-box-for-chimney"
           },
           {
             "event": "selectOffsetPlane",
             "text": "Click on the offset plane that we created in the previous chapter.",
             "tooltips": [],
-            "hint": ""
+            "hint": "select-chimney-offset-plane-with-box-tool"
           },
           {
             "event": "createdBox",
-            "text": "Create a 20x20mm Box in the middle of the roof by selecting two diagonal points in the plane.",
-            "tooltips": [],
-            "hint": ""
+            "text": "Create a 20x20mm Box in the ___middle of the roof___ by selecting two diagonal points in the plane.",
+            "tooltips": [
+              "Click on the TOP side of the <strong>View Cube</strong> (upper right corner) to easier find the middle"
+            ],
+            "hint": "create-chimney-box"
           },
           {
             "event": "confirmBox",
             "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>.",
             "tooltips": [],
-            "hint": ""
+            "hint": "confirm-chimney-box"
           },
           {
             "event": "clickedExtrudeFeauture",
-            "text": "Select the <strong>Extrude Feature</strong> in the <strong>CREATE</strong> menu or in the right-click menu under <strong>Press/Pull</strong> or press the letter <strong>E</strong> on your keyboard.",
+            "text": "Select the <strong>Extrude Feature</strong> in the <strong>CREATE</strong> menu or press the letter <strong>E</strong> on your keyboard.",
             "tooltips": [],
-            "hint": ""
+            "hint": "select-extrude-feature"
           },
           {
             "event": "selectBottomOfBox",
             "text": "Select the ___bottom___ of the newly created box",
             "tooltips": [
-              "You can drag the cube in the right upper corner of the workspace to orientate in your design."
+              "You can rotate the <strong>View Cube</strong> (upper right corner) to position the camera in the workspace"
             ],
-            "hint": ""
+            "hint": "select-bottom-chimney-box"
           },
           {
             "event": "clickedToObject",
             "text": "In the command dialog under <strong>Extend</strong> select the option <strong>To object</strong>.",
             "tooltips": [],
-            "hint": ""
+            "hint": "chimney-box-select-to-object"
           },
           {
             "event": "selectedRightSideofRoof",
             "text": "Click on the right side of our roof",
             "tooltips": [],
-            "hint": ""
+            "hint": "chimney-box-select-to-object-target"
           },
           {
             "event": "confirmExtrude",
             "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>.",
             "tooltips": [],
-            "hint": ""
+            "hint": "confirm-chimney"
           }
         ]
       },
       {
         "id": "9-back-in-time",
         "title": "Go back in Time",
-        "description": "We decided that we did not like the look of our new chimney. It seems very boring compared to the other houses in our neighborhood. Wouldn’t it be great to go back in time and change the design of our roof? How convenient that Fusion 360 has this option.",
+        "description": "We decided that we did not like the look of our new chimney. It seems very boring compared to the other houses in our neighborhood. Wouldn't it be great to go back in time and change the design of our roof? How convenient that Fusion 360 has this option. You can see every steps of our journey in the timeline at the bottom of our window. You can control them by either dragging the pointer left and right or by using the arrows on the left. The Play Button in the middle shows the construction of our design step by step. Try it out if you want. The buttons beside the Play Button push the pointer one step left or right. The buttons far left and right push the pointer to the beginning and the end of our design.",
+        "extendedDescription": "We decided that we did not like the look of our new chimney. It seems very boring compared to the other houses in our neighborhood. Wouldn't it be great to go back in time and change the design of our roof? How convenient that Fusion 360 has this option.",
         "thumbnail": "Chapter9.png",
         "steps": [
           {
             "event": "wentBackInTime",
-            "text": "We want to ___erase___ the roof that we created, therefore either drag the pointer two places back or press the button left from the play button twice.",
+            "text": "Drag the pointer two places back or press the button left from the play button twice.",
             "tooltips": [
-              "You can see every steps of our journey in the timeline at the bottom of our window. You can control them by either dragging the pointer left and right or by using the arrows on the left. The Play Button in the middle shows the construction of our design step by step. Try it out if you want. The buttons beside the Play Button push the pointer one step left or right. The buttons far left and right push the pointer to the beginning and the end of our design."
+              ""
             ],
-            "hint": ""
+            "hint": "move-two-steps-back-in-time"
           }
         ]
       },
       {
         "id": "10-cylindrical-chimney",
-        "title": "Create cylindrical chimney",
+        "title": "Round and Round",
         "description": "We decided on a cylindrical, tapered chimney for our roof to make it look a little more fancy. We will therefore create a cylinder instead of the box from the previous chapter. Draw a circle with a bigger radius then the cylinder on the roof and combine these with the “Loft” feature.",
         "thumbnail": "Chapter10.png",
         "steps": [
           {
-            "event": "selectOffsetPlane",
-            "text": "Select the previously created offset plane",
+            "event": "offsetPlaneVisible",
+            "text": "Ensure that in the ___<strong>Browser</strong>___ under <strong>Construction</strong> the offset plane is visible",
             "tooltips": [],
-            "hint": ""
+            "hint": "offset-plane-visible"
           },
           {
             "event": "clickedCylinder",
             "text": "Select <strong>Cylinder</strong> from the <strong>CREATE</strong> menu",
             "tooltips": [],
-            "hint": ""
+            "hint": "select-cylinder-tool"
+          },
+          {
+            "event": "selectOffsetPlane",
+            "text": "Select the previously created offset plane",
+            "tooltips": [],
+            "hint": "select-chimney-offset-plane-with-cylinder"
           },
           {
             "event": "clickedCylinderCenter",
-            "text": "Click on the middle of the roof for the center of the cylinder",
-            "tooltips": [],
-            "hint": ""
+            "text": "Click on the ___middle of the roof___ for the center of the cylinder",
+            "tooltips": [
+              "Click on the TOP side of the <strong>View Cube</strong> (upper right corner) to easier find the middle"
+            ],
+            "hint": "set-chimney-cylinder-center"
           },
           {
             "event": "selectedCylinderDiameter",
             "text": "Drag or type a diameter of 20mm",
             "tooltips": [],
-            "hint": ""
+            "hint": "set-chimney-cylinder-diameter"
           },
           {
             "event": "confirmCylinder",
