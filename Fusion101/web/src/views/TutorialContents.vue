@@ -2,10 +2,11 @@
   <TheRootHeader :title="tutorial.title"/>
   <main>
     <div id="tutorial-description">{{ tutorial.description }}</div>
-    <BaseChapterOverview v-for="chapter in tutorial.chapters" :key="chapter.id"
+    <BaseChapterOverview v-for="(chapter, index) in tutorial.chapters" :key="chapter.id"
                          :id="chapter.id"
+                         :number="chapterNumber(chapter, index)"
                          :title="chapter.title"
-                         :description="chapter.description"
+                         :description="chapter.extendedDescription ?? chapter.description"
                          :thumbnail-src="getThumbnailPath(chapter.thumbnail)"
                          :thumbnail-alt="chapter.thumbnailAlt"
                          :openChapter="navigateToChapter"
@@ -46,7 +47,14 @@ export default {
       }
     },
     navigateToChapter(chapterId) {
-      router.push({name: 'chapter', params: {tutorialId: this.tutorial.id, chapterId }})
+      router.push({name: 'chapter', params: {tutorialId: this.tutorial.id, chapterId}})
+    },
+    chapterNumber(chapter, index) {
+      const chapterNumber = chapter.number ? chapter.number : this.calculatedChapterNumber(index)
+      return chapterNumber.toString()
+    },
+    calculatedChapterNumber(index){
+      return this.tutorial.startChapterNumbersWith + index
     }
   }
 }
