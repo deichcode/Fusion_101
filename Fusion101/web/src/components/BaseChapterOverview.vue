@@ -1,11 +1,12 @@
 <template>
   <div class="chapter" role="button" tabindex="0"
+       :class="{'with-image': thumbnailSrc}"
        v-on:click="openChapter(id)"
        v-on:keyup.enter="openChapter(id)"
        v-on:keydown.space.prevent
        v-on:keyup.space="openChapter(id)">
-    <h2>{{ title }}</h2>
-    <img :src="thumbnailSrc" :alt="thumbnailAlt">
+    <h2>{{ number }}&emsp;{{ title }}</h2>
+    <img v-if="thumbnailSrc" :src="thumbnailSrc" :alt="thumbnailAlt">
     <p>{{ description }}</p>
   </div>
 </template>
@@ -15,6 +16,7 @@ export default {
   name: "BaseChapterOverview",
   props: {
     id: String,
+    number: String,
     title: String,
     thumbnailSrc: String,
     thumbnailAlt: String,
@@ -30,15 +32,18 @@ export default {
 
 .chapter {
   @include clickable;
-  display: grid;
-  grid-template-columns: 33% auto;
-  grid-template-rows: auto auto;
 
   padding: .8rem;
   margin-bottom: 2rem;
 
   border: 1px solid $active;
   border-radius: 4px;
+
+  &.with-image {
+    display: grid;
+    grid-template-columns: 33% auto;
+    grid-template-rows: auto auto;
+  }
 }
 
 h2 {
