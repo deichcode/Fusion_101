@@ -2,12 +2,14 @@
   <div :key="tutorialId + chapterId">
     <TheSubpageHeader
         :title="chapter.title"
-        back-button-title="< Tutorial Overview"
+        back-button-title="^ Tutorial Overview"
         :back-button-action="navigateToOverview"
     />
     <main>
       <p class="description">{{ chapter.description }}</p>
-      <!--      Hint Videos have a size of 380x163@2 (double resolution)-->
+      <!--      Hint Videos can have a size of 380x163@2 (double resolution)-->
+      <!--      Hint Videos can have a size of 570x245@2 (double resolution)-->
+      <!--      Hint Videos can have a size of 760x328@2 (double resolution)-->
       <ChapterStepHintVideo :hint="hintToShow"/>
       <ChapterSteps :chapter="chapter" :set-hint-to-show="setHintToShow"/>
       <ChapterNavigation :tutorial-id="tutorialId" :chapter-id="chapterId" :navigate-to-overview="navigateToOverview"/>
