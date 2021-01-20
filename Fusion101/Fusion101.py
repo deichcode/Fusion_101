@@ -330,14 +330,23 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
         sketches = rootComp.sketches
         sketch = sketches.item(0)
 
-        print(sketch.referencePlane == rootComp.xYConstructionPlane)
+        #Rectangle 
+        rectangleLine1 = sketch.sketchCurves.sketchLines.item(0).length
+        rectangleLine2 = sketch.sketchCurves.sketchLines.item(1).length
+        print(rectangleLine1)
+        print(rectangleLine2)
+        print(rectangleLine1 == 10.0)
         if not self.palette:
             return
         if eventArgs.commandId == 'SketchCreate':
                 self.palette.sendInfoToHTML('send', 'clickedCreateSketch')
-        #Das mag noch geändert werden wenn wir es in real Time schaffen
-        elif (sketch.referencePlane == rootComp.xYConstructionPlane):
-                self.palette.sendInfoToHTML('send', 'selectXYPlane')
+                #Checks if in the current sketch xy plane has been used as reference plane
+        elif eventArgs.commandId == 'CommitCommand':
+                #Check if rectangle is 100x100
+                if (rectangleLine1 ==  10.0):
+                        self.palette.sendInfoToHTML('send', 'specify100100square')
+                if (sketch.referencePlane == rootComp.xYConstructionPlane):
+                        self.palette.sendInfoToHTML('send', 'selectXYPlane')
         elif eventArgs.commandId == 'ShapeRectangleCenter':
                 self.palette.sendInfoToHTML('send', 'clickedCenterRectangle')
         elif eventArgs.commandId == 'SketchStop':
