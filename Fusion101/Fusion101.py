@@ -52,6 +52,7 @@ class ShowPaletteCommandExecuteHandler(adsk.core.CommandEventHandler):
             _ui.commandStarting.add(onCommandStarting)
             handlers.append(onCommandStarting)
             
+            
             # Add handler to react in palette on terminatedCommands
             onCommandTerminated = MyCommandTerminatedHandler(palette)
             _ui.commandTerminated.add(onCommandTerminated)
@@ -60,7 +61,14 @@ class ShowPaletteCommandExecuteHandler(adsk.core.CommandEventHandler):
             # Add handler to react in palette on changes of the camera
             onCameraChanged = MyCameraChangedHandler(palette)
             _app.cameraChanged.add(onCameraChanged)
-            handlers.append(onCameraChanged)                     
+            handlers.append(onCameraChanged)     
+
+            # Add handler to react in palette on changes of the active selection
+            onActiveSelectionChanged = MyActiveSelectionChangedHandler(palette)
+            _ui.activeSelectionChanged.add(onActiveSelectionChanged)
+            handlers.append(onActiveSelectionChanged)
+
+
         except:
             _ui.messageBox('Command executed failed: {}'.format(traceback.format_exc()))
 
@@ -295,12 +303,18 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
         eventArgs = adsk.core.ApplicationCommandEventArgs.cast(args)
         # Code to react to the event.
         # _ui.messageBox(str(eventArgs))
+        print(eventArgs.commandId)
+
+        print(_ui.activeSelections.count)
         if not self.palette:
             return
         if eventArgs.commandId == 'SketchCreate':
                 self.palette.sendInfoToHTML('send', 'clickedCreateSketch')
         elif eventArgs.commandId == 'ShapeRectangleCenter':
                 self.palette.sendInfoToHTML('send', 'clickedCenterRectangle')
+        elif eventArgs.commandId == 'SketchStop':
+                self.palette.sendInfoToHTML('send', 'clickedFinishSketch')
+
 
 
 class MyCommandTerminatedHandler(adsk.core.ApplicationCommandEventHandler):
@@ -323,6 +337,24 @@ class MyCameraChangedHandler(adsk.core.CameraEventHandler):
         args = eventArgs
         # Code to react to the event.
         # _ui.messageBox(eventArgs.commandId)
+
+#https://help.autodesk.com/view/fusion360/ENU/?guid=GUID-19D8AC9F-E4F7-4E8A-8B3C-9D128EF932F3
+# Event handler for the activeSelectionChanged event.
+class MyActiveSelectionChangedHandler(adsk.core.ActiveSelectionEventHandler):
+    def __init__(self, palette):
+        self.palette = palette
+        super().__init__()
+    def notify(self, args):
+        eventArgs = adsk.core.ActiveSelectionEventArgs.cast(args)
+
+
+        for selection in eventArgs.currentSelection:
+            print(selection)
+        #print(eventArgs.currentSelection.entity.classType == adsk.fusion.BRepBody.classType)
+
+        # Code to react to the event.
+        ui.messageBox('In MyActiveSelectionChangedHandler event handler.')
+
 
 def run(context):
     try:
