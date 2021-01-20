@@ -303,9 +303,9 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
         eventArgs = adsk.core.ApplicationCommandEventArgs.cast(args)
         # Code to react to the event.
         # _ui.messageBox(str(eventArgs))
-        print(eventArgs.commandId)
+        #print(eventArgs.commandId)
 
-        print(_ui.activeSelections.count)
+        #print(_ui.activeSelections.count)
         if not self.palette:
             return
         if eventArgs.commandId == 'SketchCreate':
@@ -314,6 +314,27 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                 self.palette.sendInfoToHTML('send', 'clickedCenterRectangle')
         elif eventArgs.commandId == 'SketchStop':
                 self.palette.sendInfoToHTML('send', 'clickedFinishSketch')
+        elif eventArgs.commandId == 'Extrude':
+                self.palette.sendInfoToHTML('send', 'clickedExtrudeFeauture')
+        elif eventArgs.commandId == 'DrawPolyline':
+                self.palette.sendInfoToHTML('send', 'clickedLine')
+        elif eventArgs.commandId == 'FusionShellBodyCommand':
+                self.palette.sendInfoToHTML('send', 'clickedOnShell')
+        elif eventArgs.commandId == 'ShapeRectangleTwoPoint':
+                self.palette.sendInfoToHTML('send', 'clicked2PointRectangle')
+        elif eventArgs.commandId == 'WorkPlaneOffsetFromPlaneCommand':
+                self.palette.sendInfoToHTML('send', 'clickedOffsetPlane')
+        elif eventArgs.commandId == 'PrimitiveBox':
+                self.palette.sendInfoToHTML('send', 'clickedBox')
+        #Confirm == Box?
+        elif eventArgs.commandId == 'Cylinder':
+                self.palette.sendInfoToHTML('send', 'clickedCylinder')
+        elif eventArgs.commandId == 'CircleCenterRadius':
+                self.palette.sendInfoToHTML('send', 'clickedCircle')
+        elif eventArgs.commandId == 'SolidLoft':
+                self.palette.sendInfoToHTML('send', 'clickedLoft')
+    
+
 
 
 
@@ -324,6 +345,12 @@ class MyCommandTerminatedHandler(adsk.core.ApplicationCommandEventHandler):
     def notify(self, args):
         eventArgs = adsk.core.ApplicationCommandEventArgs.cast(args)
         args = eventArgs
+
+        print(eventArgs.commandId)
+
+        print(_ui.activeSelections.count)
+
+
         # Code to react to the event.
         # _ui.messageBox(str(eventArgs))
 
