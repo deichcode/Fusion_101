@@ -306,10 +306,38 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
         #print(eventArgs.commandId)
 
         #print(_ui.activeSelections.count)
+
+
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+        #Get the collection: CommandDefinitions
+        commandDefinitions = ui.commandDefinitions
+
+        #Get current design
+        design = adsk.fusion.Design.cast(app.activeProduct)
+        #If there is no active design, send error message
+        if not design:
+            ui.messageBox('No active Fusion 360 design', 'No Design')
+            return
+
+        #Get root of active design
+        rootComp = design.rootComponent
+
+        #3D Points
+        point = adsk.core.Point3D
+
+        #Create new sketch on xy plane
+        sketches = rootComp.sketches
+        sketch = sketches.item(0)
+
+        print(sketch.referencePlane == rootComp.xYConstructionPlane)
         if not self.palette:
             return
         if eventArgs.commandId == 'SketchCreate':
                 self.palette.sendInfoToHTML('send', 'clickedCreateSketch')
+        #Das mag noch geändert werden wenn wir es in real Time schaffen
+        elif (sketch.referencePlane == rootComp.xYConstructionPlane):
+                self.palette.sendInfoToHTML('send', 'selectXYPlane')
         elif eventArgs.commandId == 'ShapeRectangleCenter':
                 self.palette.sendInfoToHTML('send', 'clickedCenterRectangle')
         elif eventArgs.commandId == 'SketchStop':
@@ -345,11 +373,6 @@ class MyCommandTerminatedHandler(adsk.core.ApplicationCommandEventHandler):
     def notify(self, args):
         eventArgs = adsk.core.ApplicationCommandEventArgs.cast(args)
         args = eventArgs
-
-        print(eventArgs.commandId)
-
-        print(_ui.activeSelections.count)
-
 
         # Code to react to the event.
         # _ui.messageBox(str(eventArgs))
