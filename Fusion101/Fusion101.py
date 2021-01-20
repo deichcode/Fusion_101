@@ -335,7 +335,6 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
         rectangleLine2 = sketch.sketchCurves.sketchLines.item(1).length
         print(rectangleLine1)
         print(rectangleLine2)
-        print(rectangleLine1 == 10.0)
         if not self.palette:
             return
         if eventArgs.commandId == 'SketchCreate':
@@ -343,8 +342,9 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                 #Checks if in the current sketch xy plane has been used as reference plane
         elif eventArgs.commandId == 'CommitCommand':
                 #Check if rectangle is 100x100
-                if (rectangleLine1 ==  10.0):
+                if (rectangleLine1 ==  10):
                         self.palette.sendInfoToHTML('send', 'specify100100square')
+                #Das wird leider verspätet aufgerufen. Es wäre gut, wenn man hier ein Event findet was gleichzeitig geworfen wird
                 if (sketch.referencePlane == rootComp.xYConstructionPlane):
                         self.palette.sendInfoToHTML('send', 'selectXYPlane')
         elif eventArgs.commandId == 'ShapeRectangleCenter':
