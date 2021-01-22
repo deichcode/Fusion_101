@@ -262,13 +262,10 @@ class popUpCommandInputChangedHandler(adsk.core.InputChangedEventHandler):
                 #commands = command.firingEvent.sender.command
                 #commands = "Remind me next time"
                # command.cancelButtonText = 'Remind me next time'
-                print(eventArgs.objectType)
                 isDontShowAgain = True
-                print(isDontShowAgain)
             else:
 
                 isDontShowAgain = False
-                print(isDontShowAgain)
 
 #Event handler for the execute event
 class popUpCommandExecuteHandler(adsk.core.CommandEventHandler):
@@ -288,11 +285,11 @@ class popUpCommandExecuteHandler(adsk.core.CommandEventHandler):
         cmd = ui.commandDefinitions.itemById('TutorialButtonOnQATRight')
         cmd.execute()
 
-class UserInterfaceGeneralEventHandlerImpl(adsk.core.UserInterfaceGeneralEvent):
+#class UserInterfaceGeneralEventHandlerImpl(adsk.core.UserInterfaceGeneralEvent):
     # def __init__(self):
     #     super().__init__()
-    def notify(self, args):
-        print(args)         
+    #def notify(self, args):
+        #print(args)         
 
 # https://help.autodesk.com/view/fusion360/ENU/?guid=GUID-EBB6C82A-A256-4AB7-9A86-0F7A9653A7E9
 class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
@@ -330,23 +327,45 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
         sketches = rootComp.sketches
         sketch = sketches.item(0)
 
+        print(eventArgs.commandId)
+
         #Rectangle 
         rectangleLine1 = sketch.sketchCurves.sketchLines.item(0).length
         rectangleLine2 = sketch.sketchCurves.sketchLines.item(1).length
         print(rectangleLine1)
         print(rectangleLine2)
+
+        if rectangleLine1 >  9.99:
+            print('y1')
+        if (rectangleLine2 >  9.99):
+            print('y2')
+        if (rectangleLine1 <  10.01):
+            print('y3')
+        if (rectangleLine2 <  10.01):
+            print('y4')
+        print(((rectangleLine1 >=  9.999) and (rectangleLine2 >= 9.999) and (rectangleLine1 <= 10.001) and (rectangleLine2 <= 10.001)))
+
+
+
+        areaProps = sketch.profiles.item(0).areaProperties(adsk.fusion.CalculationAccuracy.MediumCalculationAccuracy)
+        centroid = areaProps.centroid
+        print(centroid.x, centroid.y, centroid.z, 'Centroid')
+
+
         if not self.palette:
             return
         if eventArgs.commandId == 'SketchCreate':
                 self.palette.sendInfoToHTML('send', 'clickedCreateSketch')
                 #Checks if in the current sketch xy plane has been used as reference plane
         elif eventArgs.commandId == 'CommitCommand':
-                #Check if rectangle is 100x100
-                if (rectangleLine1 ==  10):
+                #Check if rectangle is 100x100 does not always work
+                if ((rectangleLine1 >=  9.999) and (rectangleLine2 >= 9.999) and (rectangleLine1 <= 10.001) and (rectangleLine2 <= 10.001)):
                         self.palette.sendInfoToHTML('send', 'specify100100square')
                 #Das wird leider verspätet aufgerufen. Es wäre gut, wenn man hier ein Event findet was gleichzeitig geworfen wird
                 if (sketch.referencePlane == rootComp.xYConstructionPlane):
                         self.palette.sendInfoToHTML('send', 'selectXYPlane')
+                if ((centroid.x == 0.0) and (centroid.y == 0.0) and (centroid.z == 0.0)):
+                        self.palette.sendInfoToHTML('send', 'setCenterRectangleCenter')
         elif eventArgs.commandId == 'ShapeRectangleCenter':
                 self.palette.sendInfoToHTML('send', 'clickedCenterRectangle')
         elif eventArgs.commandId == 'SketchStop':
@@ -406,10 +425,6 @@ class MyActiveSelectionChangedHandler(adsk.core.ActiveSelectionEventHandler):
     def notify(self, args):
         eventArgs = adsk.core.ActiveSelectionEventArgs.cast(args)
 
-
-        for selection in eventArgs.currentSelection:
-            print(selection)
-        #print(eventArgs.currentSelection.entity.classType == adsk.fusion.BRepBody.classType)
 
         # Code to react to the event.
         ui.messageBox('In MyActiveSelectionChangedHandler event handler.')
