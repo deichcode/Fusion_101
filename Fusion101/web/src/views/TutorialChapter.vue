@@ -12,9 +12,9 @@
       <!--      Hint Videos can have a size of 760x328@2 (double resolution)-->
       <ChapterStepHintVideo :hint="hintToShow"/>
       <ChapterSteps :chapter="chapter" :set-hint-to-show="setHintToShow"/>
-      <ChapterNavigation :tutorial-id="tutorialId" :chapter-id="chapterId" :navigate-to-overview="navigateToOverview"/>
     </main>
     <footer>
+      <ChapterNavigation :tutorial-id="tutorialId" :chapter-id="chapterId" :navigate-to-overview="navigateToOverview"/>
     </footer>
   </div>
 </template>
@@ -63,13 +63,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "src/css/variables/colors";
+
+$footerHeight: 30px;
+
 .description {
   margin-top: 0;
 }
 
-</style>
+main {
+  margin-bottom: $footerHeight;
+}
 
-ffmpeg -i click-create-sketch.mov -vcodec h264 -acodec mp2 click-create-sketch.mp4
-ffmpeg -i click-create-sketch.mp4 -c:v libvpx-vp9 -lossless 1 click-create-sketch.webm
-for f in *.*;do ffmpeg -i "$f" -vcodec h264 -acodec mp2 "${f%mov}mp4";done
-for f in *.mp4;do ffmpeg -i "$f" -c:v libvpx-vp9 -lossless 1 "${f%mp4}webm";done
+footer {
+  position: fixed;
+  bottom: 0;
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&0+0,1+28 */
+  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 28%, rgba(255, 255, 255, 1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 28%, rgba(255, 255, 255, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 28%, rgba(255, 255, 255, 1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ffffff', endColorstr='#ffffff', GradientType=0); /* IE6-9 */
+  padding-top: 15px;
+  height: $footerHeight;
+  width: 100%;
+}
+
+</style>
