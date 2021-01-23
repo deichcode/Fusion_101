@@ -344,6 +344,7 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
             cubeVolume = cube.bodies.item(0).volume
             if ((cubeVolume <= 1000.01) and (cubeVolume >= 999.99)):
                 self.palette.sendInfoToHTML('send', 'extrudeSquare')
+                self.palette.sendInfoToHTML('send', 'confirmExtrude')
 
 
         if not self.palette:
