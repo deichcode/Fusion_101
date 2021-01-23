@@ -17,6 +17,8 @@ _ui = adsk.core.UserInterface.cast(None)
 num = 0
 isDontShowAgain = False
 
+extrudeCount = 0
+
 
 # Event handler for the commandExecuted event.
 class ShowPaletteCommandExecuteHandler(adsk.core.CommandEventHandler):
@@ -336,15 +338,47 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                 #Rectangle 
                 rectangleLine1 = sketch.sketchCurves.sketchLines.item(0).length
                 rectangleLine2 = sketch.sketchCurves.sketchLines.item(1).length
+        
+        if (sketches.count == 2):
+            sketch = sketches.item(1)
 
-            
+            if (sketch.profiles.count != 0):
+                areaProps = sketch.profiles.item(0).areaProperties(adsk.fusion.CalculationAccuracy.MediumCalculationAccuracy)
+                centroid = areaProps.centroid
+                frontalCentroid = point.create(0, 5, 0)
+                if ((frontalCentroid.x == centroid.x) and (frontalCentroid.y == centroid.y) and (frontalCentroid.z == centroid.z)):
+                    self.palette.sendInfoToHTML('send', 'selectCubeFrontPlane')
+
+
+
+                if (sketch.sketchPoints.count >= 6):
+                    actualFirstPoint = point.create(-5,10,0)
+                    actualSecondPoint = point.create(0,15,0)
+                    actualThirdPoint = point.create(5,10,0)
+                    firstPoint = sketch.sketchPoints.item(5).geometry
+                    if ((actualFirstPoint.x == firstPoint.x) and (actualFirstPoint.y == firstPoint.y) and (actualFirstPoint.z == firstPoint.z)):
+                        self.palette.sendInfoToHTML('send', 'clickedFirstTriangleLine')
+                    if (sketch.sketchPoints.count >= 7):
+                        secondPoint = sketch.sketchPoints.item(6).geometry
+                        if ((actualSecondPoint.x == secondPoint.x) and (actualSecondPoint.y == secondPoint.y) and (actualSecondPoint.z == secondPoint.z)):
+                            self.palette.sendInfoToHTML('send', 'clickedSecondTriangleLine')
+                        
+                        if (sketch.sketchPoints.count >= 8):
+                            thirdPoint = sketch.sketchPoints.item(7).geometry
+                            if ((actualThirdPoint.x == thirdPoint.x) and (actualThirdPoint.y == thirdPoint.y) and (actualThirdPoint.z == thirdPoint.z)):
+                                self.palette.sendInfoToHTML('send', 'clickedThirdTriangleLine')
+
+    
+
 
         if (rootComp.features.extrudeFeatures.count != 0):
             cube = rootComp.features.extrudeFeatures.item(0)
             cubeVolume = cube.bodies.item(0).volume
             if ((cubeVolume <= 1000.01) and (cubeVolume >= 999.99)):
                 self.palette.sendInfoToHTML('send', 'extrudeSquare')
+                #if extrudeCount == 0:
                 self.palette.sendInfoToHTML('send', 'confirmExtrude')
+                   # extrudeCount = 1
 
 
         if not self.palette:
