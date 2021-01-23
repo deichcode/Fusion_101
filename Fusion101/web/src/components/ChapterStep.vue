@@ -40,7 +40,8 @@ export default {
   },
   methods: {
     handleFusionMessage: function (event) {
-      if (event.detail.data === this.step.event) {
+      const messageStatesStepCompletion = event.detail.data === this.step.event
+      if (messageStatesStepCompletion) {
         this.isDone = true
       }
     },
