@@ -285,11 +285,11 @@ class popUpCommandExecuteHandler(adsk.core.CommandEventHandler):
         cmd = ui.commandDefinitions.itemById('TutorialButtonOnQATRight')
         cmd.execute()
 
-class UserInterfaceGeneralEventHandlerImpl(adsk.core.UserInterfaceGeneralEvent):
-    def __init__(self):
-         super().__init__()
-    def notify(self, args):
-        print(args, 'General')         
+#class UserInterfaceGeneralEventHandlerImpl(adsk.core.UserInterfaceGeneralEvent):
+    #def __init__(self):
+         #super().__init__()
+    #def notify(self, args):
+        #print(args, 'General')         
 
 # https://help.autodesk.com/view/fusion360/ENU/?guid=GUID-EBB6C82A-A256-4AB7-9A86-0F7A9653A7E9
 class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
@@ -298,11 +298,12 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
         super().__init__()
     def notify(self, args):
         eventArgs = adsk.core.ApplicationCommandEventArgs.cast(args)
+
+        print(eventArgs.commandId, 'Starting')
         # Code to react to the event.
         # _ui.messageBox(str(eventArgs))
         #print(eventArgs.commandId)
 
-        #print(_ui.activeSelections.count)
 
 
         app = adsk.core.Application.get()
@@ -325,24 +326,23 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
 
         #Create new sketch on xy plane
         sketches = rootComp.sketches
-        sketch = sketches.item(0)
+        if (sketches.count != 0):
+            sketch = sketches.item(0)
 
-        print(eventArgs.commandId)
+            if (sketch.profiles.count != 0):
+                areaProps = sketch.profiles.item(0).areaProperties(adsk.fusion.CalculationAccuracy.MediumCalculationAccuracy)
+                centroid = areaProps.centroid
 
-        #Rectangle 
-        rectangleLine1 = sketch.sketchCurves.sketchLines.item(0).length
-        rectangleLine2 = sketch.sketchCurves.sketchLines.item(1).length
+                #Rectangle 
+                rectangleLine1 = sketch.sketchCurves.sketchLines.item(0).length
+                rectangleLine2 = sketch.sketchCurves.sketchLines.item(1).length
 
-        areaProps = sketch.profiles.item(0).areaProperties(adsk.fusion.CalculationAccuracy.MediumCalculationAccuracy)
-        centroid = areaProps.centroid
-        print(centroid.x, centroid.y, centroid.z, 'Centroid')
+            
 
         if (rootComp.features.extrudeFeatures.count != 0):
             cube = rootComp.features.extrudeFeatures.item(0)
             cubeVolume = cube.bodies.item(0).volume
-            print(cubeVolume)
             if ((cubeVolume <= 1000.01) and (cubeVolume >= 999.99)):
-                print('yes')
                 self.palette.sendInfoToHTML('send', 'extrudeSquare')
 
 
@@ -351,6 +351,8 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
         if eventArgs.commandId == 'SketchCreate':
                 self.palette.sendInfoToHTML('send', 'clickedCreateSketch')
                 #Checks if in the current sketch xy plane has been used as reference plane
+        elif eventArgs.commandId == 'ShapeRectangleCenter':
+                self.palette.sendInfoToHTML('send', 'clickedCenterRectangle')
         elif eventArgs.commandId == 'CommitCommand':
                 #Check if rectangle is 100x100 does not always work
                 if ((rectangleLine1 >=  9.999) and (rectangleLine2 >= 9.999) and (rectangleLine1 <= 10.001) and (rectangleLine2 <= 10.001)):
@@ -360,8 +362,6 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                         self.palette.sendInfoToHTML('send', 'selectXYPlane')
                 if ((centroid.x == 0.0) and (centroid.y == 0.0) and (centroid.z == 0.0)):
                         self.palette.sendInfoToHTML('send', 'setCenterRectangleCenter')
-        elif eventArgs.commandId == 'ShapeRectangleCenter':
-                self.palette.sendInfoToHTML('send', 'clickedCenterRectangle')
         elif eventArgs.commandId == 'SketchStop':
                 self.palette.sendInfoToHTML('send', 'clickedFinishSketch')
         elif eventArgs.commandId == 'Extrude':
@@ -396,6 +396,7 @@ class MyCommandTerminatedHandler(adsk.core.ApplicationCommandEventHandler):
         eventArgs = adsk.core.ApplicationCommandEventArgs.cast(args)
         args = eventArgs
 
+        print(eventArgs.commandId, 'Terminating')
         # Code to react to the event.
         # _ui.messageBox(str(eventArgs))
 
@@ -407,6 +408,7 @@ class MyCameraChangedHandler(adsk.core.CameraEventHandler):
     def notify(self, args):
         eventArgs = adsk.core.CameraEventArgs.cast(args)
         args = eventArgs
+        print(eventArgs.commandId, 'CameraChange')
         # Code to react to the event.
         # _ui.messageBox(eventArgs.commandId)
 
@@ -418,7 +420,7 @@ class MyActiveSelectionChangedHandler(adsk.core.ActiveSelectionEventHandler):
         super().__init__()
     def notify(self, args):
         eventArgs = adsk.core.ActiveSelectionEventArgs.cast(args)
-
+        print(eventArgs.commandId, 'Selection changed')
 
         # Code to react to the event.
         ui.messageBox('In MyActiveSelectionChangedHandler event handler.')
