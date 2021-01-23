@@ -285,11 +285,11 @@ class popUpCommandExecuteHandler(adsk.core.CommandEventHandler):
         cmd = ui.commandDefinitions.itemById('TutorialButtonOnQATRight')
         cmd.execute()
 
-#class UserInterfaceGeneralEventHandlerImpl(adsk.core.UserInterfaceGeneralEvent):
-    # def __init__(self):
-    #     super().__init__()
-    #def notify(self, args):
-        #print(args)         
+class UserInterfaceGeneralEventHandlerImpl(adsk.core.UserInterfaceGeneralEvent):
+    def __init__(self):
+         super().__init__()
+    def notify(self, args):
+        print(args, 'General')         
 
 # https://help.autodesk.com/view/fusion360/ENU/?guid=GUID-EBB6C82A-A256-4AB7-9A86-0F7A9653A7E9
 class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
@@ -332,24 +332,18 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
         #Rectangle 
         rectangleLine1 = sketch.sketchCurves.sketchLines.item(0).length
         rectangleLine2 = sketch.sketchCurves.sketchLines.item(1).length
-        print(rectangleLine1)
-        print(rectangleLine2)
-
-        if rectangleLine1 >  9.99:
-            print('y1')
-        if (rectangleLine2 >  9.99):
-            print('y2')
-        if (rectangleLine1 <  10.01):
-            print('y3')
-        if (rectangleLine2 <  10.01):
-            print('y4')
-        print(((rectangleLine1 >=  9.999) and (rectangleLine2 >= 9.999) and (rectangleLine1 <= 10.001) and (rectangleLine2 <= 10.001)))
-
-
 
         areaProps = sketch.profiles.item(0).areaProperties(adsk.fusion.CalculationAccuracy.MediumCalculationAccuracy)
         centroid = areaProps.centroid
         print(centroid.x, centroid.y, centroid.z, 'Centroid')
+
+        if (rootComp.features.extrudeFeatures.count != 0):
+            cube = rootComp.features.extrudeFeatures.item(0)
+            cubeVolume = cube.bodies.item(0).volume
+            print(cubeVolume)
+            if ((cubeVolume <= 1000.01) and (cubeVolume >= 999.99)):
+                print('yes')
+                self.palette.sendInfoToHTML('send', 'extrudeSquare')
 
 
         if not self.palette:
