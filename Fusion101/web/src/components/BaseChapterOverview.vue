@@ -33,8 +33,8 @@ export default {
 .chapter {
   @include clickable;
 
-  padding: .8rem;
-  margin-bottom: 2rem;
+  padding: 15px;
+  margin-bottom: 32px;
 
   border: 1px solid $active;
   border-radius: 4px;
@@ -43,27 +43,30 @@ export default {
     display: grid;
     grid-template-columns: 33% auto;
     grid-template-rows: auto auto;
+
+    p {
+      margin-left: 20px;
+    }
   }
-}
 
-h2 {
-  grid-column-start: 1;
-  grid-column-end: 3;
+  h2 {
+    grid-column-start: 1;
+    grid-column-end: 3;
 
-  margin-top: 0;
-  margin-bottom: .6rem;
-}
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
 
-img {
-  width: 100%;
-  max-width: 230px;
-  grid-row-start: 2;
-}
+  img {
+    width: 100%;
+    max-width: 230px;
+    grid-row-start: 2;
+  }
 
-p {
-  margin-top: 0;
-  margin-left: .8rem;
-  grid-row-start: 2;
-  font-size: .8rem
+  p {
+    margin-top: 0;
+    grid-row-start: 2;
+    font-size: .8rem
+  }
 }
 </style>
