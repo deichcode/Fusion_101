@@ -18,12 +18,6 @@
             "text": "Select <strong>Perspective with Ortho Faces</strong> in the ___View Cube___'s drop down menu.",
             "tooltips": ["The cube in the upper right of the workspace"],
             "hint": "set-view-mode-perspective-ortho-faces"
-          },
-          {
-            "event": "",
-            "text": "Select <strong>Perspective with Ortho Faces</strong> in the ___View Cube___'s drop down menu.",
-            "tooltips": ["The cube in the upper right of the workspace"],
-            "hint": "set-view-mode-perspective-ortho-faces"
           }
         ]
       },
@@ -460,49 +454,55 @@
             "event": "confirmCylinder",
             "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>.",
             "tooltips": [],
-            "hint": ""
+            "hint": "confirm-chimney-cilynder"
+          },
+          {
+            "event": "cameraHomePosition",
+            "text": "Reset the camera to the home position",
+            "tooltips": [],
+            "hint": "reset-camera-to-home-position"
           },
           {
             "event": "clickedCreateSketch",
             "text": "Click on the <strong>Create Sketch</strong> icon.",
             "tooltips": [],
-            "hint": ""
+            "hint": "click-create-sketch"
           },
           {
             "event": "selectedRightSideofRoof",
             "text": "Select the right side of our roof",
             "tooltips": [],
-            "hint": ""
+            "hint": "select-right-roof-side"
           },
           {
             "event": "clickedCircle",
             "text": "Select the <strong>Center Diameter Circle</strong> icon or press the <strong>C</strong> button",
             "tooltips": [],
-            "hint": ""
+            "hint": "select-center-diameter-circle"
           },
           {
             "event": "clickedCircleCenter",
             "text": "Click on the center of the roof to assign the center of the circle",
             "tooltips": [],
-            "hint": ""
+            "hint": "set-center-chimney-bottom"
           },
           {
             "event": "draggedCircleDiameter",
             "text": "Drag or enter a diameter of 40mm.",
             "tooltips": [],
-            "hint": ""
+            "hint": "set-diameter-chimney-bottom"
           },
           {
             "event": "clickedFinishSketch",
             "text": "Click on <strong>Finish Sketch</strong> to confirm.",
             "tooltips": [],
-            "hint": ""
+            "hint": "click-finish-sketch"
           },
           {
             "event": "clickedLoft",
             "text": "Select the <strong>Loft Feature</strong> from the <strong>CREATE</strong> menu.",
             "tooltips": [],
-            "hint": ""
+            "hint": "select-loft-feature"
           },
           {
             "event": "selectBottomOfCylinder",
@@ -510,19 +510,19 @@
             "tooltips": [
               "You can drag the cube in the right upper corner of the workspace to orientate in your design."
             ],
-            "hint": ""
+            "hint": "loft-select-bottom-cylinder"
           },
           {
             "event": "selectedCircleOnRoof",
             "text": "Select the circle sketch on the roof",
             "tooltips": [],
-            "hint": ""
+            "hint": "loft-select-sketch-roof"
           },
           {
             "event": "confirmLoft",
             "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>.",
             "tooltips": [],
-            "hint": ""
+            "hint": "confirm-chimney-loft"
           }
         ]
       }
