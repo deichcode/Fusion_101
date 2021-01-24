@@ -342,19 +342,22 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
         if (sketches.count == 2):
             sketch = sketches.item(1)
 
+            #Check if the frontal plane of the cube has been selected as a sketch base
             if (sketch.profiles.count != 0):
-                areaProps = sketch.profiles.item(0).areaProperties(adsk.fusion.CalculationAccuracy.MediumCalculationAccuracy)
-                centroid = areaProps.centroid
-                frontalCentroid = point.create(0, 5, 0)
+                frontalCentroidModel = point.create(-1.1368683772161603e-16, -5.0, 6.333333333333333)
+                frontalCentroid = point.create(-1.1368683772161603e-16, 6.333333333333333, 0.0)
+                centroid = sketch.modelToSketchSpace(frontalCentroidModel)
                 if ((frontalCentroid.x == centroid.x) and (frontalCentroid.y == centroid.y) and (frontalCentroid.z == centroid.z)):
-                    self.palette.sendInfoToHTML('send', 'selectCubeFrontPlane')
+                    self.palette.sendInfoToHTML('send', 'selectCubeFrontPlaneRoof')
 
 
-
+                #Check the right points and order of the triangle lines to create the triangle sketch
                 if (sketch.sketchPoints.count >= 6):
+                    #create the right points as points
                     actualFirstPoint = point.create(-5,10,0)
                     actualSecondPoint = point.create(0,15,0)
                     actualThirdPoint = point.create(5,10,0)
+                    #check if the right points are equivalent to the selected points as soon as one point has been created
                     firstPoint = sketch.sketchPoints.item(5).geometry
                     if ((actualFirstPoint.x == firstPoint.x) and (actualFirstPoint.y == firstPoint.y) and (actualFirstPoint.z == firstPoint.z)):
                         self.palette.sendInfoToHTML('send', 'clickedFirstTriangleLine')
@@ -362,27 +365,71 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                         secondPoint = sketch.sketchPoints.item(6).geometry
                         if ((actualSecondPoint.x == secondPoint.x) and (actualSecondPoint.y == secondPoint.y) and (actualSecondPoint.z == secondPoint.z)):
                             self.palette.sendInfoToHTML('send', 'clickedSecondTriangleLine')
-                        
                         if (sketch.sketchPoints.count >= 8):
                             thirdPoint = sketch.sketchPoints.item(7).geometry
                             if ((actualThirdPoint.x == thirdPoint.x) and (actualThirdPoint.y == thirdPoint.y) and (actualThirdPoint.z == thirdPoint.z)):
                                 self.palette.sendInfoToHTML('send', 'clickedThirdTriangleLine')
+                            #Check if the roof has been extruded in the right size by checking the volume
+                            if (rootComp.features.extrudeFeatures.count == 2):
+                                roof = rootComp.features.extrudeFeatures.item(1)
+                                roofVolume = roof.bodies.item(0).volume
+                                if ((roofVolume <= 1250.01) and (roofVolume >= 124.99)):
+                                    self.palette.sendInfoToHTML('send', 'extrudeRoof')
+                                    self.palette.sendInfoToHTML('send', 'confirmExtrudeRoof')
 
-    
+                                    #Check if the right size for the shell has been used by checking the remaining volume of the roof
+                                    if ((roofVolume <= 508.509668) and (roofVolume >= 508.509666)):
+                                        self.palette.sendInfoToHTML('send', 'draggedShell')
+                                        self.palette.sendInfoToHTML('send', 'confirmShell')
 
+                
+
+
+
+        if sketches.count == 3:
+            sketch = sketches.item(2)
+
+            #Check if the frontal plane of the cube has been selected as a sketch base
+            if (sketch.profiles.count != 0):
+                frontalCentroidModel = point.create(-1.1368683772161603e-16, -5.0, 6.333333333333333)
+                frontalCentroid = point.create(-1.1368683772161603e-16, 6.333333333333333, 0.0)
+                centroid = sketch.modelToSketchSpace(frontalCentroidModel)
+                if ((frontalCentroid.x == centroid.x) and (frontalCentroid.y == centroid.y) and (frontalCentroid.z == centroid.z)):
+                    self.palette.sendInfoToHTML('send', 'selectCubeFrontPlane')
+
+
+                    if sketch.profiles.count == 2:
+                        profile = sketch.profiles.item(1)
+                        areaProps = sketch.profiles.item(0).areaProperties(adsk.fusion.CalculationAccuracy.MediumCalculationAccuracy)
+                        centroid = areaProps.centroid
+                        area = areaProps.area
+                        print('Area', area)
+                        print('Centroid', centroid.x, centroid.y, centroid.z)
+                        if ((area == 105.0)):
+                            if  ((centroid.y == 7.063492063492063) and (centroid.z == 0.0)):
+                                self.palette.sendInfoToHTML('send', 'created2PointRectangle')
+
+
+                                if (rootComp.features.extrudeFeatures.count == 3):
+                                    entrance = rootComp.features.extrudeFeatures.item(2)
+                                    entranceVolume = entrance.bodies.item(0).volume
+                                    print(entranceVolume)
+                                    if ((entranceVolume <= 488.5097) and (entranceVolume >= 488.5095)):
+                                        self.palette.sendInfoToHTML('send', 'createdEntrance')
+                                        self.palette.sendInfoToHTML('send', 'confirmExtrudeEntrance')
 
         if (rootComp.features.extrudeFeatures.count != 0):
             cube = rootComp.features.extrudeFeatures.item(0)
             cubeVolume = cube.bodies.item(0).volume
             if ((cubeVolume <= 1000.01) and (cubeVolume >= 999.99)):
                 self.palette.sendInfoToHTML('send', 'extrudeSquare')
-                #if extrudeCount == 0:
-                self.palette.sendInfoToHTML('send', 'confirmExtrude')
-                   # extrudeCount = 1
+                self.palette.sendInfoToHTML('send', 'confirmExtrudeCube')
 
+        print('ActiveSelectionCount', _ui.activeSelections.count)
 
         if not self.palette:
             return
+        print('Goes into If')
         if eventArgs.commandId == 'SketchCreate':
                 self.palette.sendInfoToHTML('send', 'clickedCreateSketch')
                 #Checks if in the current sketch xy plane has been used as reference plane
@@ -455,10 +502,50 @@ class MyActiveSelectionChangedHandler(adsk.core.ActiveSelectionEventHandler):
         super().__init__()
     def notify(self, args):
         eventArgs = adsk.core.ActiveSelectionEventArgs.cast(args)
-        print(eventArgs.commandId, 'Selection changed')
+
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+        #Get the collection: CommandDefinitions
+        commandDefinitions = ui.commandDefinitions
+
+        #Get current design
+        design = adsk.fusion.Design.cast(app.activeProduct)
+        #If there is no active design, send error message
+        if not design:
+            ui.messageBox('No active Fusion 360 design', 'No Design')
+            return
+
+        #Get root of active design
+        rootComp = design.rootComponent
+
+        #3D Points
+        point = adsk.core.Point3D
+
+        sketches = rootComp.sketches
+
+        if (sketches.count == 2):
+            sketch = sketches.item(1)
+
+
+        print(eventArgs.currentSelection, 'Selection changed')
+
+        selectedEntity = eventArgs.currentSelection.entity
+        print(selectedEntity)
+        if sketch.classType == selectedEntity.classType:
+            print('Yes I am the same')
+        else:
+            print('No I am not the same')
+
+        if selectedEntity.classType == fusion.sketches.classType:
+            print('Yes I am a sketch')
+        else:
+            print('No I am not a ketch')
+
+
+
 
         # Code to react to the event.
-        ui.messageBox('In MyActiveSelectionChangedHandler event handler.')
+        #ui.messageBox('In MyActiveSelectionChangedHandler event handler.')
 
 
 def run(context):
