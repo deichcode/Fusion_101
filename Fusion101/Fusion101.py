@@ -403,8 +403,6 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                         areaProps = sketch.profiles.item(0).areaProperties(adsk.fusion.CalculationAccuracy.MediumCalculationAccuracy)
                         centroid = areaProps.centroid
                         area = areaProps.area
-                        print('Area', area)
-                        print('Centroid', centroid.x, centroid.y, centroid.z)
                         if ((area == 105.0)):
                             if  ((centroid.y == 7.063492063492063) and (centroid.z == 0.0)):
                                 self.palette.sendInfoToHTML('send', 'created2PointRectangle')
@@ -413,10 +411,20 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                                 if (rootComp.features.extrudeFeatures.count == 3):
                                     entrance = rootComp.features.extrudeFeatures.item(2)
                                     entranceVolume = entrance.bodies.item(0).volume
-                                    print(entranceVolume)
                                     if ((entranceVolume <= 488.5097) and (entranceVolume >= 488.5095)):
                                         self.palette.sendInfoToHTML('send', 'createdEntrance')
                                         self.palette.sendInfoToHTML('send', 'confirmExtrudeEntrance')
+
+                                        if (rootComp.constructionPlanes.count != 0):
+                                            offsetPlane = rootComp.constructionPlanes.item(0)
+                                            xyPlane = rootComp.xYConstructionPlane
+                                            if (offsetPlane.geometry.isParallelToPlane(xyPlane.geometry)):
+                                                self.palette.sendInfoToHTML('send', 'selectXYPlane')
+                                                self.palette.sendInfoToHTML('send', 'confirmOffsetPlane')
+                                                origin = point.create(0,0,16)
+                                                print(offsetPlane.geometry.origin.z)
+                                                if (offsetPlane.geometry.origin.z == origin.z):
+                                                    self.palette.sendInfoToHTML('send', 'draggedOffsetPlane')
 
         if (rootComp.features.extrudeFeatures.count != 0):
             cube = rootComp.features.extrudeFeatures.item(0)
