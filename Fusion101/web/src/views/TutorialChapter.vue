@@ -76,6 +76,7 @@ main {
 }
 
 footer {
+  pointer-events: none;
   position: fixed;
   bottom: 0;
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&0+0,1+28 */

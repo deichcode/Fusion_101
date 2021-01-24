@@ -57,6 +57,7 @@ export default {
 <style lang="scss" scoped>
 
 .chapter-navigation {
+  pointer-events: auto;
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
