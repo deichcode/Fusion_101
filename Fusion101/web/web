@@ -1,0 +1,10 @@
+build site:
+    image: node:latest
+    stage: build
+    script:
+        - yarn
+        - yarn build
+    artifacts:
+        expire_in: 1 week
+        paths:
+            - dist
