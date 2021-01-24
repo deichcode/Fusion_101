@@ -2,6 +2,7 @@ build site:
     image: node:latest
     stage: build
     script:
+        - cd Fusion101/web
         - yarn
         - yarn build
     artifacts:
