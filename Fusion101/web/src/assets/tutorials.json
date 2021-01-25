@@ -349,7 +349,7 @@
           },
           {
             "event": "createdBox",
-            "text": "Create a 20x20mm Box in the ___middle of the roof___ by selecting two diagonal points in the plane.",
+            "text": "Create a 20x20mm Box with a height of 5mm in the ___middle of the roof___ by selecting two diagonal points in the plane.",
             "tooltips": [
               "Click on the TOP side of the <strong>View Cube</strong> (upper right corner) to easier find the middle"
             ],

@@ -422,9 +422,24 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                                                 self.palette.sendInfoToHTML('send', 'selectXYPlane')
                                                 self.palette.sendInfoToHTML('send', 'confirmOffsetPlane')
                                                 origin = point.create(0,0,16)
-                                                print(offsetPlane.geometry.origin.z)
                                                 if (offsetPlane.geometry.origin.z == origin.z):
                                                     self.palette.sendInfoToHTML('send', 'draggedOffsetPlane')
+
+
+                                                    if (rootComp.features.boxFeatures.count != 0):
+                                                        box = rootComp.features.boxFeatures.item(0).bodies.item(0)
+                                                        boxVolume = box.volume
+                                                        if((boxVolume <= 2.001) and (boxVolume >= 1.999)):
+                                                            self.palette.sendInfoToHTML('send', 'createdBox')
+                                                            self.palette.sendInfoToHTML('send', 'confirmBox')
+
+                                                            if(rootComp.features.extrudeFeatures.count ==4 ):
+                                                                boxExtrusion = rootComp.features.extrudeFeatures.item(3)
+                                                                bottomOfBox = boxExtrusion.startFaces.item(0)
+                                                                extend = boxExtrusion.extentOne
+                                                                print(extend)
+                                                                if (extend.classType == adsk.fusion.ToEntityExtentDefinition.classType):
+                                                                    self.palette.sendInfoToHTML('send', 'clickedToObject')
 
         if (rootComp.features.extrudeFeatures.count != 0):
             cube = rootComp.features.extrudeFeatures.item(0)
