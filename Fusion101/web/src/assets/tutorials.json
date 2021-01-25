@@ -237,7 +237,7 @@
           },
           {
             "event": "selectCubeFrontPlane",
-            "text": "Select the ___front___ plane of our cube.",
+            "text": "Select the ___front___ plane of our house.",
             "tooltips": [
               "You can drag the cube in the right upper corner of the workspace to orientate in your design."
             ],
