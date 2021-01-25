@@ -53,8 +53,8 @@ export default {
       const hintBorder = 2
       const header = this.refs['header']
       const scrollingHint = this.refs['scrollingHint']
-      const headerBottomBorder = header.getBoundingClientRect().height + this.refs['header'].getBoundingClientRect().y
-      const scrollingVideoTopBorder = scrollingHint.getBoundingClientRect().y
+      const headerBottomBorder = header.getBoundingClientRect().bottom
+      const scrollingVideoTopBorder = scrollingHint.getBoundingClientRect().top
       this.scrollingHintIsCovered = headerBottomBorder + hintBorder > scrollingVideoTopBorder;
     });
   },
