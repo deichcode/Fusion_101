@@ -441,7 +441,6 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                 self.palette.sendInfoToHTML('send', 'confirmExtrudeChimney')
 
                 timeline = design.timeline
-                print(timeline.markerPosition, 'MARKERPOSITION')
                 if timeline.markerPosition == 8:
                     self.palette.sendInfoToHTML('send', 'wentBackInTime')
 
@@ -487,7 +486,7 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
         elif eventArgs.commandId == 'PrimitiveBox':
                 self.palette.sendInfoToHTML('send', 'clickedBox')
         #Confirm == Box?
-        elif eventArgs.commandId == 'Cylinder':
+        elif eventArgs.commandId == 'PrimitiveCylinder':
                 self.palette.sendInfoToHTML('send', 'clickedCylinder')
         elif eventArgs.commandId == 'CircleCenterRadius':
                 self.palette.sendInfoToHTML('send', 'clickedCircle')
