@@ -1,26 +1,29 @@
 <template>
-  <div id="header">
+  <header ref="header">
     <div class="button-row">
       <BaseButton :text="backButtonTitle"
                   v-on:click="backButtonAction"></BaseButton>
-      <ThePaletteCloseButton/>
     </div>
     <Title class="title" :text="title"/>
-  </div>
+  </header>
 </template>
 
 <script>
 import Title from "@/components/TheHeaderTitle";
-import ThePaletteCloseButton from "@/components/ThePaletteCloseButton";
 import BaseButton from "@/components/BaseButton";
 
 export default {
   name: "TheSubpageHeader",
-  components: {BaseButton, Title, ThePaletteCloseButton},
+  components: {BaseButton, Title},
   props: {
     backButtonTitle: String,
     backButtonAction: Function,
-    title: String
+    title: String,
+    storeRef: Function
+  },
+  mounted() {
+    //pass Reference to dom element to using component
+    this.storeRef(this.$refs.header)
   }
 }
 </script>
@@ -28,8 +31,8 @@ export default {
 <style lang="scss" scoped>
 @import "src/css/variables/colors";
 
-#header {
-  padding: 8px;
+header {
+  padding: 10px;
   position: sticky;
   top: 0;
   background-color: $menu-background;
@@ -39,6 +42,10 @@ export default {
     align-items: flex-start;
     justify-content: space-between;
     margin-bottom: .8rem;
+
+    button {
+      margin-left: 0;
+    }
   }
 }
 </style>

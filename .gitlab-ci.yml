@@ -1,0 +1,2 @@
+include:
+  - local: '/Fusion101/web/web.gitlab-ci.yml'
