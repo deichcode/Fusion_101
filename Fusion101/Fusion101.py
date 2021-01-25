@@ -386,8 +386,6 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                 #Rectangle 
                 rectangleLine1 = sketch.sketchCurves.sketchLines.item(0).length
                 rectangleLine2 = sketch.sketchCurves.sketchLines.item(1).length
-                print(rectangleLine1)
-                print(rectangleLine2)
         
         if (sketches.count == 2):
             sketch = sketches.item(1)
@@ -518,12 +516,13 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
 
         if (rootComp.features.loftFeatures.count != 0):
             self.palette.sendInfoToHTML('send', 'draggedCircleDiameter')
+            self.palette.sendInfoToHTML('send', 'confirmLoft')
             
         #Check if the offset plane is visible. Confirm if true.
         if (rootComp.constructionPlanes.count != 0):
             offsetPlane = rootComp.constructionPlanes.item(0)
             if (offsetPlane.isLightBulbOn):
-                self.palette.sendInfoToHTML('send', 'confirmLoft')
+                self.palette.sendInfoToHTML('send', 'offsetPlaneVisible')
 
 
         #Check for the extrusion of the Box. If it has the right volume, confirm
