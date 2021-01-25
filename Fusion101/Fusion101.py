@@ -598,6 +598,8 @@ class MyActiveSelectionChangedHandler(adsk.core.ActiveSelectionEventHandler):
 
         print(eventArgs.currentSelection, 'Selection changed')
 
+        activeSel = _ui.activeSelections.item(0).entity
+
         if (_ui.activeSelections.item(0).entity.classType == adsk.fusion.Profile.classType):
             print('si')
             profile = _ui.activeSelections.item(0).entity
