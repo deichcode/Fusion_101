@@ -139,12 +139,60 @@ class MyHTMLEventHandler(adsk.core.HTMLEventHandler):
         try:
             htmlArgs = adsk.core.HTMLEventArgs.cast(args)            
             data = json.loads(htmlArgs.data)
+
+
+
+
+            app = adsk.core.Application.get()
+            ui  = app.userInterface
+
+            #Get the collection: CommandDefinitions
+            commandDefinitions = ui.commandDefinitions
+
+            #Get current design
+            design = adsk.fusion.Design.cast(app.activeProduct)
+            #If there is no active design, send error message
+            if not design:
+                ui.messageBox('No active Fusion 360 design', 'No Design')
+                return
+
+            #Get root of active design
+            rootComp = design.rootComponent
+
+            #3D Points
+            point = adsk.core.Point3D
+
+            #Create new sketch on xy plane
+            sketches = rootComp.sketches
+            xyPlane = rootComp.xYConstructionPlane
+            sketch = sketches.add(xyPlane)
             # msg = "An event has been fired from the html to Fusion with the following data:\n"
             # msg += '    Command: {}\n    arg1: {}\n    arg2: {}'.format(htmlArgs.action, data['arg1'], data['arg2'])
             if data['command'] == 'close':
                 palette = _ui.palettes.itemById(PALLET_ID)
                 if palette:
                     palette.isVisible = False
+
+            chaptersToBeSkipped
+            if data['command'] == 'skipChapter1':
+                chaptersToBeSkipped = 1
+            if data['command'] == 'skipChapter2':
+                chaptersToBeSkipped = 2
+            if data['command'] == 'skipChapter3':
+                chaptersToBeSkipped = 3
+            if data['command'] == 'skipChapter4':
+                chaptersToBeSkipped = 4
+            if data['command'] == 'skipChapter5':
+                chaptersToBeSkipped = 5
+            if data['command'] == 'skipChapter6':
+                chaptersToBeSkipped = 6
+            if data['command'] == 'skipChapter7':
+                chaptersToBeSkipped = 7
+            if data['command'] == 'skipChapter8':
+                chaptersToBeSkipped = 8
+            if data['command'] == 'skipChapter9':
+                chaptersToBeSkipped = 9
+
         except:
             _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))           
 
@@ -333,11 +381,13 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
 
             if (sketch.profiles.count != 0):
                 areaProps = sketch.profiles.item(0).areaProperties(adsk.fusion.CalculationAccuracy.MediumCalculationAccuracy)
-                centroid = areaProps.centroid
+                centroid1 = areaProps.centroid
 
                 #Rectangle 
                 rectangleLine1 = sketch.sketchCurves.sketchLines.item(0).length
                 rectangleLine2 = sketch.sketchCurves.sketchLines.item(1).length
+                print(rectangleLine1)
+                print(rectangleLine2)
         
         if (sketches.count == 2):
             sketch = sketches.item(1)
@@ -515,7 +565,7 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                 #Das wird leider verspätet aufgerufen. Es wäre gut, wenn man hier ein Event findet was gleichzeitig geworfen wird
                 if (sketch.referencePlane == rootComp.xYConstructionPlane):
                         self.palette.sendInfoToHTML('send', 'selectXYPlane')
-                if ((centroid.x == 0.0) and (centroid.y == 0.0) and (centroid.z == 0.0)):
+                if ((centroid1.x == 0.0) and (centroid1.y == 0.0) and (centroid1.z == 0.0)):
                         self.palette.sendInfoToHTML('send', 'setCenterRectangleCenter')
         elif eventArgs.commandId == 'SketchStop':
                 self.palette.sendInfoToHTML('send', 'clickedFinishSketch')
