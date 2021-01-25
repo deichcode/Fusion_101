@@ -385,7 +385,7 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                 
 
 
-
+        #Check if an additonal sketch has been created. 
         if sketches.count == 3:
             sketch = sketches.item(2)
 
@@ -397,7 +397,7 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                 if ((frontalCentroid.x == centroid.x) and (frontalCentroid.y == centroid.y) and (frontalCentroid.z == centroid.z)):
                     self.palette.sendInfoToHTML('send', 'selectCubeFrontPlane')
 
-
+                    #Check if the next profile of the sketch has been created. If so, check if it has the right size by area and centroid
                     if sketch.profiles.count == 2:
                         profile = sketch.profiles.item(1)
                         areaProps = sketch.profiles.item(0).areaProperties(adsk.fusion.CalculationAccuracy.MediumCalculationAccuracy)
@@ -407,7 +407,7 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                             if  ((centroid.y == 7.063492063492063) and (centroid.z == 0.0)):
                                 self.palette.sendInfoToHTML('send', 'created2PointRectangle')
 
-
+                                #Check if an additional Extrude has been created. If so, check if the volume is right and confirm afterwards. 
                                 if (rootComp.features.extrudeFeatures.count == 3):
                                     entrance = rootComp.features.extrudeFeatures.item(2)
                                     entranceVolume = entrance.bodies.item(0).volume
@@ -415,18 +415,20 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                                         self.palette.sendInfoToHTML('send', 'createdEntrance')
                                         self.palette.sendInfoToHTML('send', 'confirmExtrudeEntrance')
 
+                                        #Check if the constructionPlane has been created
                                         if (rootComp.constructionPlanes.count != 0):
                                             offsetPlane = rootComp.constructionPlanes.item(0)
                                             xyPlane = rootComp.xYConstructionPlane
+                                            #Check if the construction plane is parallel to the xyPlane
                                             if (offsetPlane.geometry.isParallelToPlane(xyPlane.geometry)):
                                                 self.palette.sendInfoToHTML('send', 'selectXYPlane')
                                                 self.palette.sendInfoToHTML('send', 'confirmOffsetPlane')
                                                 origin = point.create(0,0,16)
+                                                #Check if the offset Plane has a height of 160mm
                                                 if (offsetPlane.geometry.origin.z == origin.z):
                                                     self.palette.sendInfoToHTML('send', 'draggedOffsetPlane')
 
-
-
+                                                    #Check if a box has been created. If so, check if it has the right volume. Confirm if true
                                                     if (rootComp.features.boxFeatures.count != 0):
                                                         box = rootComp.features.boxFeatures.item(0).bodies.item(0)
                                                         boxVolume = box.volume
@@ -434,7 +436,7 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                                                             self.palette.sendInfoToHTML('send', 'createdBox')
                                                             self.palette.sendInfoToHTML('send', 'confirmBox')
 
-        
+        #Check if the cylinder has the right volume. Confirm if true.
         if (rootComp.features.cylinderFeatures.count != 0):
             cylinder = rootComp.features.cylinderFeatures.item(0)
             cylinderVolume = cylinder.bodies.item(0).volume
@@ -442,6 +444,7 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                 self.palette.sendInfoToHTML('send', 'selectedCylinderDiameter')
                 self.palette.sendInfoToHTML('send', 'confirmCylinder')
 
+                #Check if there has been an additional sketch created
                 if sketches.count == 4:
                     sketch = sketches.item(3)
 
@@ -453,7 +456,7 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                         if ((rightCentroid.x == centroid.x) and (rightCentroid.y == centroid.y)):
                             self.palette.sendInfoToHTML('send', 'selectedRightSideofRoof')
 
-
+                            #Check if the center diameter circle has the right area. Confirm if so. 
                             if sketch.profiles.count == 2:
                                 profile = sketch.profiles.item(1)
                                 areaProps = sketch.profiles.item(0).areaProperties(adsk.fusion.CalculationAccuracy.MediumCalculationAccuracy)
@@ -461,12 +464,19 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                                 print(area)
                                 if ((area == 58.14430750429558)):
                                     self.palette.sendInfoToHTML('send', 'draggedCircleDiameter')
-        
+
+
+        if (rootComp.features.loftFeatures.count != 0):
+            self.palette.sendInfoToHTML('send', 'draggedCircleDiameter')
+            
+        #Check if the offset plane is visible. Confirm if true.
         if (rootComp.constructionPlanes.count != 0):
             offsetPlane = rootComp.constructionPlanes.item(0)
             if (offsetPlane.isLightBulbOn):
-                self.palette.sendInfoToHTML('send', 'offsetPlaneVisible')
+                self.palette.sendInfoToHTML('send', 'confirmLoft')
 
+
+        #Check for the extrusion of the Box. If it has the right volume, confirm
         if(rootComp.features.extrudeFeatures.count ==4 ):
             boxExtrusion = rootComp.features.extrudeFeatures.item(3)
             extend = boxExtrusion.extentOne
@@ -474,12 +484,13 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                 self.palette.sendInfoToHTML('send', 'clickedToObject')
                 self.palette.sendInfoToHTML('send', 'confirmExtrudeChimney')
 
+                #Check for the timeline. Confirm, if the markerposition is right
                 timeline = design.timeline
                 if timeline.markerPosition == 8:
                     self.palette.sendInfoToHTML('send', 'wentBackInTime')
 
 
-
+        #Check for the extrusion of the cube. If it has the right volume, confirm.
         if (rootComp.features.extrudeFeatures.count != 0):
             cube = rootComp.features.extrudeFeatures.item(0)
             cubeVolume = cube.bodies.item(0).volume
@@ -585,23 +596,16 @@ class MyActiveSelectionChangedHandler(adsk.core.ActiveSelectionEventHandler):
 
         sketches = rootComp.sketches
 
-        if (sketches.count == 2):
-            sketch = sketches.item(1)
-
-
         print(eventArgs.currentSelection, 'Selection changed')
 
-        selectedEntity = eventArgs.currentSelection.entity
-        print(selectedEntity)
-        if sketch.classType == selectedEntity.classType:
-            print('Yes I am the same')
-        else:
-            print('No I am not the same')
+        if (_ui.activeSelections.item(0).entity.classType == adsk.fusion.Profile.classType):
+            print('si')
+            profile = _ui.activeSelections.item(0).entity
+            parentSketch = profile.parentSketch
+            if (parentSketch == sketches.item(1)):
+                self.palette.sendInfoToHTML('send', 'clickedTrianglePlane')
 
-        if selectedEntity.classType == fusion.sketches.classType:
-            print('Yes I am a sketch')
-        else:
-            print('No I am not a ketch')
+
 
 
 
