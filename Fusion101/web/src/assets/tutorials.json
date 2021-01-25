@@ -448,7 +448,7 @@
           },
           {
             "event": "selectedCylinderDiameter",
-            "text": "Drag or type a diameter of 20mm",
+            "text": "Drag or type a diameter of 20mm and select a height of 5mm",
             "tooltips": [],
             "hint": "set-chimney-cylinder-diameter"
           },

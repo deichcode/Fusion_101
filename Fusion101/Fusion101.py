@@ -426,12 +426,19 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                                                     self.palette.sendInfoToHTML('send', 'draggedOffsetPlane')
 
 
+
                                                     if (rootComp.features.boxFeatures.count != 0):
                                                         box = rootComp.features.boxFeatures.item(0).bodies.item(0)
                                                         boxVolume = box.volume
                                                         if((boxVolume <= 2.001) and (boxVolume >= 1.999)):
                                                             self.palette.sendInfoToHTML('send', 'createdBox')
                                                             self.palette.sendInfoToHTML('send', 'confirmBox')
+
+        if (rootComp.constructionPlanes.count != 0):
+            offsetPlane = rootComp.constructionPlanes.item(0)
+            print(offsetPlane.isLightBulbOn)
+            if (offsetPlane.isLightBulbOn):
+                self.palette.sendInfoToHTML('send', 'offsetPlaneVisible')
 
         if(rootComp.features.extrudeFeatures.count ==4 ):
             boxExtrusion = rootComp.features.extrudeFeatures.item(3)
@@ -443,6 +450,7 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                 timeline = design.timeline
                 if timeline.markerPosition == 8:
                     self.palette.sendInfoToHTML('send', 'wentBackInTime')
+
 
 
         if (rootComp.features.extrudeFeatures.count != 0):
