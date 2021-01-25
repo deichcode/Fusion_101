@@ -433,13 +433,18 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                                                             self.palette.sendInfoToHTML('send', 'createdBox')
                                                             self.palette.sendInfoToHTML('send', 'confirmBox')
 
-                                                            if(rootComp.features.extrudeFeatures.count ==4 ):
-                                                                boxExtrusion = rootComp.features.extrudeFeatures.item(3)
-                                                                bottomOfBox = boxExtrusion.startFaces.item(0)
-                                                                extend = boxExtrusion.extentOne
-                                                                print(extend)
-                                                                if (extend.classType == adsk.fusion.ToEntityExtentDefinition.classType):
-                                                                    self.palette.sendInfoToHTML('send', 'clickedToObject')
+        if(rootComp.features.extrudeFeatures.count ==4 ):
+            boxExtrusion = rootComp.features.extrudeFeatures.item(3)
+            extend = boxExtrusion.extentOne
+            if (extend.classType == adsk.fusion.ToEntityExtentDefinition.classType):
+                self.palette.sendInfoToHTML('send', 'clickedToObject')
+                self.palette.sendInfoToHTML('send', 'confirmExtrudeChimney')
+
+                timeline = design.timeline
+                print(timeline.markerPosition, 'MARKERPOSITION')
+                if timeline.markerPosition == 8:
+                    self.palette.sendInfoToHTML('send', 'wentBackInTime')
+
 
         if (rootComp.features.extrudeFeatures.count != 0):
             cube = rootComp.features.extrudeFeatures.item(0)

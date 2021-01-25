@@ -388,7 +388,7 @@
             "hint": "chimney-box-select-to-object-target"
           },
           {
-            "event": "confirmExtrude",
+            "event": "confirmExtrudeChimney",
             "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>.",
             "tooltips": [],
             "hint": "confirm-chimney"
