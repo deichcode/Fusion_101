@@ -434,9 +434,16 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                                                             self.palette.sendInfoToHTML('send', 'createdBox')
                                                             self.palette.sendInfoToHTML('send', 'confirmBox')
 
+        
+        if (rootComp.features.cylinderFeatures.count != 0):
+            cylinder = rootComp.features.cylinderFeatures.item(0)
+            cylinderVolume = cylinder.bodies.item(0).volume
+            if ((cylinderVolume >= 1.5706) and (cylinderVolume <= 1.5708)):
+                self.palette.sendInfoToHTML('send', 'selectedCylinderDiameter')
+                self.palette.sendInfoToHTML('send', 'confirmCylinder')
+        
         if (rootComp.constructionPlanes.count != 0):
             offsetPlane = rootComp.constructionPlanes.item(0)
-            print(offsetPlane.isLightBulbOn)
             if (offsetPlane.isLightBulbOn):
                 self.palette.sendInfoToHTML('send', 'offsetPlaneVisible')
 
