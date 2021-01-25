@@ -441,6 +441,18 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
             if ((cylinderVolume >= 1.5706) and (cylinderVolume <= 1.5708)):
                 self.palette.sendInfoToHTML('send', 'selectedCylinderDiameter')
                 self.palette.sendInfoToHTML('send', 'confirmCylinder')
+
+                if sketches.count == 4:
+                    sketch = sketches.item(3)
+
+                    #Check if the right roof has been selected as a sketch base
+                    if (sketch.profiles.count != 0):
+                        rightCentroidModel = point.create(2.5,0.0, 12.5)
+                        rightCentroid = point.create(0.0, 7.071067811865474, 1.7763568394002505)
+                        centroid = sketch.modelToSketchSpace(rightCentroidModel)
+                        print(centroid.x, centroid.y, centroid.z)
+                        if ((rightCentroid.x == centroid.x) and (rightCentroid.y == centroid.y)):
+                            self.palette.sendInfoToHTML('send', 'selectedRightSideofRoof')
         
         if (rootComp.constructionPlanes.count != 0):
             offsetPlane = rootComp.constructionPlanes.item(0)
