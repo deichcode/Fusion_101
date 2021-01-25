@@ -448,11 +448,19 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                     #Check if the right roof has been selected as a sketch base
                     if (sketch.profiles.count != 0):
                         rightCentroidModel = point.create(2.5,0.0, 12.5)
-                        rightCentroid = point.create(0.0, 7.071067811865474, 1.7763568394002505)
+                        rightCentroid = point.create(0, 7.071067811865474, 1.7763568394002505)
                         centroid = sketch.modelToSketchSpace(rightCentroidModel)
-                        print(centroid.x, centroid.y, centroid.z)
                         if ((rightCentroid.x == centroid.x) and (rightCentroid.y == centroid.y)):
                             self.palette.sendInfoToHTML('send', 'selectedRightSideofRoof')
+
+
+                            if sketch.profiles.count == 2:
+                                profile = sketch.profiles.item(1)
+                                areaProps = sketch.profiles.item(0).areaProperties(adsk.fusion.CalculationAccuracy.MediumCalculationAccuracy)
+                                area = areaProps.area
+                                print(area)
+                                if ((area == 58.14430750429558)):
+                                    self.palette.sendInfoToHTML('send', 'draggedCircleDiameter')
         
         if (rootComp.constructionPlanes.count != 0):
             offsetPlane = rootComp.constructionPlanes.item(0)
