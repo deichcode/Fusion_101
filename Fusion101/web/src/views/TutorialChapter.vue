@@ -30,7 +30,7 @@ import getTutorialChapter from "@/tools/tutorials/getTutorialChapter";
 import TheSubpageHeader from "@/components/TheSubpageHeader";
 import ChapterStepHintVideo from "@/components/ChapterStepHintVideo";
 import ChapterSteps from "@/components/ChapterSteps";
-import ChapterNavigation from "@/views/ChapterNavigation";
+import ChapterNavigation from "@/components/ChapterNavigation";
 import {executeOnScroll} from "@/tools/eventListener/scrollEvent";
 
 export default {
