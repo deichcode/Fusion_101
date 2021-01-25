@@ -421,7 +421,9 @@
           {
             "event": "offsetPlaneVisible",
             "text": "Ensure that in the ___<strong>Browser</strong>___ under <strong>Construction</strong> the offset plane is visible",
-            "tooltips": [],
+            "tooltips": [
+              "You can find the browser typically in the left upper corner of your workspace. It lists all components, sketches etc. and allows to control the visibility of each."
+            ],
             "hint": "offset-plane-visible"
           },
           {
