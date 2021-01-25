@@ -31,6 +31,7 @@ import TheSubpageHeader from "@/components/TheSubpageHeader";
 import ChapterStepHintVideo from "@/components/ChapterStepHintVideo";
 import ChapterSteps from "@/components/ChapterSteps";
 import ChapterNavigation from "@/views/ChapterNavigation";
+import {executeOnScroll} from "@/tools/eventListener/scrollEvent";
 
 export default {
   name: "TutorialChapter",
@@ -48,15 +49,7 @@ export default {
   },
   mounted() {
     this.loadChapter();
-
-    document.addEventListener('scroll', () => {
-      const hintBorder = 2
-      const header = this.refs['header']
-      const scrollingHint = this.refs['scrollingHint']
-      const headerBottomBorder = header.getBoundingClientRect().bottom
-      const scrollingVideoTopBorder = scrollingHint.getBoundingClientRect().top
-      this.scrollingHintIsCovered = headerBottomBorder + hintBorder > scrollingVideoTopBorder;
-    });
+    executeOnScroll(this.updateScrollingHintIsCovered)
   },
   watch: {
     $route() { //Watch on changes in route and load chapter data if chapter and/or tutorial have changed
@@ -68,6 +61,14 @@ export default {
   methods: {
     loadChapter() {
       this.chapter = getTutorialChapter(this.tutorialId, this.chapterId)
+    },
+    updateScrollingHintIsCovered() {
+      const hintBorderSize = 2
+      const header = this.refs['header']
+      const scrollingHint = this.refs['scrollingHint']
+      const headerBottomBorder = header.getBoundingClientRect().bottom
+      const scrollingVideoTopBorder = scrollingHint.getBoundingClientRect().top
+      this.scrollingHintIsCovered = headerBottomBorder + hintBorderSize > scrollingVideoTopBorder;
     },
     navigateToOverview() {
       router.push({name: 'contents', params: {tutorialId: this.tutorialId}})
