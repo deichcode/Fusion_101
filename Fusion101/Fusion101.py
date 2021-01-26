@@ -39,31 +39,31 @@ class ShowPaletteCommandExecuteHandler(adsk.core.CommandEventHandler):
 
                 # Add handler to HTMLEvent of the palette.
                 onHTMLEvent = MyHTMLEventHandler()
-                palette.incomingFromHTML.add(onHTMLEvent)   
+                palette.incomingFromHTML.add(onHTMLEvent)
                 handlers.append(onHTMLEvent)
-    
+
                 # Add handler to CloseEvent of the palette.
                 onClosed = MyCloseEventHandler()
                 palette.closed.add(onClosed)
-                handlers.append(onClosed)   
+                handlers.append(onClosed)
             else:
-                palette.isVisible = True      
+                palette.isVisible = True
 
             # Add handler to react in palette on startedCommands
             onCommandStarting = MyCommandStartingHandler(palette)
             _ui.commandStarting.add(onCommandStarting)
             handlers.append(onCommandStarting)
-            
-            
+
+
             # Add handler to react in palette on terminatedCommands
             onCommandTerminated = MyCommandTerminatedHandler(palette)
             _ui.commandTerminated.add(onCommandTerminated)
-            handlers.append(onCommandTerminated)    
+            handlers.append(onCommandTerminated)
 
             # Add handler to react in palette on changes of the camera
             onCameraChanged = MyCameraChangedHandler(palette)
             _app.cameraChanged.add(onCameraChanged)
-            handlers.append(onCameraChanged)     
+            handlers.append(onCameraChanged)
 
             # Add handler to react in palette on changes of the active selection
             onActiveSelectionChanged = MyActiveSelectionChangedHandler(palette)
@@ -78,15 +78,15 @@ class ShowPaletteCommandExecuteHandler(adsk.core.CommandEventHandler):
 # Event handler for the commandCreated event.
 class ShowPaletteCommandCreatedHandler(adsk.core.CommandCreatedEventHandler):
     def __init__(self):
-        super().__init__()              
+        super().__init__()
     def notify(self, args):
         try:
             command = args.command
             onExecute = ShowPaletteCommandExecuteHandler()
             command.execute.add(onExecute)
-            handlers.append(onExecute)                                     
+            handlers.append(onExecute)
         except:
-            _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))     
+            _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
 
 
 # Event handler for the commandExecuted event.
@@ -101,7 +101,7 @@ class SendInfoCommandExecuteHandler(adsk.core.CommandEventHandler):
             if palette:
                 global num
                 num += 1
-                palette.sendInfoToHTML('send', 'This is a message sent to the palette from Fusion. It has been sent {} times.'.format(num))                        
+                palette.sendInfoToHTML('send', 'This is a message sent to the palette from Fusion. It has been sent {} times.'.format(num))
         except:
             _ui.messageBox('Command executed failed: {}'.format(traceback.format_exc()))
 
@@ -109,15 +109,15 @@ class SendInfoCommandExecuteHandler(adsk.core.CommandEventHandler):
 # Event handler for the commandCreated event.
 class SendInfoCommandCreatedHandler(adsk.core.CommandCreatedEventHandler):
     def __init__(self):
-        super().__init__()              
+        super().__init__()
     def notify(self, args):
         try:
             command = args.command
             onExecute = SendInfoCommandExecuteHandler()
             command.execute.add(onExecute)
-            handlers.append(onExecute)                                     
+            handlers.append(onExecute)
         except:
-            _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))     
+            _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
 
 
 # Event handler for the palette close event.
@@ -126,7 +126,7 @@ class MyCloseEventHandler(adsk.core.UserInterfaceGeneralEventHandler):
         super().__init__()
     def notify(self, args):
         try:
-            _ui.messageBox('Close button is clicked.') 
+            _ui.messageBox('Close button is clicked.')
         except:
             _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
 
@@ -137,7 +137,7 @@ class MyHTMLEventHandler(adsk.core.HTMLEventHandler):
         super().__init__()
     def notify(self, args):
         try:
-            htmlArgs = adsk.core.HTMLEventArgs.cast(args)            
+            htmlArgs = adsk.core.HTMLEventArgs.cast(args)
             data = json.loads(htmlArgs.data)
 
 
@@ -194,7 +194,7 @@ class MyHTMLEventHandler(adsk.core.HTMLEventHandler):
                 chaptersToBeSkipped = 9
 
         except:
-            _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))           
+            _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
 
 
 
@@ -227,7 +227,7 @@ class CommandCreatedEventHandlerQATRight(adsk.core.CommandCreatedEventHandler):
                     handlers.append(onExecute)
                     #_ui.messageBox('Right QAT command created successfully')
                 except:
-                    _ui.messageBox(' Right QAT command created failed: {}').format(traceback.format_exc())               
+                    _ui.messageBox(' Right QAT command created failed: {}').format(traceback.format_exc())
 ###########AddinSample#################
 
 #Event handler for the commandCreated event
@@ -236,7 +236,7 @@ class popUpCommandCreatedEventHandler(adsk.core.CommandCreatedEventHandler):
         super().__init__()
     def notify(self, args):
         eventArgs = adsk.core.CommandCreatedEventArgs.cast(args)
-        
+
         #Get the command
         command = eventArgs.command
 
@@ -249,7 +249,7 @@ class popUpCommandCreatedEventHandler(adsk.core.CommandCreatedEventHandler):
 
         #Create a "textBox" with the welcoming text
         welcomeText = inputs.addTextBoxCommandInput(
-            'welcomeText', 
+            'welcomeText',
             '',
             '<div align="center"><b>Welcome to Fusion 101!</b></div>',
             3,
@@ -258,7 +258,7 @@ class popUpCommandCreatedEventHandler(adsk.core.CommandCreatedEventHandler):
 
         #Create a "textBox" with the description of the tutorial
         introductionText = inputs.addTextBoxCommandInput(
-            'introductionText', 
+            'introductionText',
             '',
             '<div align="center">This interactive tutorial will guide you through'+
             ' your first steps in Fusion 360. You will get to know the most important'+
@@ -269,7 +269,7 @@ class popUpCommandCreatedEventHandler(adsk.core.CommandCreatedEventHandler):
 
         #Create a "textBox" with the second description of the tutorial
         introductionText2 = inputs.addTextBoxCommandInput(
-            'introductionText2', 
+            'introductionText2',
             '',
             '<div align="center">To start Fusion 101 later just click on the HAT symbol'+
             ' next to your profile picture or initials in the upper right Quick Access Bar of your screen</div>.',
@@ -302,8 +302,8 @@ class popUpCommandInputChangedHandler(adsk.core.InputChangedEventHandler):
         #Check the value of dont show again
         changedInput = eventArgs.input
         if changedInput.id == 'dontShowAgain':
-            
-        
+
+
 
             if changedInput.value == True:
                 #inputs = eventArgs.firingEvent.sender.commandInputs
@@ -339,7 +339,7 @@ class popUpCommandExecuteHandler(adsk.core.CommandEventHandler):
     #def __init__(self):
          #super().__init__()
     #def notify(self, args):
-        #print(args, 'General')         
+        #print(args, 'General')
 
 # https://help.autodesk.com/view/fusion360/ENU/?guid=GUID-EBB6C82A-A256-4AB7-9A86-0F7A9653A7E9
 class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
@@ -376,17 +376,7 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
 
         #Create new sketch on xy plane
         sketches = rootComp.sketches
-        if (sketches.count != 0):
-            sketch = sketches.item(0)
 
-            if (sketch.profiles.count != 0):
-                areaProps = sketch.profiles.item(0).areaProperties(adsk.fusion.CalculationAccuracy.MediumCalculationAccuracy)
-                centroid1 = areaProps.centroid
-
-                #Rectangle 
-                rectangleLine1 = sketch.sketchCurves.sketchLines.item(0).length
-                rectangleLine2 = sketch.sketchCurves.sketchLines.item(1).length
-        
         if (sketches.count == 2):
             sketch = sketches.item(1)
 
@@ -430,10 +420,10 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                                         self.palette.sendInfoToHTML('send', 'draggedShell')
                                         self.palette.sendInfoToHTML('send', 'confirmShell')
 
-                
 
 
-        #Check if an additonal sketch has been created. 
+
+        #Check if an additonal sketch has been created.
         if sketches.count == 3:
             sketch = sketches.item(2)
 
@@ -455,7 +445,7 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                             if  ((centroid.y == 7.063492063492063) and (centroid.z == 0.0)):
                                 self.palette.sendInfoToHTML('send', 'created2PointRectangle')
 
-                                #Check if an additional Extrude has been created. If so, check if the volume is right and confirm afterwards. 
+                                #Check if an additional Extrude has been created. If so, check if the volume is right and confirm afterwards.
                                 if (rootComp.features.extrudeFeatures.count == 3):
                                     entrance = rootComp.features.extrudeFeatures.item(2)
                                     entranceVolume = entrance.bodies.item(0).volume
@@ -504,7 +494,7 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                         if ((rightCentroid.x == centroid.x) and (rightCentroid.y == centroid.y)):
                             self.palette.sendInfoToHTML('send', 'selectedRightSideofRoof')
 
-                            #Check if the center diameter circle has the right area. Confirm if so. 
+                            #Check if the center diameter circle has the right area. Confirm if so.
                             if sketch.profiles.count == 2:
                                 profile = sketch.profiles.item(1)
                                 areaProps = sketch.profiles.item(0).areaProperties(adsk.fusion.CalculationAccuracy.MediumCalculationAccuracy)
@@ -517,7 +507,7 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
         if (rootComp.features.loftFeatures.count != 0):
             self.palette.sendInfoToHTML('send', 'draggedCircleDiameter')
             self.palette.sendInfoToHTML('send', 'confirmLoft')
-            
+
         #Check if the offset plane is visible. Confirm if true.
         if (rootComp.constructionPlanes.count != 0):
             offsetPlane = rootComp.constructionPlanes.item(0)
@@ -558,15 +548,13 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
         elif eventArgs.commandId == 'ShapeRectangleCenter':
                 self.palette.sendInfoToHTML('send', 'clickedCenterRectangle')
         elif eventArgs.commandId == 'CommitCommand':
-                #Check if rectangle is 100x100 does not always work
-                if ((rectangleLine1 >=  9.999) and (rectangleLine2 >= 9.999) and (rectangleLine1 <= 10.001) and (rectangleLine2 <= 10.001)):
-                        self.palette.sendInfoToHTML('send', 'specify100100square')
+            if (sketches.count != 0):
+                sketch = sketches.item(0)
                 #Das wird leider verspätet aufgerufen. Es wäre gut, wenn man hier ein Event findet was gleichzeitig geworfen wird
                 if (sketch.referencePlane == rootComp.xYConstructionPlane):
                         self.palette.sendInfoToHTML('send', 'selectXYPlane')
-                if ((centroid1.x == 0.0) and (centroid1.y == 0.0) and (centroid1.z == 0.0)):
-                        self.palette.sendInfoToHTML('send', 'setCenterRectangleCenter')
         elif eventArgs.commandId == 'SketchStop':
+            #ValidateBaseSquare here
                 self.palette.sendInfoToHTML('send', 'clickedFinishSketch')
         elif eventArgs.commandId == 'Extrude':
                 self.palette.sendInfoToHTML('send', 'clickedExtrudeFeauture')
@@ -587,9 +575,6 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                 self.palette.sendInfoToHTML('send', 'clickedCircle')
         elif eventArgs.commandId == 'SolidLoft':
                 self.palette.sendInfoToHTML('send', 'clickedLoft')
-    
-
-
 
 
 class MyCommandTerminatedHandler(adsk.core.ApplicationCommandEventHandler):
@@ -599,10 +584,48 @@ class MyCommandTerminatedHandler(adsk.core.ApplicationCommandEventHandler):
     def notify(self, args):
         eventArgs = adsk.core.ApplicationCommandEventArgs.cast(args)
         args = eventArgs
+        
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+        #Get current design
+        design = adsk.fusion.Design.cast(app.activeProduct)
+        #If there is no active design, send error message
+        if not design:
+            ui.messageBox('No active Fusion 360 design', 'No Design')
+            return
+
+        #Get root of active design
+        rootComp = design.rootComponent
+
+        #Create new sketch on xy plane
+        sketches = rootComp.sketches
+
+        if eventArgs.commandId == 'ShapeRectangleCenter':
+            if (sketches.count != 0):
+                sketch = sketches.item(0)
+                self.validateBaseSquare(sketch)
 
         print(eventArgs.commandId, 'Terminating')
         # Code to react to the event.
         # _ui.messageBox(str(eventArgs))
+
+    def validateBaseSquare(self, sketch):
+        sketchHasLeastOneProfile = sketch.profiles.count != 0
+        if sketchHasLeastOneProfile:
+            areaProps = sketch.profiles.item(0).areaProperties(adsk.fusion.CalculationAccuracy.MediumCalculationAccuracy)
+            centroid1 = areaProps.centroid
+
+            # Rectangle
+            rectangleLine1 = sketch.sketchCurves.sketchLines.item(0).length
+            rectangleLine2 = sketch.sketchCurves.sketchLines.item(1).length
+            # Check if rectangle is 100x100 does not always work
+            squareIsOfSize10by10cm = (rectangleLine1 >= 9.999) and (rectangleLine2 >= 9.999) and (rectangleLine1 <= 10.001) and (
+                        rectangleLine2 <= 10.001)
+            if squareIsOfSize10by10cm:
+                self.palette.sendInfoToHTML('send', 'specify100100square')
+            rectangleCenterIsInX0Y0 = (centroid1.x == 0.0) and (centroid1.y == 0.0) and (centroid1.z == 0.0)
+            if rectangleCenterIsInX0Y0:
+                self.palette.sendInfoToHTML('send', 'setCenterRectangleCenter')
 
 # https://help.autodesk.com/view/fusion360/ENU/?guid=GUID-7D12B291-979B-4620-870F-D4C10E72DE1E
 class MyCameraChangedHandler(adsk.core.CameraEventHandler):
@@ -612,7 +635,7 @@ class MyCameraChangedHandler(adsk.core.CameraEventHandler):
     def notify(self, args):
         eventArgs = adsk.core.CameraEventArgs.cast(args)
         args = eventArgs
-        print(eventArgs.commandId, 'CameraChange')
+        # print(eventArgs.commandId, 'CameraChange')
         # Code to react to the event.
         # _ui.messageBox(eventArgs.commandId)
 
@@ -647,14 +670,15 @@ class MyActiveSelectionChangedHandler(adsk.core.ActiveSelectionEventHandler):
 
         print(eventArgs.currentSelection, 'Selection changed')
 
-        activeSel = _ui.activeSelections.item(0).entity
+        if(_ui.activeSelections.count < 0):
+            firstActiveSelection = _ui.activeSelections.item(0).entity
 
-        if (_ui.activeSelections.item(0).entity.classType == adsk.fusion.Profile.classType):
-            print('si')
-            profile = _ui.activeSelections.item(0).entity
-            parentSketch = profile.parentSketch
-            if (parentSketch == sketches.item(1)):
-                self.palette.sendInfoToHTML('send', 'clickedTrianglePlane')
+            if (firstActiveSelection.classType == adsk.fusion.Profile.classType):
+                print('si')
+                profile = firstActiveSelection
+                parentSketch = profile.parentSketch
+                if (parentSketch == sketches.item(1)):
+                    self.palette.sendInfoToHTML('send', 'clickedTrianglePlane')
 
 
 
@@ -680,8 +704,8 @@ def run(context):
             onCommandCreated = ShowPaletteCommandCreatedHandler()
             showPaletteCmdDef.commandCreated.add(onCommandCreated)
             handlers.append(onCommandCreated)
-        
-         
+
+
         # Add a command under ADD-INS panel which sends information from Fusion to the palette's HTML.
         sendInfoCmdDef = _ui.commandDefinitions.itemById('sendInfoToHTML')
         if not sendInfoCmdDef:
@@ -723,14 +747,14 @@ def run(context):
             handlers.append(onCommandCreated)
             _ui.toolbars.itemById('QATRight').controls.addCommand(btnCmdDefinitionQATRight_).isVisible = True
             _ui.messageBox('A Tutorial button command is successfully added to the right Quick Access Toolbar')
-            
+
 
         ###### AddInSample ############
 
         #Create the popUpButton command definition
         popUpButton = cmdDef.addButtonDefinition(
-            'popUpButton01PYTHON', 
-            'Tutorial PopUp', 
+            'popUpButton01PYTHON',
+            'Tutorial PopUp',
             'Imaginary tutorial PopUp Button that is not visible anywhere in the UI',
             ''
         )
@@ -759,7 +783,7 @@ def stop(context):
         btnCmdDefinitionQATRight_ = _ui.commandDefinitions.itemById('TutorialButtonOnQATRight')
         if btnCmdDefinitionQATRight_:
             objArrayQATRight.append(btnCmdDefinitionQATRight_)
-            
+
 
         for obj in objArrayQATRight:
             if _ui and obj:
@@ -775,7 +799,7 @@ def stop(context):
         palette = _ui.palettes.itemById(PALLET_ID)
         if palette:
             palette.deleteMe()
-            
+
         # Delete controls and associated command definitions created by this add-ins
         panel = _ui.allToolbarPanels.itemById('SolidScriptsAddinsPanel')
         cmd = panel.controls.itemById('showPalette')
@@ -783,20 +807,20 @@ def stop(context):
             cmd.deleteMe()
         cmdDef = _ui.commandDefinitions.itemById('showPalette')
         if cmdDef:
-            cmdDef.deleteMe() 
+            cmdDef.deleteMe()
 
         cmd = panel.controls.itemById('sendInfoToHTML')
         if cmd:
             cmd.deleteMe()
         cmdDef = _ui.commandDefinitions.itemById('sendInfoToHTML')
         if cmdDef:
-            cmdDef.deleteMe() 
+            cmdDef.deleteMe()
 
         popUp = _ui.commandDefinitions.itemById('popUpButton01PYTHON')
         #popUp = _ui.commandDefinitions.itemById('popUpButton01PYTHON')
         if popUp:
             popUp.deleteMe()
-            
+
         _ui.messageBox('Stop addin')
     except:
         if _ui:
