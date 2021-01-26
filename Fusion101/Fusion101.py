@@ -331,7 +331,7 @@ class popUpCommandExecuteHandler(adsk.core.CommandEventHandler):
         #ui.messageBox('Tutorial will start now')
 
         #Get values from command inputs
-        inputs = eventArgs.command.commandInputs
+        #inputs = eventArgs.command.commandInputs
 
         cmd = ui.commandDefinitions.itemById('TutorialButtonOnQATRight')
         cmd.execute()
@@ -772,8 +772,7 @@ def run(context):
             panel.controls.addCommand(sendInfoCmdDef)
 
 
-                #######AddInSAMPLE######
-
+        #AddInSAMPLE
         cmdDef = _ui.commandDefinitions
 
         # add a button command on Quick Access Toolbar
@@ -787,14 +786,9 @@ def run(context):
             # keep the handler referenced beyond this function
             handlers.append(onButtonCommandCreated)
 
-
             # Connect to Command Created event.
             handlers.append(onCommandCreated)
             _ui.toolbars.itemById('QATRight').controls.addCommand(btnCmdDefinitionQATRight_).isVisible = True
-            #_ui.messageBox('A Tutorial button command is successfully added to the right Quick Access Toolbar')
-
-
-        ###### AddInSample ############
 
         #Create the popUpButton command definition
         popUpButton = cmdDef.addButtonDefinition(
@@ -810,6 +804,7 @@ def run(context):
         handlers.append(popUpCommandCreated)
 
         cmd = cmdDef.itemById('popUpButton01PYTHON')
+      
         cmd.execute()
 
     except:
@@ -862,7 +857,7 @@ def stop(context):
             cmdDef.deleteMe()
 
         popUp = _ui.commandDefinitions.itemById('popUpButton01PYTHON')
-        #popUp = _ui.commandDefinitions.itemById('popUpButton01PYTHON')
+
         if popUp:
             popUp.deleteMe()
 
