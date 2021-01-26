@@ -1,6 +1,6 @@
 PALLET_ID = 'fusion101'
 PALLET_NAME = 'Fusion 101'
-DEBUG = False
+DEBUG = True
 if DEBUG:
     PALLET_URL = 'http://localhost:8080'
 else:

@@ -17,7 +17,8 @@
             "event": "",
             "text": "Select <strong>Perspective with Ortho Faces</strong> in the ___View Cube___'s drop down menu.",
             "tooltips": ["The cube in the upper right of the workspace"],
-            "hint": "set-view-mode-perspective-ortho-faces"
+            "hint": "set-view-mode-perspective-ortho-faces",
+            "stepGroup": 0
           }
         ]
       },
@@ -88,7 +89,7 @@
         "steps": [
           {
             "event": "clickedExtrudeFeauture",
-            "text": "Select the <strong>Extrude Feature</strong> in the <strong>CREATE</strong> menu or in the right-click menu under <strong>Press/Pull</strong>",
+            "text": "Select the <strong>Extrude Feature</strong> in the <strong>CREATE</strong> menu.",
             "tooltips": [],
             "hint": "select-extrude-feature",
             "stepGroup": 0
@@ -105,7 +106,7 @@
           },
           {
             "event": "confirmExtrudeCube",
-            "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>.",
+            "text": "Confirm by clicking <strong>Ok</strong> in the command dialog.",
             "tooltips": [],
             "hint": "confirm-extrude-square",
             "stepGroup": 1
@@ -202,7 +203,7 @@
           },
           {
             "event": "confirmExtrudeRoof",
-            "text": "Click <strong>Ok</strong> in the command dialog or press <strong>Enter</strong> to confirm.",
+            "text": "Click <strong>Ok</strong> in the command dialog.",
             "tooltips": [],
             "hint": "extrude-roof-confirmation",
             "stepGroup": 2
@@ -240,7 +241,7 @@
           },
           {
             "event": "confirmShell",
-            "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>.",
+            "text": "Confirm by clicking <strong>Ok</strong> in the command dialog.",
             "tooltips": [],
             "hint": "confirm-cube-shell",
             "stepGroup": 2
@@ -271,7 +272,7 @@
           },
           {
             "event": "clicked2PointRectangle",
-            "text": "Select the <strong>2-Point Rectangle</strong> from the <strong>CREATE</strong> menu or press the <strong>R</strong> Button.",
+            "text": "Select the <strong>2-Point Rectangle</strong> from the <strong>CREATE</strong> menu",
             "tooltips": [],
             "hint": "select-2-point-rectangle",
             "stepGroup": 2
@@ -301,7 +302,7 @@
           },
           {
             "event": "clickedExtrudeFeauture",
-            "text": "Select the <strong>Extrude Feature</strong> in the <strong>CREATE</strong> menu or in the right-click menu under <strong>Press/Pull</strong> or press the letter <strong>E</strong> on your keyboard.",
+            "text": "Select the <strong>Extrude Feature</strong> in the <strong>CREATE</strong> menu.",
             "tooltips": [],
             "hint": "select-extrude-feature",
             "stepGroup": 5
@@ -317,7 +318,7 @@
           },
           {
             "event": "confirmExtrudeEntrance",
-            "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>.",
+            "text": "Confirm by clicking <strong>Ok</strong> in the command dialog",
             "tooltips": [],
             "hint": "confirm-extrude-entrance",
             "stepGroup": 6
@@ -355,14 +356,14 @@
               "Along the y-axis that is represented in green."
             ],
             "hint": "set-offset-plane-160",
-            "stepGroup": 2
+            "stepGroup": 1
           },
           {
             "event": "confirmOffsetPlane",
-            "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>.",
+            "text": "Confirm by clicking <strong>Ok</strong> in the command dialog.",
             "tooltips": [],
             "hint": "confirm-set-offset-plane-160",
-            "stepGroup": 3
+            "stepGroup": 1
           }
         ]
       },
@@ -376,13 +377,15 @@
             "event": "clickedBox",
             "text": "Select <strong>Box</strong> from the <strong>CREATE</strong> menu.",
             "tooltips": [],
-            "hint": "select-box-for-chimney"
+            "hint": "select-box-for-chimney",
+            "stepGroup": 0
           },
           {
             "event": "selectOffsetPlane",
             "text": "Click on the offset plane that we created in the previous chapter.",
             "tooltips": [],
-            "hint": "select-chimney-offset-plane-with-box-tool"
+            "hint": "select-chimney-offset-plane-with-box-tool",
+            "stepGroup": 0
           },
           {
             "event": "createdBox",
@@ -390,19 +393,22 @@
             "tooltips": [
               "Click on the TOP side of the <strong>View Cube</strong> (upper right corner) to easier find the middle"
             ],
-            "hint": "create-chimney-box"
+            "hint": "create-chimney-box",
+            "stepGroup": 0
           },
           {
             "event": "confirmBox",
-            "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>.",
+            "text": "Confirm by clicking <strong>Ok</strong> in the command dialog.",
             "tooltips": [],
-            "hint": "confirm-chimney-box"
+            "hint": "confirm-chimney-box",
+            "stepGroup": 0
           },
           {
             "event": "clickedExtrudeFeauture",
-            "text": "Select the <strong>Extrude Feature</strong> in the <strong>CREATE</strong> menu or press the letter <strong>E</strong> on your keyboard.",
+            "text": "Select the <strong>Extrude Feature</strong> in the <strong>CREATE</strong> menu.",
             "tooltips": [],
-            "hint": "select-extrude-feature"
+            "hint": "select-extrude-feature",
+            "stepGroup": 0
           },
           {
             "event": "selectBottomOfBox",
@@ -410,25 +416,29 @@
             "tooltips": [
               "You can rotate the <strong>View Cube</strong> (upper right corner) to position the camera in the workspace"
             ],
-            "hint": "select-bottom-chimney-box"
+            "hint": "select-bottom-chimney-box",
+            "stepGroup": 0
           },
           {
             "event": "clickedToObject",
             "text": "In the command dialog under <strong>Extend</strong> select the option <strong>To object</strong>.",
             "tooltips": [],
-            "hint": "chimney-box-select-to-object"
+            "hint": "chimney-box-select-to-object",
+            "stepGroup": 0
           },
           {
             "event": "selectedRightSideofRoof",
             "text": "Click on the right side of our roof",
             "tooltips": [],
-            "hint": "chimney-box-select-to-object-target"
+            "hint": "chimney-box-select-to-object-target",
+            "stepGroup": 0
           },
           {
             "event": "confirmExtrudeChimney",
-            "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>.",
+            "text": "Confirm by clicking <strong>Ok</strong> in the command dialog.",
             "tooltips": [],
-            "hint": "confirm-chimney"
+            "hint": "confirm-chimney",
+            "stepGroup": 0
           }
         ]
       },
@@ -441,11 +451,12 @@
         "steps": [
           {
             "event": "wentBackInTime",
-            "text": "Drag the pointer two places back or press the button left from the play button twice.",
+            "text": "Drag the pointer two places back or click the button left from the play button twice.",
             "tooltips": [
               ""
             ],
-            "hint": "move-two-steps-back-in-time"
+            "hint": "move-two-steps-back-in-time",
+            "stepGroup": 0
           }
         ]
       },
@@ -461,19 +472,22 @@
             "tooltips": [
               "You can find the browser typically in the left upper corner of your workspace. It lists all components, sketches etc. and allows to control the visibility of each."
             ],
-            "hint": "offset-plane-visible"
+            "hint": "offset-plane-visible",
+            "stepGroup": 0
           },
           {
             "event": "clickedCylinder",
             "text": "Select <strong>Cylinder</strong> from the <strong>CREATE</strong> menu",
             "tooltips": [],
-            "hint": "select-cylinder-tool"
+            "hint": "select-cylinder-tool",
+            "stepGroup": 0
           },
           {
             "event": "selectOffsetPlane",
             "text": "Select the previously created offset plane",
             "tooltips": [],
-            "hint": "select-chimney-offset-plane-with-cylinder"
+            "hint": "select-chimney-offset-plane-with-cylinder",
+            "stepGroup": 0
           },
           {
             "event": "clickedCylinderCenter",
@@ -481,67 +495,78 @@
             "tooltips": [
               "Click on the TOP side of the <strong>View Cube</strong> (upper right corner) to easier find the middle"
             ],
-            "hint": "set-chimney-cylinder-center"
+            "hint": "set-chimney-cylinder-center",
+            "stepGroup": 0
           },
           {
             "event": "selectedCylinderDiameter",
             "text": "Drag or type a diameter of 20mm and select a height of 5mm",
             "tooltips": [],
-            "hint": "set-chimney-cylinder-diameter"
+            "hint": "set-chimney-cylinder-diameter",
+            "stepGroup": 0
           },
           {
             "event": "confirmCylinder",
-            "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>.",
+            "text": "Confirm by clicking <strong>Ok</strong> in the command dialog.",
             "tooltips": [],
-            "hint": "confirm-chimney-cilynder"
+            "hint": "confirm-chimney-cilynder",
+            "stepGroup": 0
           },
           {
             "event": "cameraHomePosition",
             "text": "Reset the camera to the home position",
             "tooltips": [],
-            "hint": "reset-camera-to-home-position"
+            "hint": "reset-camera-to-home-position",
+            "stepGroup": 0
           },
           {
             "event": "clickedCreateSketch",
             "text": "Click on the <strong>Create Sketch</strong> icon.",
             "tooltips": [],
-            "hint": "click-create-sketch"
+            "hint": "click-create-sketch",
+            "stepGroup": 0
           },
           {
             "event": "selectedRightSideofRoof",
             "text": "Select the right side of our roof",
             "tooltips": [],
-            "hint": "select-right-roof-side"
+            "hint": "select-right-roof-side",
+            "stepGroup": 0
           },
           {
             "event": "clickedCircle",
-            "text": "Select the <strong>Center Diameter Circle</strong> icon or press the <strong>C</strong> button",
+            "text": "Select the <strong>Center Diameter Circle</strong> icon.",
             "tooltips": [],
-            "hint": "select-center-diameter-circle"
+            "hint": "select-center-diameter-circle",
+            "stepGroup": 0
           },
           {
             "event": "clickedCircleCenter",
             "text": "Click on the center of the roof to assign the center of the circle",
             "tooltips": [],
-            "hint": "set-center-chimney-bottom"
+            "hint": "set-center-chimney-bottom",
+            "stepGroup": 0
           },
           {
             "event": "draggedCircleDiameter",
             "text": "Drag or enter a diameter of 40mm.",
             "tooltips": [],
-            "hint": "set-diameter-chimney-bottom"
+            "hint": "set-diameter-chimney-bottom",
+            "stepGroup": 0
           },
           {
             "event": "clickedFinishSketch",
             "text": "Click on <strong>Finish Sketch</strong> to confirm.",
             "tooltips": [],
-            "hint": "click-finish-sketch"
+            "hint": "click-finish-sketch",
+            "stepGroup": 0
           },
           {
             "event": "clickedLoft",
             "text": "Select the <strong>Loft Feature</strong> from the <strong>CREATE</strong> menu.",
             "tooltips": [],
-            "hint": "select-loft-feature"
+            "hint": "select-loft-feature",
+            "stepGroup": 0
           },
           {
             "event": "selectBottomOfCylinder",
@@ -549,19 +574,22 @@
             "tooltips": [
               "You can drag the cube in the right upper corner of the workspace to orientate in your design."
             ],
-            "hint": "loft-select-bottom-cylinder"
+            "hint": "loft-select-bottom-cylinder",
+            "stepGroup": 0
           },
           {
             "event": "selectedCircleOnRoof",
             "text": "Select the circle sketch on the roof",
             "tooltips": [],
-            "hint": "loft-select-sketch-roof"
+            "hint": "loft-select-sketch-roof",
+            "stepGroup": 0
           },
           {
             "event": "confirmLoft",
-            "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>.",
+            "text": "Confirm by clicking <strong>Ok</strong> in the command dialog.",
             "tooltips": [],
-            "hint": "confirm-chimney-loft"
+            "hint": "confirm-chimney-loft",
+            "stepGroup": 0
           }
         ]
       }

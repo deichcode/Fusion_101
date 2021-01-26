@@ -27,22 +27,31 @@ export default {
   },
   computed: {
     lastStepGroup: function () {
-      return this.steps[this.steps.length - 1].stepGroup
+      return this.steps[this.steps?.length - 1].stepGroup
     },
     chapterCompleted: function () {
       return this.currentStepGroup > this.lastStepGroup
+    },
+    chapterDoesNotWorkRightNow: function () {
+      return this.lastStepGroup === 0
     }
   },
   watch: {
     //when steps are changed (i.e. route change) the array of current steps and the current step group umber need to be refreshed
-    'steps': function () {
-      this.updateCurrentStepGroupSteps()
-      this.resetCurrentStepGroup()
-    },
+    'steps':
+        function () {
+          this.updateCurrentStepGroupSteps()
+          this.resetCurrentStepGroup()
+          //set not finished chapters automatically to done
+          if (this.chapterDoesNotWorkRightNow) {
+            this.sendChapterCompletedNotification()
+          }
+        },
     //when current step group number is updated the steps of this step gorup need to be loaded into the current step group steps array
-    'currentStepGroup': function () {
-      this.updateCurrentStepGroupSteps()
-    }
+    'currentStepGroup':
+        function () {
+          this.updateCurrentStepGroupSteps()
+        }
   },
   methods: {
     updateCurrentStepGroupSteps() {
@@ -62,7 +71,7 @@ export default {
       }
     },
     validateStepGroup() {
-      let stepGroupCompleted = this.allStepsOfGroupCompleted;
+      let stepGroupCompleted = this.allStepsOfGroupCompleted();
       if (stepGroupCompleted) {
         this.activateNextStepGroup()
       }
