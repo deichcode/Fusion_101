@@ -16,10 +16,10 @@
       <!--      Hint Videos can have a size of 760x328@2 (double resolution)-->
       <ChapterStepHintVideo :class="{'hidden': scrollingHintIsCovered }" :storeRef="storeRef('scrollingHint')"
                             :hint="hintToShow"/>
-      <ChapterSteps :chapter="chapter" :set-hint-to-show="setHintToShow"/>
+      <ChapterSteps :steps="chapter.steps" :set-hint-to-show="setHintToShow" @chapterCompleted="chapterCompleted"/>
     </main>
     <footer>
-      <ChapterNavigation :tutorial-id="tutorialId" :chapter-id="chapterId" :navigate-to-overview="navigateToOverview"/>
+      <ChapterNavigation :tutorial-id="tutorialId" :chapter-id="chapterId" :navigate-to-overview="navigateToOverview" :chapter-is-completed="chapter.isCompleted"/>
     </footer>
   </div>
 </template>
@@ -80,6 +80,9 @@ export default {
       return (ref) => {
         this.refs[name] = ref
       }
+    },
+    chapterCompleted() {
+      this.chapter.isCompleted = true
     }
   }
 }

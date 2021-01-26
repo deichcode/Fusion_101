@@ -584,7 +584,7 @@ class MyCommandTerminatedHandler(adsk.core.ApplicationCommandEventHandler):
     def notify(self, args):
         eventArgs = adsk.core.ApplicationCommandEventArgs.cast(args)
         args = eventArgs
-        
+
         app = adsk.core.Application.get()
         ui  = app.userInterface
         #Get current design
@@ -670,15 +670,59 @@ class MyActiveSelectionChangedHandler(adsk.core.ActiveSelectionEventHandler):
 
         print(eventArgs.currentSelection, 'Selection changed')
 
-        if(_ui.activeSelections.count < 0):
+        if(_ui.activeSelections.count > 0):
             firstActiveSelection = _ui.activeSelections.item(0).entity
+            isFace = firstActiveSelection.classType == adsk.fusion.BRepFace.classType
+            if(isFace):
+                centroid = firstActiveSelection.centroid
+                isInOrigin = centroid.x == 0 and centroid.y == 0 and centroid.z == 0
+                print(isInOrigin)
+                if isInOrigin:
+                    # https://forums.autodesk.com/t5/fusion-360-api-and-scripts/how-find-point-on-face/td-p/7835617
+                    expectedSquarePointA = adsk.core.Point3D.create(5, 5, 0)
+                    res, expectedSquareParamA = firstActiveSelection.evaluator.getParameterAtPoint(expectedSquarePointA)
+                    res, newPoint = firstActiveSelection.evaluator.getPointAtParameter(expectedSquareParamA)
+                    pointAIsOnSquare = expectedSquarePointA.isEqualToByTolerance(newPoint, 0.01)
 
-            if (firstActiveSelection.classType == adsk.fusion.Profile.classType):
+                    expectedSquarePointB = adsk.core.Point3D.create(-5, 5, 0)
+                    res, expectedSquareParamB = firstActiveSelection.evaluator.getParameterAtPoint(expectedSquarePointB)
+                    res, newPoint = firstActiveSelection.evaluator.getPointAtParameter(expectedSquareParamB)
+                    pointBIsOnSquare = expectedSquarePointB.isEqualToByTolerance(newPoint, 0.01)
+
+                    expectedSquarePointC = adsk.core.Point3D.create(5, -5, 0)
+                    res, expectedSquareParamC = firstActiveSelection.evaluator.getParameterAtPoint(expectedSquarePointC)
+                    res, newPoint = firstActiveSelection.evaluator.getPointAtParameter(expectedSquareParamC)
+                    pointCIsOnSquare = expectedSquarePointC.isEqualToByTolerance(newPoint, 0.01)
+
+                    expectedSquarePointD = adsk.core.Point3D.create(-5, -5, 0)
+                    res, expectedSquareParamD = firstActiveSelection.evaluator.getParameterAtPoint(expectedSquarePointD)
+                    res, newPoint = firstActiveSelection.evaluator.getPointAtParameter(expectedSquareParamD)
+                    pointDIsOnSquare = expectedSquarePointD.isEqualToByTolerance(newPoint, 0.01)
+
+                    selectionIsBottomFace = pointAIsOnSquare and pointBIsOnSquare and pointCIsOnSquare and pointDIsOnSquare
+                    if selectionIsBottomFace:
+                        self.palette.sendInfoToHTML('send', 'selectBottomPlane')
+
+                    if sketches.count == 3:
+                        sketch = sketches.item(2)
+
+                        #Check if the frontal plane of the cube has been selected as a sketch base
+                        if (sketch.profiles.count != 0):
+                            frontalCentroidModel = point.create(-1.1368683772161603e-16, -5.0, 6.333333333333333)
+                            frontalCentroid = point.create(-1.1368683772161603e-16, 6.333333333333333, 0.0)
+                            centroid = sketch.modelToSketchSpace(frontalCentroidModel)
+                            if ((frontalCentroid.x == centroid.x) and (frontalCentroid.y == centroid.y) and (frontalCentroid.z == centroid.z)):
+                                self.palette.sendInfoToHTML('send', 'selectCubeFrontPlane')
+
+                
+            if(firstActiveSelection.classType == adsk.fusion.Profile.classType):
                 print('si')
                 profile = firstActiveSelection
                 parentSketch = profile.parentSketch
                 if (parentSketch == sketches.item(1)):
                     self.palette.sendInfoToHTML('send', 'clickedTrianglePlane')
+
+                    #Check if an additonal sketch has been created.
 
 
 

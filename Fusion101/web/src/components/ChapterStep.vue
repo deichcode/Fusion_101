@@ -1,8 +1,8 @@
 <template>
-  <li class="chapter-step" :class="{'chapter-step--done': isDone }">
+  <li class="chapter-step" :class="{'chapter-step--done': step.done, 'chapter-step--active': isCurrentStep }">
     <BaseTooltipText :text="step.text" :tooltips="step.tooltips"/>
     <!--      Set Hint when mouse if over hint icon and remove when mouse is no longer over icon-->
-    <span v-if="step.hint"
+    <span v-if="showHint()"
           v-on:mouseover="setHintToShow(step.hint)"
           v-on:mouseleave="setHintToShow('')">
         <span
@@ -15,7 +15,7 @@
           <span v-else class="hint-bulb">
             <font-awesome-icon :icon="['fas', 'lightbulb']"/>
           </span>
-          <span v-if="isDone" class="checkmark">
+          <span v-if="step.done" class="checkmark">
             <font-awesome-icon :icon="['fas', 'check']"/>
         </span>
         </span>
@@ -31,19 +31,28 @@ export default {
   props: {
     step: {},
     setHintToShow: {},
+    isCurrentStep: Boolean,
+    completeStepCallback: Function
   },
   data() {
     return {
-      hintIsDisplayed: false,
-      isDone: false
+      hintIsDisplayed: false
     }
   },
   methods: {
     handleFusionMessage: function (event) {
+      if (!this.isCurrentStep) {
+        return
+      }
       const messageStatesStepCompletion = event.detail.data === this.step.event
       if (messageStatesStepCompletion) {
-        this.isDone = true
+        this.completeStepCallback(this.step)
       }
+    },
+    showHint: function () {
+      const stepHasHint = this.step.hint
+      const hintShouldBeVisible = this.isCurrentStep || this.step.done
+      return stepHasHint && hintShouldBeVisible
     },
     setStepHintHoverd: function (isShown) {
       this.hintIsDisplayed = isShown
@@ -58,11 +67,16 @@ export default {
 @import "src/css/variables/colors";
 
 .chapter-step {
+  color: $midGray;
   margin-bottom: 10px;
 
   .hint-bulb,
   .checkmark {
     margin-left: 10px
+  }
+
+  &--active {
+    color: $font
   }
 
   &--done {

@@ -1,7 +1,7 @@
 <template>
   <div class="chapter-navigation">
-    <BaseButton v-if="nextChapter" text="Next Chapter >" v-on:click="navigateToNextChapter"/>
-    <BaseButton v-if="!nextChapter" text="Finish Tutorial" v-on:click="navigateToOverview"/>
+    <BaseButton v-if="nextChapter" text="Next Chapter >" v-on:click="navigateToNextChapter" :disabled="!chapterIsCompleted"/>
+    <BaseButton v-if="!nextChapter" text="Finish Tutorial" v-on:click="navigateToOverview" :disabled="!chapterIsCompleted"/>
     <BaseButton v-if="previousChapter" text="< Previous Chapter" v-on:click="navigateToPreviousChapter"/>
   </div>
 </template>
@@ -17,7 +17,8 @@ export default {
   props: {
     tutorialId: String,
     chapterId: String,
-    navigateToOverview: Function
+    navigateToOverview: Function,
+    chapterIsCompleted: Boolean
   },
   data() {
     return {
@@ -30,7 +31,6 @@ export default {
   },
   watch: {
     chapterId() {
-      console.log("props changed")
       this.loadTutorialData();
     }
   },
