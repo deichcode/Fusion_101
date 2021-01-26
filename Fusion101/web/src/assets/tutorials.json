@@ -334,7 +334,8 @@
             "event": "clickedOffsetPlane",
             "text": "Select <strong>Offset plane</strong> from the <strong>CONSTRUCT</strong> menu.",
             "tooltips": [],
-            "hint": "click-offset-plane"
+            "hint": "click-offset-plane",
+            "stepGroup": 0
           },
           {
             "event": "selectXYPlane",
@@ -344,7 +345,8 @@
               "If the square is covered by the house, rotate the cube in the upper right corner until you can see it through the house's bottom hole.",
               "The XY-plane is spanned by the X-axis (red) and the Y-axis (green). You can also determine which is the x, y, and z-ais by comparing position of the axes in the workspace with the axes on the cube in the upper right corner."
             ],
-            "hint": "select-x-y-plane-for-offset"
+            "hint": "select-x-y-plane-for-offset",
+            "stepGroup": 1
           },
           {
             "event": "draggedOffsetPlane",
@@ -352,13 +354,15 @@
             "tooltips": [
               "Along the y-axis that is represented in green."
             ],
-            "hint": "set-offset-plane-160"
+            "hint": "set-offset-plane-160",
+            "stepGroup": 2
           },
           {
             "event": "confirmOffsetPlane",
             "text": "Confirm by clicking <strong>Ok</strong> in the command dialog or pressing <strong>Enter</strong>.",
             "tooltips": [],
-            "hint": "confirm-set-offset-plane-160"
+            "hint": "confirm-set-offset-plane-160",
+            "stepGroup": 3
           }
         ]
       },

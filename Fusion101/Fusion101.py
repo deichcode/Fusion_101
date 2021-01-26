@@ -42,10 +42,7 @@ class ShowPaletteCommandExecuteHandler(adsk.core.CommandEventHandler):
                 palette.incomingFromHTML.add(onHTMLEvent)
                 handlers.append(onHTMLEvent)
 
-                # Add handler to CloseEvent of the palette.
-                onClosed = MyCloseEventHandler()
-                palette.closed.add(onClosed)
-                handlers.append(onClosed)
+
             else:
                 palette.isVisible = True
 
@@ -119,17 +116,6 @@ class SendInfoCommandCreatedHandler(adsk.core.CommandCreatedEventHandler):
         except:
             _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
 
-
-# Event handler for the palette close event.
-class MyCloseEventHandler(adsk.core.UserInterfaceGeneralEventHandler):
-    def __init__(self):
-        super().__init__()
-    def notify(self, args):
-        try:
-            closebutton = True
-            #_ui.messageBox('Close button is clicked.')
-        except:
-            _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
 
 
 # Event handler for the palette HTML event.                
@@ -704,31 +690,25 @@ class MyActiveSelectionChangedHandler(adsk.core.ActiveSelectionEventHandler):
                     if selectionIsBottomFace:
                         self.palette.sendInfoToHTML('send', 'selectBottomPlane')
 
+                    if sketches.count == 3:
+                        sketch = sketches.item(2)
 
-                    #Check if the frontal plane of the cube has been selected as a sketch base
-                    
-                sketch = sketches.item(sketches.count - 1)
-                if sketch:
-                    frontalCentroidModel = point.create(-1.1368683772161603e-16, -5.0, 6.333333333333333)
-                    frontalCentroid = point.create(-1.1368683772161603e-16, 6.333333333333333, 0.0)
-                    centroid = sketch.modelToSketchSpace(frontalCentroidModel)
-                    if ((frontalCentroid.x == centroid.x) and (frontalCentroid.y == centroid.y) and (frontalCentroid.z == centroid.z)):
-                        self.palette.sendInfoToHTML('send', 'selectCubeFrontPlane')
+                        #Check if the frontal plane of the cube has been selected as a sketch base
+                        if (sketch.profiles.count != 0):
+                            frontalCentroidModel = point.create(-1.1368683772161603e-16, -5.0, 6.333333333333333)
+                            frontalCentroid = point.create(-1.1368683772161603e-16, 6.333333333333333, 0.0)
+                            centroid = sketch.modelToSketchSpace(frontalCentroidModel)
+                            if ((frontalCentroid.x == centroid.x) and (frontalCentroid.y == centroid.y) and (frontalCentroid.z == centroid.z)):
+                                self.palette.sendInfoToHTML('send', 'selectCubeFrontPlane')
 
                 
             if(firstActiveSelection.classType == adsk.fusion.Profile.classType):
-                print('si')
                 profile = firstActiveSelection
                 parentSketch = profile.parentSketch
                 if (parentSketch == sketches.item(1)):
                     self.palette.sendInfoToHTML('send', 'clickedTrianglePlane')
 
                     #Check if an additonal sketch has been created.
-
-
-
-
-
 
         # Code to react to the event.
         #ui.messageBox('In MyActiveSelectionChangedHandler event handler.')
