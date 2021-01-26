@@ -703,10 +703,18 @@ class MyActiveSelectionChangedHandler(adsk.core.ActiveSelectionEventHandler):
 
                 
             if(firstActiveSelection.classType == adsk.fusion.Profile.classType):
+                print('Profile')
                 profile = firstActiveSelection
                 parentSketch = profile.parentSketch
                 if (parentSketch == sketches.item(1)):
                     self.palette.sendInfoToHTML('send', 'clickedTrianglePlane')
+                #Check if Entrance sketch has been selected
+                areaProps = profile.areaProperties(adsk.fusion.CalculationAccuracy.MediumCalculationAccuracy)
+                centroid = areaProps.centroid
+                area = areaProps.area
+                if ((area == 20.0)):
+                    if  ((centroid.x == 0.0) and (centroid.y == 2.5) and (centroid.z == 0.0)):
+                        self.palette.sendInfoToHTML('send', 'selectEntranceSketch')
 
                     #Check if an additonal sketch has been created.
 
