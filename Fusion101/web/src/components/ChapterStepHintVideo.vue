@@ -1,6 +1,11 @@
+<!--      Hint Videos can have a size of 380x163@2 (double resolution)-->
+<!--      Hint Videos can have a size of 570x245@2 (double resolution)-->
+<!--      Hint Videos can have a size of 760x328@2 (double resolution)-->
+
 <template>
   <div class="hint">
-    <video class="hint-video" :class="{'hint-video--hidden': isHidden }" ref="hintVideo" poster="@/assets/images/hint-video-placeholder.png">
+    <video class="hint-video" :class="{'hint-video--hidden': isHidden }" ref="hintVideo"
+           poster="@/assets/images/hint-video-placeholder.png">
     </video>
   </div>
 </template>
@@ -16,6 +21,7 @@ export default {
     storeRef: Function
   },
   watch: {
+    //update state of component if hint is changed by parent component
     'hint': function () {
       if (this.$props.hint) {
         this.showHint(this.$props.hint)
@@ -31,8 +37,8 @@ export default {
       isHidden: false
     }
   }, mounted() {
-    this.passDomReferenceToParent.call(this);
-    this.restartVideoWhenEnded.call(this);
+    this.passDomReferenceToParent();
+    this.restartVideoWhenEnded();
   },
   methods: {
     passDomReferenceToParent() {
@@ -46,12 +52,15 @@ export default {
       });
     },
     showHint(hint) {
+      this.addSourceElementForEachVideoFormat(hint)
+      this.playVideo()
+    },
+    addSourceElementForEachVideoFormat(hint) {
       this.videoFormats.forEach(format => {
         let videoFilename = `${hint}.${format}`;
         let sourceElement = this.createSourceElementFor(videoFilename);
         this.addSourceToHintVideo(sourceElement);
       })
-      this.playVideo()
     },
     createSourceElementFor: function (hint) {
       let sourceElement = document.createElement('source')
@@ -60,6 +69,7 @@ export default {
       return sourceElement;
     },
     getVideoSrc(fileName) {
+      //try/catch prevents error if video could not be found
       try {
         return getTutorialMedia(this.tutorialId, fileName)
       } catch (e) {
@@ -83,10 +93,13 @@ export default {
     },
 
     restartVideo: async function () {
+      await this.fadeVideoOutAndIn()
+      this.playVideo();
+    },
+    fadeVideoOutAndIn: async function () {
       await this.hideVideo();
       this.setVideoToStart();
       await this.showVideo();
-      this.playVideo();
     },
     hideVideo: async function () {
       this.isHidden = true

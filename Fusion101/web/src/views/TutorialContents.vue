@@ -2,9 +2,10 @@
   <TheRootHeader :title="tutorial.title"/>
   <main>
     <div id="tutorial-description">{{ tutorial.description }}</div>
+<!--Show each chapter of the tutorial-->
     <BaseChapterOverview v-for="(chapter, index) in tutorial.chapters" :key="chapter.id"
                          :id="chapter.id"
-                         :number="chapterNumber(chapter, index)"
+                         :number="getChapterNumber(chapter, index)"
                          :title="chapter.title"
                          :description="chapter.extendedDescription ?? chapter.description"
                          :thumbnail-src="getThumbnailPath(chapter.thumbnail)"
@@ -40,6 +41,7 @@ export default {
       this.tutorial = getTutorial(this.$route.params.tutorialId)
     },
     getThumbnailPath(thumbnailFileName) {
+      //try/catch prevents crash on missing media file
       try {
         return getTutorialMedia(this.tutorial.id, thumbnailFileName)
       } catch (e) {
@@ -49,7 +51,8 @@ export default {
     navigateToChapter(chapterId) {
       router.push({name: 'chapter', params: {tutorialId: this.tutorial.id, chapterId}})
     },
-    chapterNumber(chapter, index) {
+    getChapterNumber(chapter, index) {
+      //If chapter 'number' is given by file use it otherwise calculate by chapter's index
       const chapterNumber = chapter.number ? chapter.number : this.calculatedChapterNumber(index)
       return chapterNumber.toString()
     },

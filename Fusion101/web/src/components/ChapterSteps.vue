@@ -26,26 +26,30 @@ export default {
     }
   },
   computed: {
-    lastStepGroup: function() {
+    lastStepGroup: function () {
       return this.steps[this.steps.length - 1].stepGroup
     },
-    chapterCompleted: function() {
-      console.log("chapter Completed: ", this.currentStepGroup > this.lastStepGroup)
+    chapterCompleted: function () {
       return this.currentStepGroup > this.lastStepGroup
     }
   },
   watch: {
+    //when steps are changed (i.e. route change) the array of current steps and the current step group umber need to be refreshed
     'steps': function () {
       this.updateCurrentStepGroupSteps()
       this.resetCurrentStepGroup()
     },
+    //when current step group number is updated the steps of this step gorup need to be loaded into the current step group steps array
     'currentStepGroup': function () {
       this.updateCurrentStepGroupSteps()
     }
   },
   methods: {
     updateCurrentStepGroupSteps() {
-      this.currentStepGroupSteps = this.steps?.filter((step) => step.stepGroup === this.currentStepGroup)
+      this.currentStepGroupSteps = this.getStepsOfCurrentStepGroup()
+    },
+    getStepsOfCurrentStepGroup() {
+      return this.steps?.filter((step) => step.stepGroup === this.currentStepGroup)
     },
     resetCurrentStepGroup() {
       this.currentStepGroup = 0
@@ -53,18 +57,22 @@ export default {
     setStepDone(completedStep) {
       completedStep.done = true
       this.validateStepGroup()
-      if(this.chapterCompleted){
+      if (this.chapterCompleted) {
         this.sendChapterCompletedNotification()
       }
     },
     validateStepGroup() {
+      let stepGroupCompleted = this.allStepsOfGroupCompleted;
+      if (stepGroupCompleted) {
+        this.activateNextStepGroup()
+      }
+    },
+    allStepsOfGroupCompleted() {
       let stepGroupCompleted = true
       this.currentStepGroupSteps.forEach(step => {
         stepGroupCompleted = stepGroupCompleted && step.done
       })
-      if (stepGroupCompleted) {
-        this.activateNextStepGroup()
-      }
+      return stepGroupCompleted;
     },
     activateNextStepGroup() {
       this.currentStepGroup += 1

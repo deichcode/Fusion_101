@@ -7,13 +7,11 @@
           :back-button-action="navigateToOverview"
           :storeRef="storeRef('header')"
       />
+<!--  Video Hint element is show, when scrolled video hint is covered by header-->
       <ChapterStepHintVideo id="fixed-hint" :class="{'hidden': !scrollingHintIsCovered }" :hint="hintToShow"/>
     </div>
     <main>
       <p class="description">{{ chapter.description }}</p>
-      <!--      Hint Videos can have a size of 380x163@2 (double resolution)-->
-      <!--      Hint Videos can have a size of 570x245@2 (double resolution)-->
-      <!--      Hint Videos can have a size of 760x328@2 (double resolution)-->
       <ChapterStepHintVideo :class="{'hidden': scrollingHintIsCovered }" :storeRef="storeRef('scrollingHint')"
                             :hint="hintToShow"/>
       <ChapterSteps :steps="chapter.steps" :set-hint-to-show="setHintToShow" @chapterCompleted="chapterCompleted"/>

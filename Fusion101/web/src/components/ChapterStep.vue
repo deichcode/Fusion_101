@@ -9,7 +9,7 @@
             v-on:mouseover="setStepHintHoverd(true)"
             v-on:mouseleave="setStepHintHoverd(false)"
         >
-          <span v-if="hintIsDisplayed" class="hint-bulb">
+          <span v-if="hintVideoIsDisplayed" class="hint-bulb">
             <font-awesome-icon :icon="['far', 'lightbulb']"/>
           </span>
           <span v-else class="hint-bulb">
@@ -36,8 +36,11 @@ export default {
   },
   data() {
     return {
-      hintIsDisplayed: false
+      hintVideoIsDisplayed: false
     }
+  },
+  mounted() {
+    window.addEventListener('Fusion360Message', this.handleFusionMessage);
   },
   methods: {
     handleFusionMessage: function (event) {
@@ -55,11 +58,8 @@ export default {
       return stepHasHint && hintShouldBeVisible
     },
     setStepHintHoverd: function (isShown) {
-      this.hintIsDisplayed = isShown
+      this.hintVideoIsDisplayed = isShown
     }
-  },
-  mounted() {
-    window.addEventListener('Fusion360Message', this.handleFusionMessage);
   }
 }
 </script>

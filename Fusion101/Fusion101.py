@@ -704,16 +704,16 @@ class MyActiveSelectionChangedHandler(adsk.core.ActiveSelectionEventHandler):
                     if selectionIsBottomFace:
                         self.palette.sendInfoToHTML('send', 'selectBottomPlane')
 
-                    if sketches.count == 3:
-                        sketch = sketches.item(2)
 
-                        #Check if the frontal plane of the cube has been selected as a sketch base
-                        if (sketch.profiles.count != 0):
-                            frontalCentroidModel = point.create(-1.1368683772161603e-16, -5.0, 6.333333333333333)
-                            frontalCentroid = point.create(-1.1368683772161603e-16, 6.333333333333333, 0.0)
-                            centroid = sketch.modelToSketchSpace(frontalCentroidModel)
-                            if ((frontalCentroid.x == centroid.x) and (frontalCentroid.y == centroid.y) and (frontalCentroid.z == centroid.z)):
-                                self.palette.sendInfoToHTML('send', 'selectCubeFrontPlane')
+                    #Check if the frontal plane of the cube has been selected as a sketch base
+                    
+                sketch = sketches.item(sketches.count - 1)
+                if sketch:
+                    frontalCentroidModel = point.create(-1.1368683772161603e-16, -5.0, 6.333333333333333)
+                    frontalCentroid = point.create(-1.1368683772161603e-16, 6.333333333333333, 0.0)
+                    centroid = sketch.modelToSketchSpace(frontalCentroidModel)
+                    if ((frontalCentroid.x == centroid.x) and (frontalCentroid.y == centroid.y) and (frontalCentroid.z == centroid.z)):
+                        self.palette.sendInfoToHTML('send', 'selectCubeFrontPlane')
 
                 
             if(firstActiveSelection.classType == adsk.fusion.Profile.classType):

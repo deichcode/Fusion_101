@@ -22,7 +22,7 @@ export default {
     storeRef: Function
   },
   mounted() {
-    //pass Reference to dom element to using component
+    //pass Reference of dom element of this component to parent component
     this.storeRef(this.$refs.header)
   }
 }

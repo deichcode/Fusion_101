@@ -32,6 +32,7 @@ const routes = [
     }
 ]
 
+// Ensure scroll to top on change of route
 const scrollBehavior = (to, from, savedPosition) => {
     if (savedPosition) {
         return savedPosition;

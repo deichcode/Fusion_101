@@ -1,3 +1,4 @@
+//dynamic loading of tutorial media files
 const getTutorialMedia = (tutorialId, fileName) => {
       return require(`@/assets/tutorials/${tutorialId}/${fileName}`) //https://github.com/vuejs/vue-loader/issues/896
 }

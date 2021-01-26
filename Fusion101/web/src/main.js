@@ -14,6 +14,7 @@ library.add(faCheck)
 
 require('./css/globals/_main.scss')
 
+// Loading of the Vue App, connecting it with the router (navigation), registration of font-awesome component for later use and mounting the app at the #app div inside public/index.html
 createApp(App)
     .use(router)
     .component('font-awesome-icon', FontAwesomeIcon)
