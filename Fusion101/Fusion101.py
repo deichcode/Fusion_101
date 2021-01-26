@@ -126,7 +126,8 @@ class MyCloseEventHandler(adsk.core.UserInterfaceGeneralEventHandler):
         super().__init__()
     def notify(self, args):
         try:
-            _ui.messageBox('Close button is clicked.')
+            closebutton = True
+            #_ui.messageBox('Close button is clicked.')
         except:
             _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
 
@@ -327,7 +328,7 @@ class popUpCommandExecuteHandler(adsk.core.CommandEventHandler):
         #Code to react to the event
         app = adsk.core.Application.get()
         ui = app.userInterface
-        ui.messageBox('Tutorial will start now')
+        #ui.messageBox('Tutorial will start now')
 
         #Get values from command inputs
         inputs = eventArgs.command.commandInputs
@@ -790,7 +791,7 @@ def run(context):
             # Connect to Command Created event.
             handlers.append(onCommandCreated)
             _ui.toolbars.itemById('QATRight').controls.addCommand(btnCmdDefinitionQATRight_).isVisible = True
-            _ui.messageBox('A Tutorial button command is successfully added to the right Quick Access Toolbar')
+            #_ui.messageBox('A Tutorial button command is successfully added to the right Quick Access Toolbar')
 
 
         ###### AddInSample ############
@@ -865,7 +866,7 @@ def stop(context):
         if popUp:
             popUp.deleteMe()
 
-        _ui.messageBox('Stop addin')
+        #_ui.messageBox('Stop addin')
     except:
         if _ui:
             _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
