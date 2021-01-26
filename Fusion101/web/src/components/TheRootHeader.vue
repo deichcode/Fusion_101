@@ -1,19 +1,16 @@
 <template>
   <div id="header">
     <Title :text="title"/>
-    <ThePaletteCloseButton/>
   </div>
 </template>
 
 <script>
 import Title from "./TheHeaderTitle.vue";
-import ThePaletteCloseButton from "./ThePaletteCloseButton.vue";
 
 export default {
   name: "TheRootHeader",
   components: {
     Title,
-    ThePaletteCloseButton
   },
   props: {
     title: String
