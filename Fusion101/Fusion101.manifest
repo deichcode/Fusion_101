@@ -7,7 +7,7 @@
 		"":	"Fusion 101 focuses on novice users of Fusion 360 who are faced with the software for the first time. With Fusion 101 a gentle introduction is provided into the basics of Fusion 360. By following a step-by-step tutorial involving multiple commonly used tools, the user completes his first steps in Fusion 360 playfully. If needed, on-demand hints provide adequate help to finish the next step."
 	},
 	"version":	"0.0.1",
-	"runOnStartup":	false,
+	"runOnStartup":	true,
 	"supportedOS":	"windows|mac",
 	"editEnabled":	true
 }
