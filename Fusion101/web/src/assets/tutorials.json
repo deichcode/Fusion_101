@@ -513,60 +513,46 @@
             "stepGroup": 3
           },
           {
-            "event": "cameraHomePosition",
-            "text": "Reset the camera to the home position",
-            "tooltips": [],
-            "hint": "reset-camera-to-home-position",
-            "stepGroup": 4
-          },
-          {
             "event": "selectedRightSideofRoof",
             "text": "Select the right side of our roof",
             "tooltips": [],
             "hint": "select-right-roof-side",
-            "stepGroup": 5
+            "stepGroup": 4
           },
           {
             "event": "clickedCreateSketch",
             "text": "Click on the <strong>Create Sketch</strong> icon.",
             "tooltips": [],
             "hint": "click-create-sketch",
-            "stepGroup": 6
+            "stepGroup": 5
           },
           {
             "event": "clickedCircle",
             "text": "Select the <strong>Center Diameter Circle</strong> icon.",
             "tooltips": [],
             "hint": "select-center-diameter-circle",
-            "stepGroup": 7
+            "stepGroup": 6
           },
           {
             "event": "clickedCircleCenter",
             "text": "Click on the center of the roof to assign the center of the circle",
             "tooltips": [],
             "hint": "set-center-chimney-bottom",
-            "stepGroup": 8
+            "stepGroup": 7
           },
           {
             "event": "draggedCircleDiameter",
             "text": "Drag or enter a diameter of 40mm.",
             "tooltips": [],
             "hint": "set-diameter-chimney-bottom",
-            "stepGroup": 8
+            "stepGroup": 7
           },
           {
             "event": "clickedFinishSketch",
             "text": "Click on <strong>Finish Sketch</strong> to confirm.",
             "tooltips": [],
             "hint": "click-finish-sketch",
-            "stepGroup": 8
-          },
-          {
-            "event": "clickedLoft",
-            "text": "Select the <strong>Loft Feature</strong> from the <strong>CREATE</strong> menu.",
-            "tooltips": [],
-            "hint": "select-loft-feature",
-            "stepGroup": 9
+            "stepGroup": 7
           },
           {
             "event": "selectBottomOfCylinder",
@@ -575,7 +561,14 @@
               "You can drag the cube in the right upper corner of the workspace to orientate in your design."
             ],
             "hint": "loft-select-bottom-cylinder",
-            "stepGroup": 10
+            "stepGroup": 8
+          },
+          {
+            "event": "clickedLoft",
+            "text": "Select the <strong>Loft Feature</strong> from the <strong>CREATE</strong> menu.",
+            "tooltips": [],
+            "hint": "select-loft-feature",
+            "stepGroup": 9
           },
           {
             "event": "selectedCircleOnRoof",

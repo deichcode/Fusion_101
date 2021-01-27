@@ -408,9 +408,6 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                                         self.palette.sendInfoToHTML('send', 'draggedShell')
                                         self.palette.sendInfoToHTML('send', 'confirmShell')
 
-
-
-
         #Check if an additonal sketch has been created.
         if sketches.count == 3:
             sketch = sketches.item(2)
@@ -474,27 +471,26 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                 if sketches.count == 4:
                     sketch = sketches.item(3)
 
-                    #Check if the right roof has been selected as a sketch base
-                    if (sketch.profiles.count != 0):
-                        rightCentroidModel = point.create(2.5,0.0, 12.5)
-                        rightCentroid = point.create(0, 7.071067811865474, 1.7763568394002505)
-                        centroid = sketch.modelToSketchSpace(rightCentroidModel)
-                        if ((rightCentroid.x == centroid.x) and (rightCentroid.y == centroid.y)):
-                            self.palette.sendInfoToHTML('send', 'selectedRightSideofRoof')
-
-                            #Check if the center diameter circle has the right area. Confirm if so.
-                            if sketch.profiles.count == 2:
-                                profile = sketch.profiles.item(1)
-                                areaProps = sketch.profiles.item(0).areaProperties(adsk.fusion.CalculationAccuracy.MediumCalculationAccuracy)
-                                area = areaProps.area
-                                print(area)
-                                if ((area == 58.14430750429558)):
-                                    self.palette.sendInfoToHTML('send', 'draggedCircleDiameter')
-
+                    if sketch.profiles.count == 2:
+                        #Check if the center diameter circle has the right area. Confirm if so.
+                        areaProps = sketch.profiles.item(0).areaProperties(adsk.fusion.CalculationAccuracy.MediumCalculationAccuracy)
+                        area = areaProps.area
+                        if ((area == 58.14430750429558)):
+                            self.palette.sendInfoToHTML('send', 'draggedCircleDiameter')
+                        
+                        #Check if circle center is at the correct postition
+                        expectedOrigin = point.create(-1.6849756775338687e-17, 7.086427259780254, -8.881784197001252e-16)
+                        circleIsAtExpectedPosition = areaProps.centroid.x == expectedOrigin.x and areaProps.centroid.y == expectedOrigin.y and areaProps.centroid.z == expectedOrigin.z
+                        if(circleIsAtExpectedPosition):
+                            self.palette.sendInfoToHTML('send', 'clickedCircleCenter')
 
         if (rootComp.features.loftFeatures.count != 0):
             self.palette.sendInfoToHTML('send', 'draggedCircleDiameter')
             self.palette.sendInfoToHTML('send', 'confirmLoft')
+            if(rootComp.features.loftFeatures.item(0).bodies.count != 0):
+                loftVolume = rootComp.features.loftFeatures.item(0).bodies.item(0).volume
+                if(loftVolume > 510 and loftVolume < 511):
+                    self.palette.sendInfoToHTML('send', 'selectedCircleOnRoof')  
 
         #Check if the offset plane is visible. Confirm if true.
         if (rootComp.constructionPlanes.count != 0):
@@ -670,8 +666,13 @@ class MyActiveSelectionChangedHandler(adsk.core.ActiveSelectionEventHandler):
             firstActiveSelection = _ui.activeSelections.item(0).entity
             isFace = firstActiveSelection.classType == adsk.fusion.BRepFace.classType
             if(isFace):
-                #Check if bottom plane of cube is selected
                 centroid = firstActiveSelection.centroid
+                #Check if selected plane is right roof side
+                isRightRoofSide = centroid.x == 2.5 and centroid.y == 0 and centroid.z == 12.5
+                if(isRightRoofSide):
+                    self.palette.sendInfoToHTML('send', 'selectedRightSideofRoof')
+
+                #Check if bottom plane of cube is selected
                 isInOrigin = centroid.x == 0 and centroid.y == 0 and centroid.z == 0
                 print(isInOrigin)
                 if isInOrigin:
@@ -701,13 +702,14 @@ class MyActiveSelectionChangedHandler(adsk.core.ActiveSelectionEventHandler):
                     if selectionIsBottomFace:
                         self.palette.sendInfoToHTML('send', 'selectBottomPlane')
 
-                #Check if selected Plane is bottom plane of chimney box
+                #Check if selected Plane is bottom plane of chimney box or cylinder
                 PlaneIsOnZ160 = centroid.z == 16
                 xyPlane = rootComp.xYConstructionPlane
                 planeIsParallelToXY = firstActiveSelection.geometry.isParallelToPlane(xyPlane.geometry)
                 planeIsOn160XYOffsetPlane = PlaneIsOnZ160 and planeIsParallelToXY
                 if (planeIsOn160XYOffsetPlane):
                     self.palette.sendInfoToHTML('send', 'selectBottomOfBox')
+                    self.palette.sendInfoToHTML('send', 'selectBottomOfCylinder')
 
                 if sketches.count == 2:
                     sketch = sketches.item(1)
