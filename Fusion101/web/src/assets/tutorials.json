@@ -421,24 +421,24 @@
           },
           {
             "event": "clickedToObject",
-            "text": "In the command dialog under <strong>Extend</strong> select the option <strong>To object</strong>.",
+            "text": "In the command dialog under <strong>Extent Type</strong> select the option <strong>To object</strong>.",
             "tooltips": [],
             "hint": "chimney-box-select-to-object",
-            "stepGroup": 4
+            "stepGroup": 5
           },
           {
             "event": "selectedSideOfRoof",
             "text": "Click on the right side of our roof",
             "tooltips": [],
             "hint": "chimney-box-select-to-object-target",
-            "stepGroup": 4
+            "stepGroup": 5
           },
           {
             "event": "confirmExtrudeChimney",
             "text": "Confirm by clicking <strong>Ok</strong> in the command dialog.",
             "tooltips": [],
             "hint": "confirm-chimney",
-            "stepGroup": 4
+            "stepGroup": 5
           }
         ]
       },
