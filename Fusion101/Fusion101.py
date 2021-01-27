@@ -501,19 +501,21 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
         if(rootComp.features.extrudeFeatures.count ==4 ):
             boxExtrusion = rootComp.features.extrudeFeatures.item(3)
             extend = boxExtrusion.extentOne
-            volume = boxExtrusion.bodies.item(0).volume
-            minChimneyVolume = 498
-            maxChimneyVolume = 511
-            volumeIsInPossibleRange = volume > minChimneyVolume and volume < maxChimneyVolume
-            if (extend.classType == adsk.fusion.ToEntityExtentDefinition.classType and volumeIsInPossibleRange):
-                self.palette.sendInfoToHTML('send', 'clickedToObject')
-                self.palette.sendInfoToHTML('send', 'selectedSideOfRoof')
-                self.palette.sendInfoToHTML('send', 'confirmExtrudeChimney')
+            chimneyIsExtruded = boxExtrusion.bodies.count > 0
+            if(chimneyIsExtruded):
+                volume = boxExtrusion.bodies.item(0).volume
+                minChimneyVolume = 498
+                maxChimneyVolume = 511
+                volumeIsInPossibleRange = volume > minChimneyVolume and volume < maxChimneyVolume
+                if (extend.classType == adsk.fusion.ToEntityExtentDefinition.classType and volumeIsInPossibleRange):
+                    self.palette.sendInfoToHTML('send', 'clickedToObject')
+                    self.palette.sendInfoToHTML('send', 'selectedSideOfRoof')
+                    self.palette.sendInfoToHTML('send', 'confirmExtrudeChimney')
 
-                #Check for the timeline. Confirm, if the markerposition is right
-                timeline = design.timeline
-                if timeline.markerPosition == 8:
-                    self.palette.sendInfoToHTML('send', 'wentBackInTime')
+            #Check for the timeline. Confirm, if the markerposition is right
+            timeline = design.timeline
+            if timeline.markerPosition == 8:
+                self.palette.sendInfoToHTML('send', 'wentBackInTime')
 
 
         #Check for the extrusion of the cube. If it has the right volume, confirm.
