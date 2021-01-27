@@ -374,18 +374,18 @@
         "thumbnail": "Chapter8.png",
         "steps": [
           {
-            "event": "clickedBox",
-            "text": "Select <strong>Box</strong> from the <strong>CREATE</strong> menu.",
-            "tooltips": [],
-            "hint": "select-box-for-chimney",
-            "stepGroup": 0
-          },
-          {
             "event": "selectOffsetPlane",
             "text": "Click on the offset plane that we created in the previous chapter.",
             "tooltips": [],
             "hint": "select-chimney-offset-plane-with-box-tool",
             "stepGroup": 0
+          },
+          {
+            "event": "clickedBox",
+            "text": "Select <strong>Box</strong> from the <strong>CREATE</strong> menu.",
+            "tooltips": [],
+            "hint": "select-box-for-chimney",
+            "stepGroup": 1
           },
           {
             "event": "createdBox",
@@ -394,21 +394,14 @@
               "Click on the TOP side of the <strong>View Cube</strong> (upper right corner) to easier find the middle"
             ],
             "hint": "create-chimney-box",
-            "stepGroup": 0
+            "stepGroup": 2
           },
           {
             "event": "confirmBox",
             "text": "Confirm by clicking <strong>Ok</strong> in the command dialog.",
             "tooltips": [],
             "hint": "confirm-chimney-box",
-            "stepGroup": 0
-          },
-          {
-            "event": "clickedExtrudeFeauture",
-            "text": "Select the <strong>Extrude Feature</strong> in the <strong>CREATE</strong> menu.",
-            "tooltips": [],
-            "hint": "select-extrude-feature",
-            "stepGroup": 0
+            "stepGroup": 2
           },
           {
             "event": "selectBottomOfBox",
@@ -417,28 +410,35 @@
               "You can rotate the <strong>View Cube</strong> (upper right corner) to position the camera in the workspace"
             ],
             "hint": "select-bottom-chimney-box",
-            "stepGroup": 0
+            "stepGroup": 3
+          },
+          {
+            "event": "clickedExtrudeFeauture",
+            "text": "Select the <strong>Extrude Feature</strong> in the <strong>CREATE</strong> menu.",
+            "tooltips": [],
+            "hint": "select-extrude-feature",
+            "stepGroup": 4
           },
           {
             "event": "clickedToObject",
             "text": "In the command dialog under <strong>Extend</strong> select the option <strong>To object</strong>.",
             "tooltips": [],
             "hint": "chimney-box-select-to-object",
-            "stepGroup": 0
+            "stepGroup": 4
           },
           {
-            "event": "selectedRightSideofRoof",
+            "event": "selectedSideOfRoof",
             "text": "Click on the right side of our roof",
             "tooltips": [],
             "hint": "chimney-box-select-to-object-target",
-            "stepGroup": 0
+            "stepGroup": 4
           },
           {
             "event": "confirmExtrudeChimney",
             "text": "Confirm by clicking <strong>Ok</strong> in the command dialog.",
             "tooltips": [],
             "hint": "confirm-chimney",
-            "stepGroup": 0
+            "stepGroup": 4
           }
         ]
       },

@@ -416,11 +416,6 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
 
             #Check if the frontal plane of the cube has been selected as a sketch base
             if (sketch.profiles.count != 0):
-                frontalCentroidModel = point.create(-1.1368683772161603e-16, -5.0, 6.333333333333333)
-                frontalCentroid = point.create(-1.1368683772161603e-16, 6.333333333333333, 0.0)
-                centroid = sketch.modelToSketchSpace(frontalCentroidModel)
-                if ((frontalCentroid.x == centroid.x) and (frontalCentroid.y == centroid.y) and (frontalCentroid.z == centroid.z)):
-                    self.palette.sendInfoToHTML('send', 'selectCubeFrontPlane')
 
                     #Check if the next profile of the sketch has been created. If so, check if it has the right size by area and centroid
                     if sketch.profiles.count == 2:
@@ -506,8 +501,13 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
         if(rootComp.features.extrudeFeatures.count ==4 ):
             boxExtrusion = rootComp.features.extrudeFeatures.item(3)
             extend = boxExtrusion.extentOne
-            if (extend.classType == adsk.fusion.ToEntityExtentDefinition.classType):
+            volume = boxExtrusion.bodies.item(0).volume
+            minChimneyVolume = 498
+            maxChimneyVolume = 511
+            volumeIsInPossibleRange = volume > minChimneyVolume and volume < maxChimneyVolume
+            if (extend.classType == adsk.fusion.ToEntityExtentDefinition.classType and volumeIsInPossibleRange):
                 self.palette.sendInfoToHTML('send', 'clickedToObject')
+                self.palette.sendInfoToHTML('send', 'selectedSideOfRoof')
                 self.palette.sendInfoToHTML('send', 'confirmExtrudeChimney')
 
                 #Check for the timeline. Confirm, if the markerposition is right
@@ -562,7 +562,6 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                 self.palette.sendInfoToHTML('send', 'clickedCircle')
         elif eventArgs.commandId == 'SolidLoft':
                 self.palette.sendInfoToHTML('send', 'clickedLoft')
-
 
 class MyCommandTerminatedHandler(adsk.core.ApplicationCommandEventHandler):
     def __init__(self, palette):
@@ -661,11 +660,13 @@ class MyActiveSelectionChangedHandler(adsk.core.ActiveSelectionEventHandler):
             firstActiveSelection = _ui.activeSelections.item(0).entity
             isFace = firstActiveSelection.classType == adsk.fusion.BRepFace.classType
             if(isFace):
+                #Check if bottom plane of cube is selected
                 centroid = firstActiveSelection.centroid
                 isInOrigin = centroid.x == 0 and centroid.y == 0 and centroid.z == 0
                 print(isInOrigin)
                 if isInOrigin:
                     # https://forums.autodesk.com/t5/fusion-360-api-and-scripts/how-find-point-on-face/td-p/7835617
+                    # Create four points and check if they sit on the selected plane => If yes it is the bottom plane
                     expectedSquarePointA = adsk.core.Point3D.create(5, 5, 0)
                     res, expectedSquareParamA = firstActiveSelection.evaluator.getParameterAtPoint(expectedSquarePointA)
                     res, newPoint = firstActiveSelection.evaluator.getPointAtParameter(expectedSquareParamA)
@@ -690,6 +691,14 @@ class MyActiveSelectionChangedHandler(adsk.core.ActiveSelectionEventHandler):
                     if selectionIsBottomFace:
                         self.palette.sendInfoToHTML('send', 'selectBottomPlane')
 
+                #Check if selected Plane is bottom plane of chimney box
+                PlaneIsOnZ160 = centroid.z == 16
+                xyPlane = rootComp.xYConstructionPlane
+                planeIsParallelToXY = firstActiveSelection.geometry.isParallelToPlane(xyPlane.geometry)
+                planeIsOn160XYOffsetPlane = PlaneIsOnZ160 and planeIsParallelToXY
+                if (planeIsOn160XYOffsetPlane):
+                    self.palette.sendInfoToHTML('send', 'selectBottomOfBox')
+
                 if sketches.count == 2:
                     sketch = sketches.item(1)
 
@@ -700,7 +709,6 @@ class MyActiveSelectionChangedHandler(adsk.core.ActiveSelectionEventHandler):
                         centroid = sketch.modelToSketchSpace(frontalCentroidModel)
                         if ((frontalCentroid.x == centroid.x) and (frontalCentroid.y == centroid.y) and (frontalCentroid.z == centroid.z)):
                             self.palette.sendInfoToHTML('send', 'selectCubeFrontPlane')
-
                 
             if(firstActiveSelection.classType == adsk.fusion.Profile.classType):
                 print('Profile')
@@ -718,8 +726,15 @@ class MyActiveSelectionChangedHandler(adsk.core.ActiveSelectionEventHandler):
 
                     #Check if an additonal sketch has been created.
 
-        # Code to react to the event.
-        #ui.messageBox('In MyActiveSelectionChangedHandler event handler.')
+            isConstructionPlane = firstActiveSelection.classType == adsk.fusion.ConstructionPlane.classType
+            if(isConstructionPlane):
+                xyPlane = rootComp.xYConstructionPlane
+                #Check if the selected construction plane is parallel to the xyPlane
+                if (firstActiveSelection.geometry.isParallelToPlane(xyPlane.geometry)):
+                    expectedOrigin = point.create(0,0,16)
+                    #Check if the selected offset Plane has a height of 160mm
+                    if (firstActiveSelection.geometry.origin.z == expectedOrigin.z):
+                        self.palette.sendInfoToHTML('send', 'selectOffsetPlane')
 
 
 def run(context):
@@ -845,7 +860,6 @@ def stop(context):
             cmdDef.deleteMe()
 
         popUp = _ui.commandDefinitions.itemById('popUpButton01PYTHON')
-
         if popUp:
             popUp.deleteMe()
 
