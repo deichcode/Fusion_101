@@ -463,6 +463,11 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
             if ((cylinderVolume >= 1.5706) and (cylinderVolume <= 1.5708)):
                 self.palette.sendInfoToHTML('send', 'selectedCylinderDiameter')
                 self.palette.sendInfoToHTML('send', 'confirmCylinder')
+                #Check if cylinder is centered to the roof
+                if(cylinder.bodies.item(0).faces.count > 0):
+                    cylinderIsOnRoofCenter = cylinder.bodies.item(0).faces.item(0).centroid.x == 2.5
+                    if(cylinderIsOnRoofCenter):
+                        self.palette.sendInfoToHTML('send', 'clickedCylinderCenter')
 
                 #Check if there has been an additional sketch created
                 if sketches.count == 4:
@@ -557,13 +562,15 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                 self.palette.sendInfoToHTML('send', 'clickedOffsetPlane')
         elif eventArgs.commandId == 'PrimitiveBox':
                 self.palette.sendInfoToHTML('send', 'clickedBox')
-        #Confirm == Box?
         elif eventArgs.commandId == 'PrimitiveCylinder':
                 self.palette.sendInfoToHTML('send', 'clickedCylinder')
         elif eventArgs.commandId == 'CircleCenterRadius':
                 self.palette.sendInfoToHTML('send', 'clickedCircle')
         elif eventArgs.commandId == 'SolidLoft':
                 self.palette.sendInfoToHTML('send', 'clickedLoft')
+        #Bad hack to ensure tutorial continues.
+        elif eventArgs.commandId == 'VisibilityToggleCmd':
+            self.palette.sendInfoToHTML('send', 'offsetPlaneVisible')
 
 class MyCommandTerminatedHandler(adsk.core.ApplicationCommandEventHandler):
     def __init__(self, palette):
