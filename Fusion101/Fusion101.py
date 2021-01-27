@@ -238,8 +238,8 @@ class popUpCommandCreatedEventHandler(adsk.core.CommandCreatedEventHandler):
         welcomeText = inputs.addTextBoxCommandInput(
             'welcomeText',
             '',
-            '<div align="center"><b>Welcome to Fusion 101!</b></div>',
-            3,
+            '<div align="left"><h3>Welcome to Fusion 101!</h3></div>',
+            2,
             True
         )
 
@@ -247,9 +247,9 @@ class popUpCommandCreatedEventHandler(adsk.core.CommandCreatedEventHandler):
         introductionText = inputs.addTextBoxCommandInput(
             'introductionText',
             '',
-            '<div align="center">This interactive tutorial will guide you through'+
+            '<div align="left" style="width: 100%">This interactive tutorial will guide you through'+
             ' your first steps in Fusion 360. You will get to know the most important'+
-            ' tools, workflows and concepts to kickstart your own ideas</div>.',
+            ' tools, workflows and concepts to kickstart your own ideas.</div>',
             6,
             True
         )
@@ -258,8 +258,8 @@ class popUpCommandCreatedEventHandler(adsk.core.CommandCreatedEventHandler):
         introductionText2 = inputs.addTextBoxCommandInput(
             'introductionText2',
             '',
-            '<div align="center">To start Fusion 101 later just click on the HAT symbol'+
-            ' next to your profile picture or initials in the upper right Quick Access Bar of your screen</div>.',
+            '<div align="left" style="width: 100%">To start Fusion 101 later just click on the <strong>graduation hat</strong>'+
+            ' next to your profile picture or initials in the <strong>upper right</strong> Quick Access Bar of your screen.</div>',
             6,
             True
         )
@@ -267,7 +267,7 @@ class popUpCommandCreatedEventHandler(adsk.core.CommandCreatedEventHandler):
         #Create a check box asking for random or explicit number of rings
         dontShowAgain = inputs.addBoolValueInput('dontShowAgain', 'Don\'t show again', True, '', False)
 
-
+        command.setDialogInitialSize(300, 200)
 
         #Connect to the execute event
         onExecute = popUpCommandExecuteHandler()
@@ -278,6 +278,7 @@ class popUpCommandCreatedEventHandler(adsk.core.CommandCreatedEventHandler):
         onInputChanged = popUpCommandInputChangedHandler()
         command.inputChanged.add(onInputChanged)
         handlers.append(onInputChanged)
+
 
 #Event handler for the inputChanged event
 class popUpCommandInputChangedHandler(adsk.core.InputChangedEventHandler):
