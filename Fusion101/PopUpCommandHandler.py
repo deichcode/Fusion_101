@@ -100,7 +100,6 @@ class PopUpCommandExecuteHandler(adsk.core.CommandEventHandler):
         super().__init__()
 
     def notify(self, args):
-        eventArgs = adsk.core.CommandEventArgs.cast(args)
 
         # Code to react to the event
         app = adsk.core.Application.get()

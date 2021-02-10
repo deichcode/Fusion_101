@@ -6,8 +6,6 @@ import adsk.core
 import adsk.fusion
 import adsk.cam
 
-from .constants import PALLET_ID
-
 
 class MyPaletteMessageReceivedEventHandler(adsk.core.HTMLEventHandler):
     def __init__(self):
@@ -29,20 +27,6 @@ class MyPaletteMessageReceivedEventHandler(adsk.core.HTMLEventHandler):
             if not design:
                 ui.messageBox('No active Fusion 360 design', 'No Design')
                 return
-
-            # Get root of active design
-            rootComp = design.rootComponent
-
-            # Create new sketch on xy plane
-            sketches = rootComp.sketches
-            xyPlane = rootComp.xYConstructionPlane
-            sketch = sketches.add(xyPlane)
-            # msg = "An event has been fired from the html to Fusion with the following data:\n"
-            # msg += '    Command: {}\n    arg1: {}\n    arg2: {}'.format(htmlArgs.action, data['arg1'], data['arg2'])
-            if data['command'] == 'close':
-                palette = self.ui.palettes.itemById(PALLET_ID)
-                if palette:
-                    palette.isVisible = False
 
             # determine which chapter should be skipped (implementation not finished yet)
             chaptersToBeSkipped = 0

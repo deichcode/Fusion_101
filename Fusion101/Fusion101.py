@@ -124,7 +124,6 @@ def stop(context):
         if popUp:
             popUp.deleteMe()
 
-        # _ui.messageBox('Stop addin')
     except:
         if _ui:
             _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))

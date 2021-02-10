@@ -2,6 +2,7 @@ import adsk.core
 import adsk.fusion
 import adsk.cam
 
+
 # https://help.autodesk.com/view/fusion360/ENU/?guid=GUID-EBB6C82A-A256-4AB7-9A86-0F7A9653A7E9
 class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
     def __init__(self, palette):
@@ -90,7 +91,6 @@ class MyCommandStartingHandler(adsk.core.ApplicationCommandEventHandler):
                 # Check if the next profile of the sketch has been created. If so, check if it has the right size by
                 # area and centroid
                 if sketch.profiles.count == 2:
-                    profile = sketch.profiles.item(1)
                     areaProps = sketch.profiles.item(0).areaProperties(
                         adsk.fusion.CalculationAccuracy.MediumCalculationAccuracy)
                     centroid = areaProps.centroid

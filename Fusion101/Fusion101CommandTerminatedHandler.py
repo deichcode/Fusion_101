@@ -2,6 +2,7 @@ import adsk.core
 import adsk.fusion
 import adsk.cam
 
+
 class MyCommandTerminatedHandler(adsk.core.ApplicationCommandEventHandler):
     def __init__(self, palette):
         self.palette = palette
@@ -9,7 +10,6 @@ class MyCommandTerminatedHandler(adsk.core.ApplicationCommandEventHandler):
 
     def notify(self, args):
         eventArgs = adsk.core.ApplicationCommandEventArgs.cast(args)
-        args = eventArgs
 
         app = adsk.core.Application.get()
         ui = app.userInterface
